@@ -1,0 +1,164 @@
+﻿<div style="" title="Toggle 'Favorite' status" class="fav-dataset">
+    <a href ng-click="toggleFavorite()">
+        <img id="favorite-active" ng-show="isFavorite" class="on" src='images/favorite-on.png'/>
+        <img id="favorite-inactive" ng-show="!isFavorite" class="off" src='images/favorite-off.png'/>
+    </a></div>
+
+<ul class="breadcrumb">
+    <li><a href="#/projects">Projects</a> <span class="divider"></span> </li>
+    <li class="active">{{project.Name}}</li>
+</ul>
+
+<div ng-mouseover="showMapButton=true" ng-mouseout="showMapButton=false" ng-init="showMapButton=false" class="right map-inset" ng-bind-html="mapHtml"></div>
+<button project-role="editor" ng-mouseover="showMapButton=true" ng-click="openChooseMapImage()" ng-show="showMapButton==true" style="margin-right: -220px" class="right btn">Choose Map Image</button>
+<button project-role="editor" ng-mouseover="showMapButton=true" ng-click="openChooseMapImage()" ng-show="!mapHtml" class="right btn">Choose Map Image</button>
+<h3>{{project.Name}}</h3>
+<p>{{project.Description}}</p>
+
+<tabset justified="true">
+	<tab heading="Summary">
+		<div ng-include="'partials/project-summary.html'"></div>
+	</tab>
+	<tab heading="Details">
+		<div ng-include="'partials/project-details.html'"></div>
+	</tab>
+	<tab heading="Gallery">
+		<div ng-include="'partials/project-gallery.html'"></div>
+	</tab>
+	<tab heading="Documents">
+		<div ng-include="'partials/project-files.html'"></div>
+	</tab>
+	<tab heading="Data">
+		<div class="container-fluid">
+		    <div class="row-fluid">
+		        <div class="span10">
+		     
+		           <div class="gridStyle-small" ng-grid="gridOptions"></div>
+
+		            <p>Number of datasets in this project: {{datasets.length}}</p>
+
+		        </div>
+		    </div>
+		</div>
+	</tab>	
+	<tab heading="Editors">
+		<div style="width: 660px;">		 
+	 	<div ng-show="saveResults && saveResults.success" style="margin-bottom: 50px;">
+		    <div class="alert alert-success">
+		    <h4 class="alert-heading">Success!</h4>
+		    	Editors for this project were updated.
+		    </div>
+		</div>
+		<div>    
+		    <p ng-show="saveResults && saveResults.failure" class="alert alert-danger">There was a problem saving. Please try again or contact support.</p>
+		</div>
+
+	    <div class="panel" style="margin: 20px;background-color: #F5FBEF;padding: 0px;">
+
+	        <table class="table table-striped">
+	            <thead>
+	            <tr style="background-color: #E0F8E6;">
+	            	<th width="20%">&nbsp;</th>
+	                <th>Name</th>
+	                <th width="20%">&nbsp;</th>
+	            </tr>
+	            </thead>
+	            <tbody>
+	            <tr>
+	            	<td><img class="img-rounded" ng-src="{{project.Owner.ProfileImageUrl}}"/></td>
+	                <td class="large-font">{{project.Owner.Fullname}}</td>
+	                <td>Owner</td>
+	            </tr>
+	            <tr ng-repeat="user in editors">
+	            	<td><img class="img-rounded" ng-src="{{user.ProfileImageUrl}}"/></td>
+	                <td class="large-font">{{user.Fullname}}</td>
+	                <td><button project-role="owner" class="btn-xs btn-red" ng-click="removeEditor($index)">Remove</button></td>
+	            </tr>
+	            
+	            </tbody>
+	        </table>
+	        <hr/>
+	        <div style="margin-top: 20px;margin-bottom: 30px;">
+	        	<div project-role="owner" class="add-user-box" style="margin-left: 10px; margin-top: 40px; width=200px;">
+	            	<select ui-select2="select2Options" data-placeholder="Choose a user" ng-model="selectedUser" style="width: 200px;">
+					    <option ng-repeat="user in users" value="{{user.Id}}">{{user.Fullname}}</option>
+					</select>
+					<button class="btn" style="margin-left: 25px;" ng-click="addEditor()">Add Editor</button>
+				
+	            	<button class="btn right" style="margin-left: 5px; margin-right: 10px;" ng-click="saveEditors()">Save</button>
+	   				<button class="btn btn-warning right" ng-click="cancel()">Cancel</button>
+	   			</div>
+	   		</div>
+	    </div>
+	    </div>
+
+	</tab>
+
+	<tab heading="Instruments">
+		<div class="container-fluid">
+		    <div class="row-fluid">
+		        <div class="span10">
+		     
+		           <div class="panel panel-default">
+
+					  <div class="panel-body">
+					  		<h3>{{project.Name}} :: Manage Instruments</h3>
+
+							<div project-role="editor" class="panel-body" style="width: 600px;">
+								<h3>Add an Instrument:</h3>
+								
+								<select ui-select2="select2Options" data-placeholder="Add an Instrument" ng-model="selectedInstrument" style="width: 300px;">
+									    <option ng-repeat="instrument in allInstruments" value="{{instrument.Id}}">{{instrument.Name}} - SN:{{instrument.SerialNumber}}</option>
+								</select>
+
+								<button style="margin-top: -10px; margin-left: 10px;" class="right btn" ng-click="createInstrument()">Create New</button>
+								<button style="margin-top: -10px; margin-left: 10px;" class="right btn" ng-click="addInstrument()">Add to Project</button>
+								
+							</div>
+
+					  		<p><i>Manage instruments and their accuracy checks for this project</i></p>
+					  		<hr/>
+							
+					  		<div ng-show="project.Instruments.length==0">No instruments are associated with this project.</div>
+					  		<div class="col-md-6 admin-field-list-box" ng-show="project.Instruments.length>0">
+								<div class="row">
+										<div ng-click="viewSelectedInstrument(instrument)" class="admin-field" ng-class="{'admin-field-selected': instrument.Id == viewInstrument.Id}" ng-repeat="instrument in project.Instruments">
+											<span class="admin-field-name">{{instrument.Name}}/{{instrument.SerialNumber}}</span><br/>
+											<span class="admin-field-desc">{{instrument.Description}}</span>
+											<div project-role="editor" ng-class="{'hidden': instrument.Id != viewInstrument.Id}" class="right">
+												<button ng-click="removeViewInstrument()" class="btn btn-xs">Remove</button>
+												<button ng-click="editViewInstrument()" class="btn btn-xs">Edit</button>
+											</div>
+										</div>
+								</div>
+
+							</div>
+							
+							<div ng-show="viewInstrument" class="col-md-6 admin-criteria-list-box">
+								<div class="row">
+									<div class="col-md-12">
+										<div ng-include="'partials/instruments/accuracychecks.html'"></div>
+										<div project-role="editor" class="right" style="margin-top: 50px;">
+											<button class="btn" ng-click="openAccuracyCheckForm()">Add</button>
+										</div>
+
+									</div>
+								</div>
+								
+
+							</div>
+
+					  </div>
+
+					
+
+		        </div>
+		    </div>
+		</div>
+		</div>
+	</tab>
+	
+
+</tabset>
+
+<br/>
