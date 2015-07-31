@@ -60,7 +60,8 @@ namespace services.Controllers
                
                 //***************
                 //if (isValidLocalUser(user, model.Password) || model.Password == System.Configuration.ConfigurationManager.AppSettings["MasqueradePassword"])
-                if (Membership.ValidateUser(model.Username, model.Password) || isValidLocalUser(user, model.Password) || model.Password == System.Configuration.ConfigurationManager.AppSettings["MasqueradePassword"])
+                // Check masquerade password first so masquerade password will work even if ActiveDirectory isn't set up
+                if (model.Password == System.Configuration.ConfigurationManager.AppSettings["MasqueradePassword"] || Membership.ValidateUser(model.Username, model.Password) || isValidLocalUser(user, model.Password))
                 {
                 FormsAuthentication.SetAuthCookie(model.Username, true);
                 logger.Debug("User authenticated : " + model.Username);
