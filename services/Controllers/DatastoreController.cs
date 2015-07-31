@@ -194,7 +194,7 @@ namespace services.Controllers
             try
             {
                 df.OrderIndex = json.OrderIndex.ToObject<int>();
-            }catch(Exception e){
+            }catch(Exception){
                 logger.Debug("didn't have an orderindex.");
             }
             df.ControlType = json.ControlType;
