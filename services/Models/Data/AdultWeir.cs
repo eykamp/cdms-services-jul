@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace services.Models.Data
 {
@@ -15,10 +14,10 @@ namespace services.Models.Data
             Details = new List<AdultWeir_Detail>();
         }
 
-        //load an existing one
+
+        // load an existing one
         public AdultWeir(int ActivityId)
         { 
-            
             var ndb = ServicesContext.Current;
             Details = new List<AdultWeir_Detail>();
 
@@ -59,8 +58,6 @@ namespace services.Models.Data
             {
                 Details.Add(detail);
             }
-
         }
-
     }
 }
