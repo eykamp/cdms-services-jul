@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data;
 using System.Transactions;
 using System.Data.Common;
+using System.Data.Entity;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
