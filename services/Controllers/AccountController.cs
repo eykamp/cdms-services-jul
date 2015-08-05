@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Security.Principal;
 using System.Threading;
@@ -8,7 +8,6 @@ using System.Web.Security;
 using NLog;
 using services.Models;
 using services.Resources;
-using System.DirectoryServices;
 
 namespace services.Controllers
 {
@@ -77,7 +76,7 @@ namespace services.Controllers
                 else
                 {
                     user.BumpLastLoginDate();
-                    db.Entry(user).State = System.Data.EntityState.Modified;
+                    db.Entry(user).State = EntityState.Modified;
                     db.SaveChanges();
                 }
 

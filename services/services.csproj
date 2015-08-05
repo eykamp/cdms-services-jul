@@ -473,6 +473,10 @@
     <Compile Include="Migrations\201508032315150_Update SpawingGroundSurvey.Designer.cs">
       <DependentUpon>201508032315150_Update SpawingGroundSurvey.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508040008395_Add SpawningGroundSurvey metadata.cs" />
+    <Compile Include="Migrations\201508040008395_Add SpawningGroundSurvey metadata.Designer.cs">
+      <DependentUpon>201508040008395_Add SpawningGroundSurvey metadata.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -890,6 +894,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508032315150_Update SpawingGroundSurvey.resx">
       <DependentUpon>201508032315150_Update SpawingGroundSurvey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508040008395_Add SpawningGroundSurvey metadata.resx">
+      <DependentUpon>201508040008395_Add SpawningGroundSurvey metadata.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

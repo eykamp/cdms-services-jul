@@ -58,6 +58,9 @@ namespace services.Models
         public DbSet<AdultWeir_Detail> AdultWeir_Detail { get; set; }
         public DbSet<AdultWeir_Header> AdultWeir_Header { get; set; }
 
+        public DbSet<SpawningGroundSurvey_Detail> SpawningGroundSurvey_Detail { get; set; }
+        public DbSet<SpawningGroundSurvey_Header> SpawningGroundSurvey_Header { get; set; }
+
         public DbSet<FishTransport_Detail> FishTransport_Detail { get; set; }
         public DbSet<FishTransport_Header> FishTransport_Header { get; set; }
 
