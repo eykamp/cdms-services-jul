@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using NLog;
 
 namespace services.Models
@@ -22,7 +19,7 @@ namespace services.Models
         //note: we expect the filename to be simple: "somefile.pdf"
         public static int getFileTypeFromFilename(string filename)
         {
-            return FileType.getFileTypeFromFilename(new System.IO.FileInfo(filename));
+            return getFileTypeFromFilename(new System.IO.FileInfo(filename));
         }
 
         public static int getFileTypeFromFilename(System.IO.FileInfo fileinfo)

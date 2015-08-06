@@ -22,17 +22,17 @@ namespace services.Models
         {
             get
             {
-                if (this.ControlType == "lookup" || this.ControlType == "multilookup")
+                if (ControlType == "lookup" || ControlType == "multilookup")
                 {
-                    return LookupFieldHelper.getPossibleValues(this.DataSource);
+                    return LookupFieldHelper.getPossibleValues(DataSource);
                 }
-                else
-                    return _possibleValues;
+                
+                return _possibleValues;
             }
 
             set
             {
-                if (this.ControlType != "lookup" && this.ControlType != "multilookup")
+                if (ControlType != "lookup" && ControlType != "multilookup")
                     _possibleValues = value;
                 //otherwise -- we won't set it... we don't want to set possible values
                 //  for lookup and multilookup since they are populated from a query.

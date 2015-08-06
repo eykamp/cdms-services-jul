@@ -58,7 +58,7 @@ namespace services.Resources
             {
                 db.SaveChanges();
             }
-            catch (DbUpdateConcurrencyException ex)
+            catch (DbUpdateConcurrencyException)
             {
                 throw new HttpResponseException(new HttpResponseMessage
                 {
@@ -113,7 +113,7 @@ namespace services.Resources
             {
                 db.SaveChanges();
             }
-            catch (DbUpdateConcurrencyException ex)
+            catch (DbUpdateConcurrencyException)
             {
                 throw new HttpResponseException(new HttpResponseMessage
                 {

@@ -1,5 +1,4 @@
-﻿
-namespace services.Models
+﻿namespace services.Models
 {
     public class LoginModel
     {

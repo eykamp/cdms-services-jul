@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace services.Models
 {
@@ -14,7 +11,5 @@ namespace services.Models
         public DateTime EffDt { get; set; }
         public string Values { get; set; }
         public int UserId { get; set; }
-
-
     }
 }

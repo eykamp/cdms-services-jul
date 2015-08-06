@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace services.Models
+﻿namespace services.Models
 {
     public class UserPreference
     {
@@ -15,6 +10,5 @@ namespace services.Models
         public int UserId { get; set; }
         public string Name { get; set; }
         public string Value { get; set; }
-
     }
 }

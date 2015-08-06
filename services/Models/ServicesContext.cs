@@ -19,7 +19,6 @@ namespace services.Models
         {
             this.Configuration.LazyLoadingEnabled = true;
             this.Configuration.ProxyCreationEnabled = true;  
-
         }
 
         public DbSet<Project> Projects { get; set; }

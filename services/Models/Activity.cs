@@ -64,11 +64,7 @@ namespace services.Models
                     where a.ActivityTypeId.Equals(this.ActivityTypeId)
                     select a;
 
-            if (q.Count() > 0)
-                return true;
-            else
-                return false;
-
+            return q.Any();
         }
     }
 
@@ -84,12 +80,8 @@ namespace services.Models
         [JsonIgnore]
         [NotMapped]
         public virtual Activity Activity { get; set; }
-
         public virtual QAStatus QAStatus { get; set; }
-
         public virtual User User { get; set; }
-
-
     }
 
     public class ActivityType

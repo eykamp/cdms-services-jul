@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace services.Models
 {
@@ -34,9 +31,5 @@ namespace services.Models
         public virtual FieldRole FieldRole { get; set; }
         public virtual Source Source { get; set; }
         public virtual Instrument Instrument { get; set; }
-
-
     }
-
-    
 }

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Newtonsoft.Json;
 
 namespace services.Models
@@ -57,7 +55,6 @@ namespace services.Models
             LocationTypeId = LocationType.DEFAULT_LOCATIONTYPEID;
             CreateDateTime = DateTime.Now;
             SdeFeatureClassId = SdeFeatureClass.DEFAULT_FEATURECLASSID;
-
         }
     }
 

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace services.Models
+﻿namespace services.Models
 {
     // Type of metadata / category / entity.  like:
     //FieldConfigurations
@@ -19,8 +14,5 @@ namespace services.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-
-
-
     }
 }
