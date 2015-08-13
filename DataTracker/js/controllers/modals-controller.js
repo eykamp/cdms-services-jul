@@ -182,6 +182,44 @@ mod_fmc.controller('FileModalCtrl', ['$scope','$modalInstance', 'DataService','D
             $modalInstance.dismiss();
         };
 
+
+        $scope.uploadWaypoints = function(){
+            var formData = new FormData();
+
+            angular.forEach($scope.filesToUpload[$scope.file_field.DbColumnName], function(incoming_file, key){
+                formData.append('file', incoming_file);
+            });
+
+            $.ajax({
+                url: serviceUrl + '/data/HandleWaypoints',
+                type : 'POST',
+                data : formData,
+                processData: false,  // tell jQuery not to process the data
+                contentType: false,  // tell jQuery not to set contentType
+                success : function(data) {
+                    
+                    var waypoints = eval("(" + data + ")");
+                    var size = 0, key;
+
+                    for (key in waypoints)
+                        size++;
+
+                    alert(size + " waypoints loaded");
+
+                    $scope.__proto__.waypoints = waypoints;     // This is probably not right, but not sure how else to get the outer scope object
+                },
+                error: function(jqXHR, error, errorThrown) {
+                    if(jqXHR.status&&jqXHR.status == 400) {
+                        alert(jqXHR.responseText + "\n\n" + "Waypoints not loaded!");
+                    } else{
+                        alert("Error uploading file!");
+                    }
+                }
+            });
+
+            $modalInstance.dismiss();
+        };
+
         $scope.cancel = function(){
             $modalInstance.dismiss();
         };

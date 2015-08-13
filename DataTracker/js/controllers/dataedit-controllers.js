@@ -323,6 +323,18 @@ mod_edit.controller('DataEditCtrl', ['$scope','$q','$sce','$routeParams','DataSe
             });
         };
 
+		$scope.openWaypointFileModal = function(row, field)
+        {
+            $scope.file_row = row;
+            $scope.file_field = field;
+
+            var modalInstance = $modal.open({
+                templateUrl: 'partials/modals/waypoint-file-modal.html',
+                controller: 'FileModalCtrl',
+                scope: $scope, //scope to make a child of
+            });
+        };
+
         //field = DbColumnName
         $scope.onFileSelect = function(field, files)
         {
@@ -361,6 +373,9 @@ mod_edit.controller('DataEditCtrl', ['$scope','$q','$sce','$routeParams','DataSe
 
 				//spin through the files that we uploaded
 				angular.forEach($scope.filesToUpload, function(files, field){
+
+					if(field == "null")
+						return;
 
 					var local_files = [];
 
