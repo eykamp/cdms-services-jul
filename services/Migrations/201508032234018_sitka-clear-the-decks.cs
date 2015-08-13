@@ -7,9 +7,9 @@ namespace services.Migrations
     {
         public override void Up()
         {
-            RenameTable(name: "dbo.ProjectInstruments", newName: "InstrumentProjects");
-            DropPrimaryKey("dbo.InstrumentProjects");
-            AddPrimaryKey("dbo.InstrumentProjects", new[] { "Instrument_Id", "Project_Id" });
+            //RenameTable(name: "dbo.ProjectInstruments", newName: "InstrumentProjects");
+            //DropPrimaryKey("dbo.InstrumentProjects");
+            //AddPrimaryKey("dbo.InstrumentProjects", new[] { "Instrument_Id", "Project_Id" });
             //CreateIndex("dbo.InstrumentAccuracyChecks", "InstrumentId");
             //CreateIndex("dbo.InstrumentAccuracyChecks", "UserId");
             //CreateIndex("dbo.Instruments", "OwningDepartmentId");
@@ -176,9 +176,9 @@ namespace services.Migrations
             //DropIndex("dbo.Instruments", new[] { "OwningDepartmentId" });
             //DropIndex("dbo.InstrumentAccuracyChecks", new[] { "UserId" });
             //DropIndex("dbo.InstrumentAccuracyChecks", new[] { "InstrumentId" });
-            DropPrimaryKey("dbo.InstrumentProjects");
-            AddPrimaryKey("dbo.InstrumentProjects", new[] { "Project_Id", "Instrument_Id" });
-            RenameTable(name: "dbo.InstrumentProjects", newName: "ProjectInstruments");
+            //DropPrimaryKey("dbo.InstrumentProjects");
+            //AddPrimaryKey("dbo.InstrumentProjects", new[] { "Project_Id", "Instrument_Id" });
+            //RenameTable(name: "dbo.InstrumentProjects", newName: "ProjectInstruments");
         }
     }
 }

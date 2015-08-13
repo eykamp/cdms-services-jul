@@ -9,7 +9,6 @@ namespace services.Models
 {
     public class Project
     {
-        
         private static Logger logger = LogManager.GetCurrentClassLogger(); 
 
         private const int SUPERUSER_KEN = 1;
@@ -38,7 +37,7 @@ namespace services.Models
         [InverseProperty("ProjectEditor")]
         public virtual List<User> Editors { get; set; }
 
-        [InverseProperty("ProjectInstruments")]
+        //[InverseProperty("ProjectInstruments")]
         public virtual List<Instrument> Instruments { get; set; }
 
         public bool isOwnerOrEditor(User user)

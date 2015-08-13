@@ -1,0 +1,44 @@
+Index: BatchController.cs
+===================================================================
+--- BatchController.cs	(revision 91435)
++++ BatchController.cs	(revision 91457)
+@@ -299,8 +299,8 @@
+ 
+             foreach (var f in objectsToPublish)
+             {
+-                var sourceFile = f.UploadFile.GetFilepath(true, false);
+-                var destFile   = MakeDestFileName(f.Visit, f.Component.PublicationSchema, f.Component.DestFolder, f.Component.PublishName, sourceFile);
++                var sourceFile = Sanitize((f.UploadFile.GetFilepath(true, false)));
++                var destFile   = Sanitize(MakeDestFileName(f.Visit, f.Component.PublicationSchema, f.Component.DestFolder, f.Component.PublishName, sourceFile));
+ 
+                 var link = new XElement("Link");
+ 
+@@ -318,13 +318,13 @@
+ 
+         internal static string MakeDestFileName(ProgramSiteVisit visit, PublicationSchema schema, string path, string publishName, string origFileName)
+         {
+-            var iterationName = Sanitize(visit.ProgramIteration.Iteration.IterationName.Trim());
+-            var watershedName = Sanitize(visit.ProgramWatershed.DisplayName.Trim());
+-            var siteName      = Sanitize(visit.ProgramSite.Site.SiteName.Trim());
++            var iterationName = visit.ProgramIteration.Iteration.IterationName.Trim();
++            var watershedName = visit.ProgramWatershed.DisplayName.Trim();
++            var siteName      = visit.ProgramSite.Site.SiteName.Trim();
+ 
+             string hitchName = "Unknown Hitch";
+             if (visit.Hitch != null)
+-                hitchName =  Sanitize(visit.Hitch.HitchName.Trim());
++                hitchName =  visit.Hitch.HitchName.Trim();
+ 
+             string extension = Path.GetExtension(origFileName).ToLower();
+ 
+@@ -342,7 +342,9 @@
+         // Sanitize!  Returns a clean legal filename!  Boom!
+         private static string Sanitize(string name)
+         {
+-            return FileUtility.GetCleanFileName(name).Replace(" ", string.Empty);
++            return Path.Combine(FileUtility.GetCleanFolderName(Path.GetDirectoryName(name)),
++                                FileUtility.GetCleanFileName(Path.GetFileName(name)))
++                       .Replace(" ", "_");
+         }
+ 
+         #endregion 

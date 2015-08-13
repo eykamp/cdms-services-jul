@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.Data.SqlClient;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -11,12 +12,14 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using CsvHelper;
+using Microsoft.VisualBasic.FileIO;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NLog;
 using services.Models;
 using services.Models.Data;
 using services.Resources;
+using FieldType = Microsoft.Ajax.Utilities.FieldType;
 
 namespace services.Controllers
 {
@@ -1357,8 +1360,7 @@ namespace services.Controllers
 
             var db = ServicesContext.Current;
 
-            var task = Request.Content.ReadAsMultipartAsync(provider).
-                ContinueWith<HttpResponseMessage>(o =>
+            var task = Request.Content.ReadAsMultipartAsync(provider).ContinueWith(o =>
                 {
 
                     if (o.IsFaulted || o.IsCanceled)
@@ -1495,6 +1497,12 @@ namespace services.Controllers
             string root = System.Web.HttpContext.Current.Server.MapPath("~/uploads");
             string rootUrl = Request.RequestUri.AbsoluteUri.Replace(Request.RequestUri.AbsolutePath, String.Empty);
 
+
+            // Make sure our folder exists
+            DirectoryInfo dirInfo = new DirectoryInfo(root);
+            if(!dirInfo.Exists)
+                dirInfo.Create();
+
             logger.Debug("saving files to location: " + root);
             logger.Debug(" and the root url = " + rootUrl);
 
@@ -1504,10 +1512,8 @@ namespace services.Controllers
 
             var db = ServicesContext.Current;
 
-            var task = Request.Content.ReadAsMultipartAsync(provider).
-                ContinueWith<HttpResponseMessage>(o =>
+            var task = Request.Content.ReadAsMultipartAsync(provider).ContinueWith(o =>
                 {
-
                     if (o.IsFaulted || o.IsCanceled)
                     {
                         logger.Debug("Error: " + o.Exception.Message);
@@ -1595,17 +1601,118 @@ namespace services.Controllers
 
                     logger.Debug("Done saving files.");
                     var result = JsonConvert.SerializeObject(thefiles);
-                    HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.OK);
-                    resp.Content = new System.Net.Http.StringContent(result, System.Text.Encoding.UTF8, "text/plain");  //to stop IE from being stupid.
+                    HttpResponseMessage resp = new HttpResponseMessage(HttpStatusCode.OK);
+                    resp.Content = new StringContent(result, System.Text.Encoding.UTF8, "text/plain");  //to stop IE from being stupid.
 
                     return resp;
-                    
-                    
-
                 });
 
             return task;
+        }
 
+
+        HttpResponseMessage error(string message)
+        {
+            HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.BadRequest);
+            response.Content = new StringContent(message, System.Text.Encoding.UTF8, "text/plain");
+            return response;
+        }
+
+
+        // Users can upload waypoints; the data will be extracted, converted to json, then sent back to the browser in the response.
+        // The uploaded files will NOT be saved.
+        [HttpPost]
+        public Task<HttpResponseMessage> HandleWaypoints()
+        {
+            var provider = new MultipartMemoryStreamProvider();
+
+            var task = Request.Content.ReadAsMultipartAsync(provider).ContinueWith(o =>
+                {
+                    if (!Request.Content.IsMimeMultipartContent())
+                        return error("Uploaded filed does not look like a waypoints file");
+
+                    var data = new Dictionary<string, Dictionary<string, string>>();
+
+                    foreach (var contents in provider.Contents)
+                    {
+                        var csvData = contents.ReadAsStreamAsync();
+                        csvData.Wait();
+                        var res = csvData.Result;
+
+                        var parser = new TextFieldParser(res);
+
+                        var readingHeaderRow = true;
+                        var id = -1;
+                        var lat = -1;
+                        var lng = -1;
+                        var x = -1;
+                        var y = -1;
+
+                        parser.TextFieldType = Microsoft.VisualBasic.FileIO.FieldType.Delimited;
+                        parser.SetDelimiters(",");
+                        while (!parser.EndOfData)
+                        {
+                            var fields = parser.ReadFields();
+
+                            // Figure out which fields we want
+                            if (readingHeaderRow)
+                            {
+                                var ctr = 0;
+                                foreach (var f in fields)
+                                {
+                                    if (f == "WP_")
+                                        id = ctr;
+                                    else if (f == "Longitude")
+                                        lng = ctr;
+                                    else if (f == "Latitude")
+                                        lat = ctr;
+                                    else if (f == "x_proj")
+                                        x = ctr;
+                                    else if (f == "y_proj")
+                                        y = ctr;
+                                    ctr++;
+                                }
+
+                                if (id == -1)
+                                    return error("Could not find waypoint id column");
+                                if (lat == -1)
+                                    return error("Could not find lat column");
+                                if (lng == -1)
+                                    return error("Could not find long column");
+                                if (x == -1)
+                                    return error("Could not find projected x column");
+                                if (y == -1)
+                                    return error("Could not find projected y column");
+
+                                readingHeaderRow = false;
+                            }
+                            else    // Parse a data row
+                            {
+                                try
+                                {
+                                    var dict = new Dictionary<string, string>();
+                                    dict["lat"] = fields[lat];
+                                    dict["long"] = fields[lng];
+                                    dict["x"] = fields[x];
+                                    dict["y"] = fields[y];
+                                    // Ids look like 1.00000.... sanitize it to 1
+                                    data[int.Parse(fields[id], NumberStyles.Any).ToString()] = dict;    // Will clobber data if ids are reused
+                                }
+                                catch
+                                {
+                                    return error("Could not parse waypoint file");
+                                }
+                            }
+                        }
+                        parser.Close();
+                    }
+
+                    var resp = new HttpResponseMessage(HttpStatusCode.OK);
+                    resp.Content = new StringContent(JsonConvert.SerializeObject(data), System.Text.Encoding.UTF8, "text/plain"); 
+                    return resp;
+                });
+
+            return task;
         }
 
 
@@ -1687,7 +1794,6 @@ namespace services.Controllers
             HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.OK);
 
             return resp;
-
         }
 
 

@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
+﻿using System.Data.Entity;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
-using System.Web.Optimization;
 using System.Web.Routing;
 using services.Models;
-using services.Resources;
 
 namespace services
 {
@@ -28,6 +23,8 @@ namespace services
 
             Database.SetInitializer<ServicesContext>(null);
 
+            // Remove the XML serializer so that we get JSON back when testing web requests from the browser
+            GlobalConfiguration.Configuration.Formatters.Remove(GlobalConfiguration.Configuration.Formatters.XmlFormatter);
         }
 
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)

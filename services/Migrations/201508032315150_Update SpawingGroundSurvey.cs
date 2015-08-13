@@ -13,8 +13,8 @@ namespace services.Migrations
         
         public override void Down()
         {
-            AlterColumn("dbo.SpawningGroundSurvey_Header", "Flow", c => c.Int(nullable: false));
-            AlterColumn("dbo.SpawningGroundSurvey_Header", "Species", c => c.Int(nullable: false));
+            //AlterColumn("dbo.SpawningGroundSurvey_Header", "Flow", c => c.Int(nullable: false));
+            //AlterColumn("dbo.SpawningGroundSurvey_Header", "Species", c => c.Int(nullable: false));
         }
     }
 }

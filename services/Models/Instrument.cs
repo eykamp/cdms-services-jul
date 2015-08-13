@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
 using Newtonsoft.Json;
 
 namespace services.Models
@@ -11,7 +9,6 @@ namespace services.Models
     {
         public const int ACTIVE_STATUSID = 0; //active
         public const int INACTIVE_STATUSID = 1; //inactive
-
 
         public int Id { get; set; }
         public string Name { get; set; }
@@ -39,7 +36,7 @@ namespace services.Models
         public virtual User User { get; set; }
 
         [JsonIgnore]
-        [InverseProperty("Instruments")]
+        //[InverseProperty("Instruments")]
         public virtual List<Project> ProjectInstruments { get; set; }
 
         public Instrument()
