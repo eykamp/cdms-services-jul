@@ -476,8 +476,6 @@ mod_de.controller('DataEntryFormCtrl', ['$scope','$routeParams','DataService','$
 
 					if(field == "null")
 						return;
-
-					debugger;
 					
 					var local_files = [];
 
