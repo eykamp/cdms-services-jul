@@ -8,9 +8,7 @@ namespace services.Models.Data
         public string FeatureType { get; set; }
         public string Species { get; set; }
         public string Time { get; set; }
-        public int? Temp { get; set; }
-        public float? Easting { get; set; }
-        public float? Northing { get; set; }
+        public float? Temp { get; set; }
         public string Channel { get; set; }
         public string ReddLocation { get; set; }
         public string ReddHabitat { get; set; }

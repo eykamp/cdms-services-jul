@@ -8,8 +8,8 @@ namespace services.Models.Data
         public string Technicians { get; set; }
         public string StartTime { get; set; }
         public string EndTime { get; set; }
-        public int? StartTemperature { get; set; }
-        public int? EndTemperature { get; set; }
+        public float? StartTemperature { get; set; }
+        public float? EndTemperature { get; set; }
         public int? StartEasting { get; set; }
         public int? StartNorthing { get; set; }
         public int? EndEasting { get; set; }

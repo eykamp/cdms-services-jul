@@ -59,7 +59,7 @@ SELECT
     Description               = @datasetBaseName + ': ' + p.name,
     DefaultActivityQAStatusId = 6,
     DatastoreId               = (SELECT IDENT_CURRENT('dbo.Datastores')),
-    Config                    = NULL
+    Config                    = '{""DataEntryPage"": {""HiddenFields"": [""Instrument""]}}'
 FROM #ProjectInfo as p
 
 -------------------------
@@ -153,7 +153,7 @@ UNION ALL SELECT
         Validation = NULL,
         DataType = NULL,
         PossibleValues = NULL,
-        DbColumnName = NULL,
+        DbColumnName = '',
         ControlType = 'temp-waypoint-file',
         [Rule] = NULL
 
@@ -224,7 +224,7 @@ UNION ALL SELECT
         Units = NULL,
         Validation = NULL,
         DataType = 'string',
-        PossibleValues = '[""Riffles and Pools"",""Can see bottom of riffles"",""Cannot see bottom of riffles or pools""]',
+        PossibleValues = '[""Riffles and Pools"",""Riffles"",""Neither Riffles or Pools""]',
         DbColumnName = 'WaterVisibility',
         ControlType = 'select',
         [Rule] = NULL
@@ -267,7 +267,7 @@ UNION ALL SELECT
 
 UNION ALL SELECT
         FieldCategoryId = (SELECT IDENT_CURRENT('dbo.FieldCategories')), 
-        Name = 'Header Comments',
+        Name = 'Survey Comments',
         Description = 'Comments about the site or any other observations',
         Units = NULL,
         Validation = NULL,
@@ -297,6 +297,29 @@ update #NewFieldInfo set FieldRoleId = 1 where FieldRoleId is NULL   -- 1 == hea
 INSERT INTO dbo.Fields (FieldCategoryId, Name, [Description], Units, Validation, DataType, PossibleValues, DbColumnName, ControlType, [Rule])
 OUTPUT INSERTED.id, INSERTED.Name, INSERTED.DbColumnName, INSERTED.Validation, INSERTED.ControlType , INSERTED.[Rule], NULL INTO #NewFieldInfo
 SELECT FieldCategoryId = (SELECT IDENT_CURRENT('dbo.FieldCategories')), 
+        Name = 'Feature Number',
+        Description = 'Number assigned',
+        Units = NULL,
+        Validation = NULL,
+        DataType = 'int',
+        PossibleValues = NULL,
+        DbColumnName = 'FeatureID',
+        ControlType = 'number',
+        [Rule] = NULL
+
+UNION ALL SELECT FieldCategoryId = (SELECT IDENT_CURRENT('dbo.FieldCategories')), 
+        Name = 'Feature Type',
+        Description = 'Type of observation',
+        Units = NULL,
+        Validation = NULL,
+        DataType = 'string',
+        PossibleValues = '[""Redd"", ""Live"", ""Carcass"", ""Observation""]',
+        DbColumnName = 'FeatureType',
+        ControlType = 'select',
+        [Rule] = NULL
+
+
+UNION ALL SELECT FieldCategoryId = (SELECT IDENT_CURRENT('dbo.FieldCategories')), 
         Name = 'Species',
         Description = 'Species of the carcass found',
         Units = NULL,
@@ -341,31 +364,8 @@ UNION ALL SELECT
         PossibleValues = NULL,
         DbColumnName = 'WaypointNumber',
         ControlType = 'number',
-        [Rule] = '{""OnChange"": ""if(scope.waypoints){var w=scope.waypoints[value]; if(w){row[''Easting'']=w.long;row[''Northing'']=w.lat;row[''NorthingUTM'']=w.y;row[''EastingUTM'']=w.x;}}""}'
+        [Rule] = '{""OnChange"": ""if(scope.waypoints){var w=scope.waypoints[value]; if(w){row[''NorthingUTM'']=w.y;row[''EastingUTM'']=w.x;}}""}'
 
-UNION ALL SELECT
-        FieldCategoryId = (SELECT IDENT_CURRENT('dbo.FieldCategories')), 
-        Name = 'Easting',
-        Description = 'Easting location of the feature',
-        Units = NULL,
-        Validation = '',
-        DataType = 'float',
-        PossibleValues = NULL,
-        DbColumnName = 'Easting',
-        ControlType = 'number',
-        [Rule] = NULL
-
-UNION ALL SELECT
-        FieldCategoryId = (SELECT IDENT_CURRENT('dbo.FieldCategories')), 
-        Name = 'Northing',
-        Description = 'Northing Location of the feature',
-        Units = NULL,
-        Validation = '',
-        DataType = 'float',
-        PossibleValues = NULL,
-        DbColumnName = 'Northing',
-        ControlType = 'number',
-        [Rule] = NULL
 
 UNION ALL SELECT
         FieldCategoryId = (SELECT IDENT_CURRENT('dbo.FieldCategories')), 
@@ -651,12 +651,415 @@ FROM #NewDatasetIds as d, #QaStatusIds as q
 
 
 
+CREATE TABLE #NewLocationIds (id int)        
+
+INSERT INTO dbo.Locations(LocationTypeId, SdeFeatureClassId, SdeObjectId, Label, CreateDateTime)
+OUTPUT INSERTED.id into #NewLocationIds
+
+SELECT
+  LocationTypeId        = 1,
+  SdeFeatureClassId     = 2,
+  SdeObjectId           = 33, 
+  Label                 = 'Buckaroo 1',
+  CreateDateTime        = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 34, 
+    Label               = 'Buckaroo 2',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 42, 
+    Label               = 'East Meacham 1',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 31, 
+    Label               = 'Isqúulktpe 1',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 32, 
+    Label               = 'Isqúulktpe 2',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 55, 
+    Label               = 'Little Lookingglass Creek - Unit 4',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 51, 
+    Label               = 'Lookingglass Creek - Unit 1',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 52, 
+    Label               = 'Lookingglass Creek - Unit 2',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 53, 
+    Label               = 'Lookingglass Creek - Unit 3L',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 54, 
+    Label               = 'Lookingglass Creek - Unit 3U',
+    CreateDateTime      = GetDate()
+
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 36, 
+    Label               = 'Meacham 1',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 37, 
+    Label               = 'Meacham 2',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 38, 
+    Label               = 'Meacham 3',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 39, 
+    Label               = 'Meacham 4',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 40, 
+    Label               = 'Meacham 5',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 41, 
+    Label               = 'Meacham 6',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 43, 
+    Label               = 'Meacham 7',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 44, 
+    Label               = 'Meacham 8',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 35, 
+    Label               = 'Moonshine 1',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 29, 
+    Label               = 'NF Umatilla 1',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 30, 
+    Label               = 'NF Umatilla 2',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 49, 
+    Label               = 'Pearson 1',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 50, 
+    Label               = 'Pearson 2',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 27, 
+    Label               = 'SF Umatilla 1',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 28, 
+    Label               = 'Thomas Creek 1',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 1,  
+    Label               = 'Umatilla 1',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 2,  
+    Label               = 'Umatilla 2',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 3,  
+    Label               = 'Umatilla 3',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 4,  
+    Label               = 'Umatilla 4',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 5,  
+    Label               = 'Umatilla 5',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 6,  
+    Label               = 'Umatilla 6',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 7,  
+    Label               = 'Umatilla 7',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 8,  
+    Label               = 'Umatilla 8',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 9,  
+    Label               = 'Umatilla 9',
+    CreateDateTime      = GetDate()
+
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 10, 
+    Label               = 'Umatilla 10',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 11, 
+    Label               = 'Umatilla 11',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 12, 
+    Label               = 'Umatilla 12',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 13, 
+    Label               = 'Umatilla 13',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 14, 
+    Label               = 'Umatilla 14',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 15, 
+    Label               = 'Umatilla 15',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 16, 
+    Label               = 'Umatilla 16',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 17, 
+    Label               = 'Umatilla 17',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 18, 
+    Label               = 'Umatilla 18',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 19, 
+    Label               = 'Umatilla 19',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 20, 
+    Label               = 'Umatilla 20',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 21, 
+    Label               = 'Umatilla 21',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 22, 
+    Label               = 'Umatilla 22',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 23, 
+    Label               = 'Umatilla 23',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 24, 
+    Label               = 'Umatilla 24',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 25, 
+    Label               = 'Umatilla 25',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 26, 
+    Label               = 'Umatilla 26',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 45, 
+    Label               = 'Willdhorse 1',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 46, 
+    Label               = 'Wildhorse 2',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 47, 
+    Label               = 'Wildhorse 3',
+    CreateDateTime      = GetDate()
+
+UNION ALL SELECT
+    LocationTypeId      = 7,
+    SdeFeatureClassId   = 2,
+    SdeObjectId         = 48, 
+    Label               = 'Wildhorse 4',
+    CreateDateTime      = GetDate()
+
+
+
+-- Associate the locations above with our new projects
+INSERT INTO dbo.LocationProjects(Location_Id, Project_Id)
+SELECT
+    Location_Id  = l.id,
+    Project_Id = p.id
+FROM #NewLocationIds as l, #ProjectInfo as p
+ 
+
+
 -- Cleanup
 drop table #ProjectInfo
 drop table #NewFieldInfo
 drop table #NewDatasetIds
 drop table #QaStatusIds
-
+drop table #NewLocationIds
 ");
 
         }
@@ -670,6 +1073,8 @@ declare @datasetBaseName as varchar(max) = 'Spawning Ground Survey'
 declare @categoryName as varchar(max) = @datasetBaseName
 declare @datastoreName as varchar(max) = @datasetBaseName
 
+delete from dbo.Locations where id in (select location_id from dbo.LocationProjects where project_id in (select ProjectId from datasets where name = @datasetBaseName))
+delete from dbo.LocationProjects where project_id in (select ProjectId from datasets where name = @datasetBaseName)
 delete from dbo.DatasetQAStatus  where Dataset_Id in (select id from dbo.Datasets where name = @datasetBaseName)
 delete from dbo.DatasetQAStatus1 where Dataset_Id in (select id from dbo.Datasets where name = @datasetBaseName)
 delete from dbo.DatasetFields where DatasetId in (select id from dbo.Datasets where name = @datasetBaseName)

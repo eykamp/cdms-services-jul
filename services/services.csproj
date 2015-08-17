@@ -504,6 +504,14 @@
     <Compile Include="Migrations\201508122247108_Ints to floats.Designer.cs">
       <DependentUpon>201508122247108_Ints to floats.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508150022311_Remove fields.cs" />
+    <Compile Include="Migrations\201508150022311_Remove fields.Designer.cs">
+      <DependentUpon>201508150022311_Remove fields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508171735315_make_temps_float.cs" />
+    <Compile Include="Migrations\201508171735315_make_temps_float.Designer.cs">
+      <DependentUpon>201508171735315_make_temps_float.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -916,35 +924,41 @@
     <EmbeddedResource Include="Migrations\201508032234018_sitka-clear-the-decks.resx">
       <DependentUpon>201508032234018_sitka-clear-the-decks.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508032246476_Add SpawningGroundSurvey table.resx">
+    <EmbeddedResource Include="Migrations\201508032246476_Add SpawningGroundSurvey table.resx ">
       <DependentUpon>201508032246476_Add SpawningGroundSurvey table.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508032315150_Update SpawingGroundSurvey.resx">
+    <EmbeddedResource Include="Migrations\201508032315150_Update SpawingGroundSurvey.resx ">
       <DependentUpon>201508032315150_Update SpawingGroundSurvey.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508040008395_Add SpawningGroundSurvey metadata.resx">
+    <EmbeddedResource Include="Migrations\201508040008395_Add SpawningGroundSurvey metadata.resx ">
       <DependentUpon>201508040008395_Add SpawningGroundSurvey metadata.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508070023135_FixDatabaseWeirdness.resx">
+    <EmbeddedResource Include="Migrations\201508070023135_FixDatabaseWeirdness.resx ">
       <DependentUpon>201508070023135_FixDatabaseWeirdness.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508072252352_Change datatypes.resx">
+    <EmbeddedResource Include="Migrations\201508072252352_Change datatypes.resx ">
       <DependentUpon>201508072252352_Change datatypes.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508080007380_Change datetimes to strings.resx">
+    <EmbeddedResource Include="Migrations\201508080007380_Change datetimes to strings.resx ">
       <DependentUpon>201508080007380_Change datetimes to strings.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508080023313_Remove location field.resx">
+    <EmbeddedResource Include="Migrations\201508080023313_Remove location field.resx ">
       <DependentUpon>201508080023313_Remove location field.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508110011111_Make ints optional.resx">
+    <EmbeddedResource Include="Migrations\201508110011111_Make ints optional.resx ">
       <DependentUpon>201508110011111_Make ints optional.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508110012290_Make ints optional II.resx">
+    <EmbeddedResource Include="Migrations\201508110012290_Make ints optional II.resx ">
       <DependentUpon>201508110012290_Make ints optional II.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201508122247108_Ints to floats.resx">
+    <EmbeddedResource Include="Migrations\201508122247108_Ints to floats.resx ">
       <DependentUpon>201508122247108_Ints to floats.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508150022311_Remove fields.resx">
+      <DependentUpon>201508150022311_Remove fields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508171735315_make_temps_float.resx">
+      <DependentUpon>201508171735315_make_temps_float.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
