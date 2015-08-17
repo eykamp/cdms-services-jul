@@ -35,7 +35,7 @@
                     <div class="header-value">{{grid.Header.Activity.Timezone.Name}}&nbsp;</div>
                 </div>
 
-                <div ng-show="grid.Header.Activity.Instrument" >
+                <div ng-show="grid.Header.Activity.Instrument && !dataset.Config.DataEntryPage.HiddenFields.contains('Instrument')" >
 
                     <div class="header-label">Instrument: </div>
                     <div class="header-value">{{grid.Header.Activity.Instrument.Name}} (SN:{{grid.Header.Activity.Instrument.SerialNumber}})</div>

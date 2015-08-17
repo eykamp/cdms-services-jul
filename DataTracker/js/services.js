@@ -1188,7 +1188,8 @@ mod.service('DataSheet',[ 'Logger', '$window', '$route',
 
             },
 
-            getColDefs: function(){
+            // Only used for datasheet.  For form look at config column
+            getColDefs: function(DatastoreTablePrefix, theMode){
 	            var coldefs = [{
                             field: 'locationId',
                             Label: 'Location',
@@ -1213,7 +1214,11 @@ mod.service('DataSheet',[ 'Logger', '$window', '$route',
                             cellFilter: 'QAStatusFilter',
                             Field: { Description: "Quality Assurance workflow status"}
 
-                        },
+                        }];
+
+                // No instruments for SpawningGroundSurvey!
+                if(DatastoreTablePrefix != 'SpawningGroundSurvey')
+                    coldefs.push(
                         {
                             field: 'InstrumentId',
                             Label: 'Instrument',
@@ -1222,8 +1227,7 @@ mod.service('DataSheet',[ 'Logger', '$window', '$route',
                             cellFilter: 'instrumentFilter', //'','instrumentFilter',
                             editableCellTemplate: InstrumentCellEditTemplate, //'<input ng-blur="updateCell(row,\'instrumentId\')" ng-model="COL_FIELD" ng-input="COL_FIELD" />',   'InstrumentCellEditTemplate',
                             Field: { Description: "Instrument that detected this value."}
-                        },
-                  ];
+                        });
 
                 return coldefs;
             },
@@ -1584,6 +1588,7 @@ function makeFieldColDef(field, scope) {
                 // Check for common misconfiguration error
                 if(field.Field.PossibleValues == null)
                     console.log("Missing list of possible values from select/lookup field " + field.Field.Name);
+
                 coldef.editableCellTemplate = '<select ng-class="\'colt\' + col.index" ng-input="COL_FIELD" ng-model="COL_FIELD" ng-blur="updateCell(row,\''+field.DbColumnName+'\')" ng-options="id as name for (id, name) in CellOptions.'+ field.DbColumnName +'Options"><option value="" selected="selected"></option></select>';
                 scope.CellOptions[field.DbColumnName+'Options'] = makeObjectsFromValues(scope.dataset.DatastoreId+field.DbColumnName, field.Field.PossibleValues);
 //                console.log("and we used: " + scope.dataset.DatastoreId+field.DbColumnName + " as the key");
