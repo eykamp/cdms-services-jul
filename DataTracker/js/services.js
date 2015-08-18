@@ -1605,6 +1605,7 @@ function makeFieldColDef(field, scope) {
                 editableCellTemplate: '<input type="text" ng-blur="updateCell(row,\''+field.DbColumnName+'\')" ng-pattern="'+date_pattern+'" ng-model="COL_FIELD" ng-input="COL_FIELD" />';
                 break;
             case 'datetime':
+            case 'time':
                 coldef.editableCellTemplate = '<input type="text" ng-blur="updateCell(row,\''+field.DbColumnName+'\')" ng-model="COL_FIELD" ng-input="COL_FIELD" />';
                 break;
             case 'text':
@@ -1948,6 +1949,10 @@ function validateField(field, row, key, scope, row_errors)
         case 'date':
             //TODO
             break;
+        case 'time':
+            if(!stringIsTime(value) && !is_empty(value))
+                row_errors.push("["+field.DbColumnName+"] Value is not a time.");
+            break;
         case 'text':
             //anything here?
             break;
@@ -2012,6 +2017,15 @@ if(field.DbColumnName == "FinClip")
 function stringIsNumber(s) {
     return !isNaN(parseFloat(s)) && isFinite(s);
 }
+
+
+function stringIsTime(s) {
+    if(s == null)
+        return false;
+
+    return s.match(/^\s*([01]?\d|2[0-3]):([0-5]\d)\s*$/);
+}
+
 
 function is_empty(obj) {
 
