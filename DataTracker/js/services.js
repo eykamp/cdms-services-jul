@@ -832,7 +832,11 @@ mod.service('ActivityParser',[ 'Logger',
                 activities.errors.saveError = message;
             },
 
+            // Some codepaths do not pass two args, which causes this to crash
             makeKey: function(row, activityDateToday){
+
+                if(activityDateToday == null)
+                    activityDateToday = new Date();
 
                 if(!row.activityDate)
                     row.activityDate = toExactISOString(activityDateToday);
