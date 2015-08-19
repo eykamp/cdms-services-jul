@@ -44,6 +44,8 @@ namespace services.Models
         public DbSet<FieldCategory> FieldCategories { get; set; }
         public DbSet<FieldRole> FieldRoles { get; set; }
         public DbSet<Instrument> Instruments { get; set; }
+        public DbSet<Laboratory> Laboratories { get; set; }
+        
         public DbSet<InstrumentType> InstrumentType { get; set; }
         public DbSet<InstrumentAccuracyCheck> AccuracyChecks { get; set; }
         public DbSet<Source> Sources { get; set; }
@@ -59,6 +61,9 @@ namespace services.Models
 
         public DbSet<SpawningGroundSurvey_Detail> SpawningGroundSurvey_Detail { get; set; }
         public DbSet<SpawningGroundSurvey_Header> SpawningGroundSurvey_Header { get; set; }
+
+        public DbSet<WaterQuality_Detail> WaterQuality_Detail { get; set; }
+        public DbSet<WaterQuality_Header> WaterQuality_Header { get; set; }
 
         public DbSet<FishTransport_Detail> FishTransport_Detail { get; set; }
         public DbSet<FishTransport_Header> FishTransport_Header { get; set; }

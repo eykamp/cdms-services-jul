@@ -512,6 +512,38 @@
     <Compile Include="Migrations\201508171735315_make_temps_float.Designer.cs">
       <DependentUpon>201508171735315_make_temps_float.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508172149152_LabDataWaterQualityDatabaseDesign.cs" />
+    <Compile Include="Migrations\201508172149152_LabDataWaterQualityDatabaseDesign.Designer.cs">
+      <DependentUpon>201508172149152_LabDataWaterQualityDatabaseDesign.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508172149479_WaterQualityMetadata.cs" />
+    <Compile Include="Migrations\201508172149479_WaterQualityMetadata.Designer.cs">
+      <DependentUpon>201508172149479_WaterQualityMetadata.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508172313418_SpawningGroundSurveyFixes.cs" />
+    <Compile Include="Migrations\201508172313418_SpawningGroundSurveyFixes.Designer.cs">
+      <DependentUpon>201508172313418_SpawningGroundSurveyFixes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508182048196_Laboratories.cs" />
+    <Compile Include="Migrations\201508182048196_Laboratories.Designer.cs">
+      <DependentUpon>201508182048196_Laboratories.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508182342320_AddUserId.cs" />
+    <Compile Include="Migrations\201508182342320_AddUserId.Designer.cs">
+      <DependentUpon>201508182342320_AddUserId.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508190036474_FixDatatype.cs" />
+    <Compile Include="Migrations\201508190036474_FixDatatype.Designer.cs">
+      <DependentUpon>201508190036474_FixDatatype.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508190043349_FixDataType2.cs" />
+    <Compile Include="Migrations\201508190043349_FixDataType2.Designer.cs">
+      <DependentUpon>201508190043349_FixDataType2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508191905447_FloatToString.cs" />
+    <Compile Include="Migrations\201508191905447_FloatToString.Designer.cs">
+      <DependentUpon>201508191905447_FloatToString.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -558,8 +590,11 @@
     <Compile Include="Models\Data\FishTransport_Detail.cs" />
     <Compile Include="Models\Data\FishTransport_Header.cs" />
     <Compile Include="Models\Data\DataDetailRelation.cs" />
+    <Compile Include="Models\Data\WaterQuality.cs" />
     <Compile Include="Models\Data\SpawningGroundSurvey.cs" />
+    <Compile Include="Models\Data\WaterQuality_Detail.cs" />
     <Compile Include="Models\Data\SpawningGroundSurvey_Detail.cs" />
+    <Compile Include="Models\Data\WaterQuality_Header.cs" />
     <Compile Include="Models\Data\SpawningGroundSurvey_Header.cs" />
     <Compile Include="Models\Data\WaterTemp.cs" />
     <Compile Include="Models\Data\WaterTemp_Detail.cs" />
@@ -610,6 +645,7 @@
     <Compile Include="Models\Department.cs" />
     <Compile Include="Models\File.cs" />
     <Compile Include="Models\FileType.cs" />
+    <Compile Include="Models\Laboratory.cs" />
     <Compile Include="Models\Instrument.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\LocationType.cs" />
@@ -959,6 +995,30 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508171735315_make_temps_float.resx">
       <DependentUpon>201508171735315_make_temps_float.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508172149152_LabDataWaterQualityDatabaseDesign.resx">
+      <DependentUpon>201508172149152_LabDataWaterQualityDatabaseDesign.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508172149479_WaterQualityMetadata.resx">
+      <DependentUpon>201508172149479_WaterQualityMetadata.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508172313418_SpawningGroundSurveyFixes.resx">
+      <DependentUpon>201508172313418_SpawningGroundSurveyFixes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508182048196_Laboratories.resx">
+      <DependentUpon>201508182048196_Laboratories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508182342320_AddUserId.resx">
+      <DependentUpon>201508182342320_AddUserId.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508190036474_FixDatatype.resx">
+      <DependentUpon>201508190036474_FixDatatype.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508190043349_FixDataType2.resx">
+      <DependentUpon>201508190043349_FixDataType2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508191905447_FloatToString.resx">
+      <DependentUpon>201508191905447_FloatToString.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

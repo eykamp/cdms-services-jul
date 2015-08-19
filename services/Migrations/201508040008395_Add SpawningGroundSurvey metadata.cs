@@ -603,7 +603,7 @@ UNION ALL SELECT
         Validation = NULL,
         DataType = 'date',
         PossibleValues = NULL,
-        DbColumnName = 'text',
+        DbColumnName = 'DateTime',
         ControlType = 'text',
         [Rule] = NULL
 
