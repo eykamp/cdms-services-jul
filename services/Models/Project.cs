@@ -39,6 +39,7 @@ namespace services.Models
 
         //[InverseProperty("ProjectInstruments")]
         public virtual List<Instrument> Instruments { get; set; }
+        public virtual List<Laboratory> Laboratories { get; set; }
 
         public bool isOwnerOrEditor(User user)
         {

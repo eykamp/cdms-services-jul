@@ -16,12 +16,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-using CsvHelper;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using NLog;
 using services.Models;
-using services.Models.Data;
 using services.Resources;
 
 //kb 5/1/2014
@@ -51,6 +48,13 @@ namespace services.Controllers
         {
             var db = ServicesContext.Current;
             return db.Instruments.OrderBy(o => o.Name).ThenBy(o => o.SerialNumber).AsEnumerable();
+        }
+
+        [HttpGet]
+        public IEnumerable<Laboratory> GetAllLaboratories()
+        {
+            var db = ServicesContext.Current;
+            return db.Laboratories.OrderBy(o => o.Name).AsEnumerable();
         }
 
         [HttpGet]
@@ -362,8 +366,39 @@ namespace services.Controllers
             }
 
             return new HttpResponseMessage(HttpStatusCode.OK);
-
         }
+
+
+        [HttpPost]
+        public HttpResponseMessage SaveCharacteristic(JObject jsonData)
+        {
+            var db = ServicesContext.Current;
+            dynamic json = jsonData;
+            User me = AuthorizationManager.getCurrentUser();
+
+            Laboratory laboratory = db.Laboratories.Find(json.LaboratoryId.ToObject<int>());
+
+            if (laboratory == null)
+                throw new Exception("Configuration error -- couldn't find lab.  Please try again.");
+
+            LaboratoryCharacteristic ac = json.Characteristic.ToObject<LaboratoryCharacteristic>();
+
+            ac.UserId = me.Id;
+
+            if (ac.Id == 0)
+            {
+                laboratory.Characteristics.Add(ac);
+                db.SaveChanges();
+            }
+            else
+            {
+                db.Entry(ac).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+
+            return new HttpResponseMessage(HttpStatusCode.OK);
+        }
+
 
         [HttpPost]
         public HttpResponseMessage SaveProjectInstrument(JObject jsonData)
@@ -443,6 +478,92 @@ namespace services.Controllers
             {
                 db.Entry(instrument).State = EntityState.Modified;
                 logger.Debug("updated existing instrument");
+            }
+            
+            db.SaveChanges();
+
+            return new HttpResponseMessage(HttpStatusCode.OK);
+        }
+
+
+        [HttpPost]
+        public HttpResponseMessage SaveProjectLaboratory(JObject jsonData)
+        {
+            var db = ServicesContext.Current;
+            dynamic json = jsonData;
+            User me = AuthorizationManager.getCurrentUser();
+            Project project = db.Projects.Find(json.ProjectId.ToObject<int>());
+
+            if (!project.isOwnerOrEditor(me))
+                throw new Exception("Authorization error.");
+
+            Laboratory laboratory = db.Laboratories.Find(json.Laboratory.Id.ToObject<int>());
+
+            if (project == null || laboratory == null)
+                throw new Exception("Configuration error.  Please try again.");
+
+            project.Laboratories.Add(laboratory);
+            db.SaveChanges();
+            logger.Debug("success adding NEW proejct instrument!");
+            
+
+            return new HttpResponseMessage(HttpStatusCode.OK);
+        }
+
+        [HttpPost]
+        public HttpResponseMessage RemoveProjectLaboratory(JObject jsonData)
+        {
+            var db = ServicesContext.Current;
+            dynamic json = jsonData;
+            User me = AuthorizationManager.getCurrentUser();
+            Project p = db.Projects.Find(json.ProjectId.ToObject<int>());
+
+            if (!p.isOwnerOrEditor(me))
+                throw new Exception("Authorization error.");
+
+            Laboratory laboratory = db.Laboratories.Find(json.LaboratoryId.ToObject<int>());
+            if (p == null || laboratory == null)
+                throw new Exception("Configuration error.  Please try again.");
+
+            p.Laboratories.Remove(laboratory);
+            db.Entry(p).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return new HttpResponseMessage(HttpStatusCode.OK);
+
+        }
+
+        [HttpPost]
+        public HttpResponseMessage SaveLaboratory(JObject jsonData)
+        {
+            var db = ServicesContext.Current;
+            dynamic json = jsonData;
+            User me = AuthorizationManager.getCurrentUser();
+            Project p = db.Projects.Find(json.ProjectId.ToObject<int>());
+            if (p == null)
+                throw new Exception("Configuration error.  Please try again.");
+
+            if (!p.isOwnerOrEditor(me))
+                throw new Exception("Authorization error.");
+
+            Laboratory laboratory = json.Laboratory.ToObject<Laboratory>();
+            //laboratory.OwningDepartmentId = json.Laboratory.OwningDepartmentId.ToObject<int>();
+
+            //logger.Debug("The id == " + laboratory.OwningDepartmentId);
+
+            //if there is an laboratory id already set, then we'll just update the laboratory and call it good.
+            //  otherwise we'll create the new laboratory and a relationship to the project.
+
+            if (laboratory.Id == 0)
+            {
+                laboratory.UserId = me.Id;
+                p.Laboratories.Add(laboratory);
+                logger.Debug("created new laboratory");
+            }
+            else
+            {
+                db.Entry(laboratory).State = EntityState.Modified;
+                logger.Debug("updated existing laboratory");
             }
             
             db.SaveChanges();
