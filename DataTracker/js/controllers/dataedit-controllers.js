@@ -229,6 +229,15 @@ mod_edit.controller('DataEditCtrl', ['$scope','$q','$sce','$routeParams','DataSe
             });
          };
 
+        $scope.createLaboratory = function(){
+            $scope.viewLaboratory = null;
+            var modalInstance = $modal.open({
+              templateUrl: 'partials/instruments/modal-create-laboratory.html',
+              controller: 'ModalCreateLaboratoryCtrl',
+              scope: $scope, //very important to pass the scope along...
+            });
+         };         
+
 
 		$scope.reloadProject = function(){
                 //reload project instruments -- this will reload the instruments, too
@@ -236,23 +245,27 @@ mod_edit.controller('DataEditCtrl', ['$scope','$q','$sce','$routeParams','DataSe
                 $scope.project = DataService.getProject($scope.dataset.ProjectId);
                 var watcher = $scope.$watch('project.Id', function(){
                 	$scope.selectInstrument();
+                	$scope.selectLaboratory();
                 	watcher();
                 });
 
          };
 
 		$scope.openAccuracyCheckModal = function(){
-
             var modalInstance = $modal.open({
               templateUrl: 'partials/instruments/modal-new-accuracycheck.html',
               controller: 'ModalQuickAddAccuracyCheckCtrl',
               scope: $scope, //very important to pass the scope along...
-
             });
-
 		};
 
-
+		$scope.openCharacteristicModal = function(){
+            var modalInstance = $modal.open({
+              templateUrl: 'partials/instruments/modal-new-characteristic.html',
+              controller: 'ModalQuickAddCharacteristicCtrl',
+              scope: $scope, //very important to pass the scope along...
+            });
+		};
 		$scope.getDataGrade = function(check){ return getDataGrade(check)}; //alias from service
 
 		$scope.selectInstrument = function(){
@@ -260,11 +273,20 @@ mod_edit.controller('DataEditCtrl', ['$scope','$q','$sce','$routeParams','DataSe
 			$scope.selectAccuracyCheck();
 		};
 
+		$scope.selectLaboratory = function(){
+			$scope.viewLaboratory = getByField($scope.project.Laboratories, $scope.row.LaboratoryId, "Id");
+			$scope.selectLabCharacteristic();
+		};
+
 		$scope.selectAccuracyCheck = function(){
 			if($scope.row.AccuracyCheckId)
 				$scope.row.AccuracyCheck = getByField($scope.viewInstrument.AccuracyChecks, $scope.row.AccuracyCheckId, "Id");
 		};
 
+		$scope.selectLabCharacteristic = function(){
+			if($scope.row.LabCharacteristicId)
+				$scope.row.LabCharacteristic = getByField($scope.viewLaboratory.Characteristics, $scope.row.LabCharacteristicId, "Id");
+		};
 
 		 $scope.cancel = function(){
 		 	if($scope.dataChanged)

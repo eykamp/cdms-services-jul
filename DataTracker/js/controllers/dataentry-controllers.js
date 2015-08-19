@@ -15,8 +15,6 @@ mod_de.controller('ModalQuickAddAccuracyCheckCtrl', ['$scope','$modalInstance', 
           $scope.reloadProject();  
           $modalInstance.dismiss();  
       });
-      
-
     };
 
     $scope.cancel = function(){
@@ -25,6 +23,29 @@ mod_de.controller('ModalQuickAddAccuracyCheckCtrl', ['$scope','$modalInstance', 
 
   }
 ]);
+
+
+mod_de.controller('ModalQuickAddCharacteristicCtrl', ['$scope','$modalInstance', 'DataService','DatastoreService',
+  function($scope,  $modalInstance, DataService, DatastoreService){
+
+    $scope.char_row = {};
+
+    $scope.save = function(){
+      
+      var promise = DatastoreService.saveCharacteristic($scope.viewLabCharacteristic.Id, $scope.char_row);
+      promise.$promise.then(function(){
+          $scope.reloadProject();  
+          $modalInstance.dismiss();  
+      });
+    };
+
+    $scope.cancel = function(){
+      $modalInstance.dismiss();
+    };
+
+  }
+]);
+
 
 //datasheet version of the data entrypage
 mod_de.controller('DataEntryDatasheetCtrl', ['$scope','$routeParams','DataService','$modal','$location','$rootScope','ActivityParser','DataSheet','$route',
@@ -361,6 +382,19 @@ mod_de.controller('DataEntryFormCtrl', ['$scope','$routeParams','DataService','$
 
 			if($scope.row.LastAccuracyCheck)
 				$scope.row.AccuracyCheckId = $scope.row.LastAccuracyCheck.Id;
+		};
+
+		$scope.selectLaboratory = function(){
+			if(!$scope.row.LaboratoryId)
+				return;
+
+			//get latest accuracy check
+			$scope.viewLaboratory = getByField($scope.project.Laboratories, $scope.row.LaboratoryId, "Id");
+			$scope.row.LastCharacteristic = $scope.viewLaboratory.Characteristics[$scope.viewLaboratory.Characteristics.length-1];
+			$scope.row.DataGradeText = getDataGrade($scope.row.LastCharacteristic) ;
+
+			if($scope.row.LastCharacteristic)
+				$scope.row.LastCharacteristicId = $scope.row.LastCharacteristic.Id;
 		};
 
 		$scope.cancel = function(){

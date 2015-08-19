@@ -141,6 +141,10 @@ mod.factory('GetInstruments', ['$resource', function($resource){
         return $resource(serviceUrl+'/data/GetInstruments');
 }]);
 
+mod.factory('GetLaboratories', ['$resource', function($resource){
+        return $resource(serviceUrl+'/data/GetLaboratories');
+}]);
+
 mod.factory('SaveDatasetField', ['$resource', function($resource){
         return $resource(serviceUrl+'/data/SaveDatasetField');
 }]);
@@ -173,24 +177,48 @@ mod.factory('GetAllInstruments', ['$resource', function($resource){
         return $resource(serviceUrl+'/data/GetAllInstruments');
 }]);
 
+mod.factory('GetAllLaboratories', ['$resource', function($resource){
+        return $resource(serviceUrl+'/data/GetAllLaboratories');
+}]);
+
 mod.factory('SaveProjectInstrument', ['$resource', function($resource){
         return $resource(serviceUrl+'/data/SaveProjectInstrument');
+}]);
+
+mod.factory('SaveProjectLaboratory', ['$resource', function($resource){
+        return $resource(serviceUrl+'/data/SaveProjectLaboratory');
 }]);
 
 mod.factory('SaveInstrument', ['$resource', function($resource){
         return $resource(serviceUrl+'/data/SaveInstrument');
 }]);
 
+mod.factory('SaveLaboratory', ['$resource', function($resource){
+        return $resource(serviceUrl+'/data/SaveLaboratory');
+}]);
+
 mod.factory('SaveInstrumentAccuracyCheck', ['$resource', function($resource){
         return $resource(serviceUrl+'/data/SaveInstrumentAccuracyCheck');
+}]);
+
+mod.factory('SaveCharacteristic', ['$resource', function($resource){
+        return $resource(serviceUrl+'/data/SaveCharacteristic');
 }]);
 
 mod.factory('GetInstrumentTypes', ['$resource', function($resource){
         return $resource(serviceUrl+'/data/GetInstrumentTypes');
 }]);
 
+mod.factory('GetLaboratoryTypes', ['$resource', function($resource){
+        return $resource(serviceUrl+'/data/GetLaboratoryTypes');
+}]);
+
 mod.factory('RemoveProjectInstrument', ['$resource', function($resource){
         return $resource(serviceUrl+'/data/RemoveProjectInstrument');
+}]);
+
+mod.factory('RemoveProjectLaboratory', ['$resource', function($resource){
+        return $resource(serviceUrl+'/data/RemoveProjectLaboratory');
 }]);
 
 mod.factory('GetMetadataFor',['$resource', function($resource){
@@ -236,9 +264,9 @@ mod.factory('GetRelationData', ['$resource', function($resource){
 
 
 
+mod.service('DatastoreService', ['$q','GetAllPossibleDatastoreLocations','GetAllDatastoreFields','GetDatastore','GetDatastoreProjects','GetAllDatastores','GetDatastoreDatasets','GetSources','GetInstruments','GetLaboratories','SaveDatasetField','SaveMasterField','DeleteDatasetField','GetAllFields','AddMasterFieldToDataset','GetLocationTypes','SaveProjectLocation','GetAllInstruments','GetAllLaboratories','SaveProjectInstrument','SaveProjectLaboratory','SaveInstrument','SaveLaboratory','SaveInstrumentAccuracyCheck','SaveCharacteristic','GetInstrumentTypes','GetLaboratoryTypes','RemoveProjectInstrument', 'RemoveProjectLaboratory', 'GetWaterBodies','UpdateFile','DeleteFile','GetTimeZones','DeleteLocationAction',
+    function($q, GetAllPossibleDatastoreLocations,GetAllDatastoreFields,GetDatastore,GetDatastoreProjects,GetAllDatastores,GetDatastoreDatasets, GetSources, GetInstruments,GetLaboratories,SaveDatasetField, SaveMasterField, DeleteDatasetField,GetAllFields, AddMasterFieldToDataset, GetLocationTypes, SaveProjectLocation,GetAllInstruments,GetAllLaboratories,SaveProjectInstrument,SaveProjectLaboratory,SaveInstrument,SaveLaboratory, SaveInstrumentAccuracyCheck, SaveCharacteristic, GetInstrumentTypes, GetLaboratoryTypes,RemoveProjectInstrument,RemoveProjectLaboratory, GetWaterBodies,UpdateFile,DeleteFile, GetTimeZones,DeleteLocationAction){
 
-mod.service('DatastoreService', ['$q','GetAllPossibleDatastoreLocations','GetAllDatastoreFields','GetDatastore','GetDatastoreProjects','GetAllDatastores','GetDatastoreDatasets','GetSources','GetInstruments','SaveDatasetField','SaveMasterField','DeleteDatasetField','GetAllFields','AddMasterFieldToDataset','GetLocationTypes','SaveProjectLocation','GetAllInstruments','SaveProjectInstrument','SaveInstrument','SaveInstrumentAccuracyCheck','GetInstrumentTypes','RemoveProjectInstrument','GetWaterBodies','UpdateFile','DeleteFile','GetTimeZones','DeleteLocationAction',
-    function($q, GetAllPossibleDatastoreLocations,GetAllDatastoreFields,GetDatastore,GetDatastoreProjects,GetAllDatastores,GetDatastoreDatasets, GetSources, GetInstruments,SaveDatasetField, SaveMasterField, DeleteDatasetField,GetAllFields, AddMasterFieldToDataset, GetLocationTypes, SaveProjectLocation,GetAllInstruments,SaveProjectInstrument,SaveInstrument, SaveInstrumentAccuracyCheck, GetInstrumentTypes, RemoveProjectInstrument,GetWaterBodies,UpdateFile,DeleteFile, GetTimeZones,DeleteLocationAction){
         var service = {
 
             datastoreId: null,
@@ -288,10 +316,18 @@ mod.service('DatastoreService', ['$q','GetAllPossibleDatastoreLocations','GetAll
             {
                 return GetInstruments.query();
             },
+            getLaboratories: function()
+            {
+                return GetLaboratories.query();
+            },            
             getInstrumentTypes: function()
             {
                 return GetInstrumentTypes.query();
             },
+            getLaboratoryTypes: function()
+            {
+                return GetLaboratoryTypes.query();
+            },            
             getLocationTypes: function()
             {
                 return GetLocationTypes.query();
@@ -339,19 +375,32 @@ mod.service('DatastoreService', ['$q','GetAllPossibleDatastoreLocations','GetAll
             {
                 return GetAllInstruments.query();
             },
+            getAllLaboratories: function()
+            {
+                return GetAllLaboratories.query();
+            },
             saveInstrument: function(projectId, instrument){
                 return SaveInstrument.save({ProjectId: projectId, Instrument: instrument}); //will connect to this project if creating instrument
             },
+            saveLaboratory: function(projectId, laboratory){
+                return SaveLaboratory.save({ProjectId: projectId, Laboratory: laboratory}); //will connect to this project if creating instrument
+            },            
             saveProjectInstrument: function(projectId, instrument){
                 return SaveProjectInstrument.save({ProjectId: projectId, Instrument: instrument});
             },
-            removeProjectInstrument: function(projectId, instrumentId){
-                return RemoveProjectInstrument.save({ProjectId: projectId, InstrumentId: instrumentId});
+            saveProjectLaboratory: function(projectId, laboratory){
+                return SaveProjectLaboratory.save({ProjectId: projectId, Laboratory: laboratory});
+            },            removeProjectLaboratory: function(projectId, laboratoryId){
+                return RemoveProjectLaboratory.save({ProjectId: projectId, LaboratoryId: laboratoryId});
             },
             saveInstrumentAccuracyCheck: function(instrumentId, ac)
             {
                 return SaveInstrumentAccuracyCheck.save({InstrumentId: instrumentId, AccuracyCheck: ac});
             },
+            saveCharacteristic: function(laboratoryId, ch)
+            {
+                return SaveCharacteristic.save({LaboratoryId: laboratoryId, Characteristic: ch});
+            },            
             updateFile: function(projectId, file)
             {
                 return UpdateFile.save({ProjectId: projectId, File: file});
@@ -368,9 +417,6 @@ mod.service('DatastoreService', ['$q','GetAllPossibleDatastoreLocations','GetAll
             {
                 return GetTimeZones.query();
             }
-
-
-
         };
 
         return service;
@@ -405,10 +451,11 @@ mod.service('DataService', ['$q','$resource', 'Projects', 'Users','Project','Pro
             service.project.$promise.then(function(){
                 //console.log("after-project-load!");
                 //do some sorting after we load for instruments
-                if(service.project.Instruments.length > 0)
-                {
+                if(service.project.Instruments && service.project.Instruments.length > 0)
                     service.project.Instruments = service.project.Instruments.sort(orderByAlphaName);
-                }
+
+                if(service.project.Laboratories && service.project.Laboratories.length > 0)
+                    service.project.Laboratories = service.project.Laboratories.sort(orderByAlphaName);
 
                 //and also for locations
                 //service.project.Locations = service.project.Locations.sort(orderByAlpha);
@@ -500,6 +547,10 @@ mod.service('DataService', ['$q','$resource', 'Projects', 'Users','Project','Pro
         },
 
         getDepartments: function(){
+            return GetDepartments.query();
+        },
+
+        getLaboratoryTypes: function(){
             return GetDepartments.query();
         },
 
@@ -1606,18 +1657,10 @@ function makeFieldColDef(field, scope) {
 //                console.log("and we used: " + scope.dataset.DatastoreId+field.DbColumnName + " as the key");
                 break;
             case 'date':
-                editableCellTemplate: '<input type="text" ng-blur="updateCell(row,\''+field.DbColumnName+'\')" ng-pattern="'+date_pattern+'" ng-model="COL_FIELD" ng-input="COL_FIELD" />';
+                coldef.editableCellTemplate = '<input type="text" ng-blur="updateCell(row,\''+field.DbColumnName+'\')" ng-pattern="'+date_pattern+'" ng-model="COL_FIELD" ng-input="COL_FIELD" />';
                 break;
             case 'datetime':
             case 'time':
-                coldef.editableCellTemplate = '<input type="text" ng-blur="updateCell(row,\''+field.DbColumnName+'\')" ng-model="COL_FIELD" ng-input="COL_FIELD" />';
-                break;
-            case 'text':
-                coldef.editableCellTemplate = '<input type="text" ng-blur="updateCell(row,\''+field.DbColumnName+'\')" ng-model="COL_FIELD" ng-input="COL_FIELD" />';
-                break;
-            case 'currency':
-                coldef.editableCellTemplate = '<input type="text" ng-blur="updateCell(row,\''+field.DbColumnName+'\')" ng-model="COL_FIELD" ng-input="COL_FIELD" />';
-                break;                
             case 'textarea':
                 coldef.editableCellTemplate = '<input type="text" ng-blur="updateCell(row,\''+field.DbColumnName+'\')" ng-model="COL_FIELD" ng-input="COL_FIELD" />';
                 break;
@@ -1636,7 +1679,7 @@ function makeFieldColDef(field, scope) {
                 //<span ng-bind-html="fileNamesFromRow(row,\''+ field.DbColumnName + '\')"></span>';
                 break;
             //case 'grid':
-            //    coldef.cellTemplate = '<button class="right btn btn-xs" ng-click="viewRelation(row, col.field)">View</button> <span ng-cell-text ng-bind-html="row.getProperty(col.field)"></span>';
+            //    coldef.cellTemplate = '<button class="rigt btn btn-xs" ng-click="viewRelation(row, col.field)">View</button> <span ng-cell-text ng-bind-html="row.getProperty(col.field)"></span>';
             //    break;
             default:
                 console.log("Unknown control type: " + field.ControlType);

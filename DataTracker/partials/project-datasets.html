@@ -145,13 +145,69 @@
 									</div>
 								</div>
 								
+							</div>
+					  </div>
+		        </div>
+		    </div>
+		</div>
+		</div>
+	</tab>
+
+
+	<tab heading="Laboratories">
+		<div class="container-fluid">
+		    <div class="row-fluid">
+		        <div class="span10">
+		     
+		           <div class="panel panel-default">
+
+					  <div class="panel-body">
+					  		<h3>{{project.Name}} :: Manage Laboratories</h3>
+
+							<div project-role="editor" class="panel-body" style="width: 600px;">
+								<h3>Add a Laboratory:</h3>
+								
+								<select ui-select2="select2Options" data-placeholder="Add a Laboratory" ng-model="selectedLaboratory" style="width: 300px;">
+									    <option ng-repeat="laboratory in allLaboratories" value="{{laboratory.Id}}">{{laboratory.Name}}</option>
+								</select>
+
+								<button style="margin-top: -10px; margin-left: 10px;" class="right btn" ng-click="createLaboratory()">Create New</button>
+								<button style="margin-top: -10px; margin-left: 10px;" class="right btn" ng-click="addLaboratory()">Add to Project</button>
+								
+							</div>
+
+					  		<p><i>Manage Laboratories for this project</i></p>
+					  		<hr/>
+							
+					  		<div ng-show="project.Laboratories.length==0">There are no Laboratories associated with this project.</div>
+					  		<div class="col-md-6 admin-field-list-box" ng-show="project.Laboratories.length>0">
+								<div class="row">
+										<div ng-click="viewSelectedLaboratory(laboratory)" class="admin-field" ng-class="{'admin-field-selected': laboratory.Id == viewLaboratory.Id}" ng-repeat="laboratory in project.Laboratories">
+											<span class="admin-field-name">{{laboratory.Name}}</span><br/>
+											<div project-role="editor" ng-class="{'hidden': laboratory.Id != viewLaboratory.Id}" class="right">
+												<button ng-click="removeViewLaboratory()" class="btn btn-xs">Remove</button>
+												<button ng-click="editViewLaboratory()" class="btn btn-xs">Edit</button>
+											</div>
+										</div>
+								</div>
+
+							</div>
+							
+							<div ng-show="viewLaboratory" class="col-md-6 admin-criteria-list-box">
+								<div class="row">
+									<div class="col-md-12">
+										<div ng-include="'partials/laboratories/labcharacteristics.html'"></div>
+										<div project-role="editor" class="right" style="margin-top: 50px;">
+											<button class="btn" ng-click="openCharacteristicForm()">Add</button>
+										</div>
+
+									</div>
+								</div>
+								
 
 							</div>
 
 					  </div>
-
-					
-
 		        </div>
 		    </div>
 		</div>

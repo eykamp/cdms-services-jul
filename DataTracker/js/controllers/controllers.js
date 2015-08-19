@@ -7,19 +7,18 @@
 var mod_ds = angular.module('DatasetControllers', ['ui.bootstrap', 'angularFileUpload','ui.select2']);
 
 mod_ds.controller('ModalAddAccuracyCheckCtrl', ['$scope','$modalInstance', 'DataService','DatastoreService',
-  function($scope,  $modalInstance, DataService, DatastoreService){
+  function($scope, $modalInstance, DataService, DatastoreService){
 
     $scope.ac_row = angular.copy($scope.ac_row);
 
     $scope.save = function(){
 
       var promise = DatastoreService.saveInstrumentAccuracyCheck($scope.viewInstrument.Id, $scope.ac_row);
+
       promise.$promise.then(function(){
           $scope.reloadProject();
           $modalInstance.dismiss();
       });
-
-
     };
 
     $scope.cancel = function(){
@@ -28,6 +27,30 @@ mod_ds.controller('ModalAddAccuracyCheckCtrl', ['$scope','$modalInstance', 'Data
 
   }
 ]);
+
+
+mod_ds.controller('ModalAddCharacteristicCtrl', ['$scope','$modalInstance', 'DataService','DatastoreService',
+  function($scope, $modalInstance, DataService, DatastoreService){
+
+    $scope.char_row = angular.copy($scope.char_row);
+
+    $scope.save = function(){
+
+      var promise = DatastoreService.saveCharacteristic($scope.viewLaboratory.Id, $scope.char_row);
+
+      promise.$promise.then(function(){
+          $scope.reloadProject();
+          $modalInstance.dismiss();
+      });
+    };
+
+    $scope.cancel = function(){
+      $modalInstance.dismiss();
+    };
+
+  }
+]);
+
 
 mod_ds.controller('ModalProjectEditorCtrl', ['$scope','$modalInstance', 'DataService','DatastoreService',
   function($scope,  $modalInstance, DataService, DatastoreService){
@@ -160,6 +183,7 @@ var projectDatasetsController = ['$scope', '$routeParams', 'DataService','Datast
     scope.currentUserId = $rootScope.Profile.Id;
     scope.filteredUsers = false;
     scope.allInstruments = DatastoreService.getAllInstruments();
+    scope.allLaboratories = DatastoreService.getAllLaboratories();
     scope.CellOptions = {}; //for metadata dropdown options
     scope.isFavorite = $rootScope.Profile.isProjectFavorite(routeParams.Id);
 
@@ -333,11 +357,12 @@ var projectDatasetsController = ['$scope', '$routeParams', 'DataService','Datast
                         scope.project.Docs.push(file);
                 });
 
-                //reload if it is already selected
+                //reload if it is already selected -- this is what allows you to see the new accuracycheck/characteristic immediately after it is added
                 if(scope.viewInstrument)
-                {
                     scope.viewInstrument = getMatchingByField(scope.project.Instruments, scope.viewInstrument.Id, 'Id')[0];
-                }
+
+                if(scope.viewLaboratory)
+                    scope.viewLaboratory = getMatchingByField(scope.project.Laboratories, scope.viewLaboratory.Id, 'Id')[0];
 
                 //add in the metadata to our metadataList that came with this dataset
                 addMetadataProperties(scope.project.Metadata, scope.metadataList, scope, DataService);
@@ -399,7 +424,19 @@ var projectDatasetsController = ['$scope', '$routeParams', 'DataService','Datast
               templateUrl: 'partials/instruments/modal-new-accuracycheck.html',
               controller: 'ModalAddAccuracyCheckCtrl',
               scope: scope, //very important to pass the scope along...
+            });
+         };
 
+         scope.openCharacteristicForm = function(char_row){
+            if(char_row)
+              scope.char_row = char_row;
+            else
+              scope.char_row = {};
+
+            var modalInstance = $modal.open({
+              templateUrl: 'partials/laboratories/modal-new-characteristic.html',
+              controller: 'ModalAddCharacteristicCtrl',
+              scope: scope, //very important to pass the scope along...
             });
          };
 
@@ -416,6 +453,23 @@ var projectDatasetsController = ['$scope', '$routeParams', 'DataService','Datast
             var modalInstance = $modal.open({
               templateUrl: 'partials/instruments/modal-create-instrument.html',
               controller: 'ModalCreateInstrumentCtrl',
+              scope: scope, //very important to pass the scope along...
+            });
+         };
+
+         scope.createLaboratory = function(){
+            scope.viewLaboratory = null;
+            var modalInstance = $modal.open({
+              templateUrl: 'partials/laboratories/modal-create-laboratory.html',
+              controller: 'ModalCreateLaboratoryCtrl',
+              scope: scope, //very important to pass the scope along...
+            });
+         };
+
+        scope.editViewLaboratory = function(){
+            var modalInstance = $modal.open({
+              templateUrl: 'partials/laboratories/modal-create-laboratory.html',
+              controller: 'ModalCreateLaboratoryCtrl',
               scope: scope, //very important to pass the scope along...
             });
          };
@@ -438,9 +492,12 @@ var projectDatasetsController = ['$scope', '$routeParams', 'DataService','Datast
          scope.getDataGrade = function(check){ return getDataGrade(check)}; //alias from service
 
          scope.viewInstrument = null; //what they've clicked to view accuracy checks
+         scope.viewLaboratory = null;
          scope.selectedInstrument = null; //what they've selected in the dropdown to add to the project
+         scope.selectedLaboratory = null;
+
          scope.reloadProject = function(){
-                //reload project instruments -- this will reload the instruments, too
+                //reload project -- this will reload the instruments & laboratories
                 DataService.clearProject();
                 scope.project = DataService.getProject(routeParams.Id);
          };
@@ -456,11 +513,20 @@ var projectDatasetsController = ['$scope', '$routeParams', 'DataService','Datast
             promise.$promise.then(function(){
                 scope.reloadProject();
             });
-
-
          };
 
+         scope.addLaboratory = function(){
+            if(!scope.selectedLaboratory || getMatchingByField(scope.project.Laboratories, scope.selectedLaboratory, 'Id').length > 0)
+                return;
 
+            var Laboratories = getMatchingByField(scope.allLaboratories, scope.selectedLaboratory, 'Id');
+
+            var promise = DatastoreService.saveProjectLaboratory(scope.project.Id, Laboratories[0]);
+
+            promise.$promise.then(function(){
+                scope.reloadProject();
+            });
+         };
 
 
          scope.removeViewInstrument = function(){
@@ -472,7 +538,17 @@ var projectDatasetsController = ['$scope', '$routeParams', 'DataService','Datast
             promise.$promise.then(function(){
                 scope.reloadProject();
             });
+         };
 
+         scope.removeViewLaboratory = function(){
+            if(!scope.viewLaboratory)
+                return;
+
+            var promise = DatastoreService.removeProjectLaboratory(scope.project.Id, scope.viewLaboratory.Id);
+
+            promise.$promise.then(function(){
+                scope.reloadProject();
+            });
 
          };
 
@@ -494,6 +570,9 @@ var projectDatasetsController = ['$scope', '$routeParams', 'DataService','Datast
             scope.viewInstrument = instrument;
          };
 
+         scope.viewSelectedLaboratory = function(laboratory){
+            scope.viewLaboratory = laboratory;
+         };
 
         //remove this editor from the users dropdown.
         scope.filterUsers = function()

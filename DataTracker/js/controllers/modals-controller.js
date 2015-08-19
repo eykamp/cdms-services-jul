@@ -44,6 +44,43 @@ mod_fmc.controller('ModalCreateInstrumentCtrl', ['$scope','$modalInstance', 'Dat
 ]);
 
 
+mod_fmc.controller('ModalCreateLaboratoryCtrl', ['$scope','$modalInstance', 'DataService','DatastoreService',
+  function($scope,  $modalInstance, DataService, DatastoreService){
+
+    $scope.header_message = "Create new laboratory";
+
+    $scope.laboratory_row = {
+        StatusId: 0
+    };
+
+    if($scope.viewLaboratory)
+    {
+        $scope.header_message = "Edit laboratory: " + $scope.viewLaboratory.Name;
+        $scope.laboratory_row = $scope.viewLaboratory;
+    }
+
+
+    // $scope.LaboratoryTypes = DatastoreService.getLaboratoryTypes();
+    // $scope.Departments = DataService.getDepartments();
+    // $scope.RawProjects = DataService.getProjects();
+
+
+    $scope.save = function(){
+        var saveRow = angular.copy($scope.laboratory_row);
+        saveRow.LaboratoryType = undefined;
+        var promise = DatastoreService.saveLaboratory($scope.project.Id, saveRow);
+        promise.$promise.then(function(){
+            $scope.reloadProject();
+            $modalInstance.dismiss();
+        });
+    };
+
+    $scope.cancel = function(){
+        $modalInstance.dismiss();
+    };
+  }
+]);
+
 //when you click the "View" button on a relation table field, it opens this modal
 mod_fmc.controller('RelationGridModalCtrl', ['$scope','$modalInstance', 'DataService','DatastoreService',
     function($scope,  $modalInstance, DataService, DatastoreService){
