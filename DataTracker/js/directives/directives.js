@@ -352,6 +352,16 @@ mod.directive('ctuirFileField',
         return result;
     });
 
+mod.directive('ctuirTempWaypointFileField',
+    function($modal){
+        var result = {
+            templateUrl: 'partials/dataentry/field-waypoint-file.html',
+            restrict: 'E',
+        };
+
+        return result;
+    });
+
 mod.directive('ctuirLinkField',
     function($modal){
         var result = {

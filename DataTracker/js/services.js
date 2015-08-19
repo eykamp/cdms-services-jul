@@ -832,7 +832,11 @@ mod.service('ActivityParser',[ 'Logger',
                 activities.errors.saveError = message;
             },
 
+            // Some codepaths do not pass two args, which causes this to crash
             makeKey: function(row, activityDateToday){
+
+                if(activityDateToday == null)
+                    activityDateToday = new Date();
 
                 if(!row.activityDate)
                     row.activityDate = toExactISOString(activityDateToday);
@@ -1019,6 +1023,9 @@ mod.service('FileUploadService',['$q','$upload',function($q, $upload){
 
                     angular.forEach(filesToUpload, function(files, field){
 
+                        if(field == "null")
+                            return;
+
                         console.log("handling files for: " + field)
 
                           for(var i = 0; i < files.length; i++)
@@ -1185,7 +1192,8 @@ mod.service('DataSheet',[ 'Logger', '$window', '$route',
 
             },
 
-            getColDefs: function(){
+            // Only used for datasheet.  For form look at config column
+            getColDefs: function(DatastoreTablePrefix, theMode){
 	            var coldefs = [{
                             field: 'locationId',
                             Label: 'Location',
@@ -1210,7 +1218,11 @@ mod.service('DataSheet',[ 'Logger', '$window', '$route',
                             cellFilter: 'QAStatusFilter',
                             Field: { Description: "Quality Assurance workflow status"}
 
-                        },
+                        }];
+
+                // No instruments for SpawningGroundSurvey!
+                if(DatastoreTablePrefix != 'SpawningGroundSurvey')
+                    coldefs.push(
                         {
                             field: 'InstrumentId',
                             Label: 'Instrument',
@@ -1219,8 +1231,7 @@ mod.service('DataSheet',[ 'Logger', '$window', '$route',
                             cellFilter: 'instrumentFilter', //'','instrumentFilter',
                             editableCellTemplate: InstrumentCellEditTemplate, //'<input ng-blur="updateCell(row,\'instrumentId\')" ng-model="COL_FIELD" ng-input="COL_FIELD" />',   'InstrumentCellEditTemplate',
                             Field: { Description: "Instrument that detected this value."}
-                        },
-                  ];
+                        });
 
                 return coldefs;
             },
@@ -1573,10 +1584,15 @@ function makeFieldColDef(field, scope) {
 
         //setup column according to what type it is
         //  the "coldef" options available here are "ColumnDefs Options" http://angular-ui.github.io/ng-grid/
+
         switch(field.ControlType)
         {
             case 'select':
             case 'lookup':
+                // Check for common misconfiguration error
+                if(field.Field.PossibleValues == null)
+                    console.log("Missing list of possible values from select/lookup field " + field.Field.Name);
+
                 coldef.editableCellTemplate = '<select ng-class="\'colt\' + col.index" ng-input="COL_FIELD" ng-model="COL_FIELD" ng-blur="updateCell(row,\''+field.DbColumnName+'\')" ng-options="id as name for (id, name) in CellOptions.'+ field.DbColumnName +'Options"><option value="" selected="selected"></option></select>';
                 scope.CellOptions[field.DbColumnName+'Options'] = makeObjectsFromValues(scope.dataset.DatastoreId+field.DbColumnName, field.Field.PossibleValues);
 //                console.log("and we used: " + scope.dataset.DatastoreId+field.DbColumnName + " as the key");
@@ -1593,6 +1609,7 @@ function makeFieldColDef(field, scope) {
                 editableCellTemplate: '<input type="text" ng-blur="updateCell(row,\''+field.DbColumnName+'\')" ng-pattern="'+date_pattern+'" ng-model="COL_FIELD" ng-input="COL_FIELD" />';
                 break;
             case 'datetime':
+            case 'time':
                 coldef.editableCellTemplate = '<input type="text" ng-blur="updateCell(row,\''+field.DbColumnName+'\')" ng-model="COL_FIELD" ng-input="COL_FIELD" />';
                 break;
             case 'text':
@@ -1621,6 +1638,8 @@ function makeFieldColDef(field, scope) {
             //case 'grid':
             //    coldef.cellTemplate = '<button class="right btn btn-xs" ng-click="viewRelation(row, col.field)">View</button> <span ng-cell-text ng-bind-html="row.getProperty(col.field)"></span>';
             //    break;
+            default:
+                console.log("Unknown control type: " + field.ControlType);
         }
     }
 
@@ -1934,18 +1953,22 @@ function validateField(field, row, key, scope, row_errors)
         case 'date':
             //TODO
             break;
+        case 'time':
+            if(!stringIsTime(value) && !is_empty(value))
+                row_errors.push("["+field.DbColumnName+"] Value is not a time.");
+            break;
         case 'text':
             //anything here?
             break;
         case 'number':
-            if(field.Field.Validation && field.Field.Validation.length == 2)
+            // Check if input is a number even if we haven't specified a numeric range
+            if(!stringIsNumber(value) && !is_empty(value))
             {
-                if(!stringIsNumber(value) && !is_empty(value))
-                {
-                    //console.dir(value);
-                    row_errors.push("["+field.DbColumnName+"] Value is not a number.");
-                }
+                row_errors.push("["+field.DbColumnName+"] Value is not a number.");
+            }
 
+            else if(field.Field.Validation && field.Field.Validation.length == 2)
+            {
                 if(value < field.Field.Validation[0])
                     row_errors.push("["+field.DbColumnName+"] Value is too low.");
 
@@ -1998,6 +2021,15 @@ if(field.DbColumnName == "FinClip")
 function stringIsNumber(s) {
     return !isNaN(parseFloat(s)) && isFinite(s);
 }
+
+
+function stringIsTime(s) {
+    if(s == null)
+        return false;
+
+    return s.match(/^\s*([01]?\d|2[0-3]):([0-5]\d)\s*$/);
+}
+
 
 function is_empty(obj) {
 

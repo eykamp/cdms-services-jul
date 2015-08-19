@@ -198,7 +198,7 @@ mod_de.controller('DataEntryFormCtrl', ['$scope','$routeParams','DataService','$
 		$scope.filesToUpload = {};
 
         $scope.dataSheetDataset = [];
-        $scope.row = {ActivityQAStatus: {}, activityDate: new Date()}; //header field values get attached here by dbcolumnname
+        // $scope.row = {ActivityQAStatus: {}, activityDate: new Date()}; //header field values get attached here by dbcolumnname
         
 		//datasheet grid
 		$scope.gridDatasheetOptions = {
@@ -254,8 +254,16 @@ mod_de.controller('DataEntryFormCtrl', ['$scope','$routeParams','DataService','$
 		$scope.$watch('dataset.Fields', function() { 
 			if(!$scope.dataset.Fields ) return;
 
+			$scope.DatastoreTablePrefix = $scope.dataset.Datastore.TablePrefix;
+
+
 			//load our project based on the projectid we get back from the dataset
         	$scope.project = DataService.getProject($scope.dataset.ProjectId);
+        	if ($scope.DatastoreTablePrefix === "CreelSurvey" || $scope.DatastoreTablePrefix === "SpawningGroundSurvey")
+				$scope.row = {ActivityQAStatus: {}}; //header field values get attached here by dbcolumnname; leave activityDate blank for CreelSurvey.								
+			else
+				$scope.row = {ActivityQAStatus: {}, activityDate: new Date()}; //header field values get attached here by dbcolumnname				
+
 			
         	$scope.QAStatusOptions = $rootScope.QAStatusOptions = makeObjects($scope.dataset.QAStatuses, 'Id','Name');
 
@@ -431,6 +439,18 @@ mod_de.controller('DataEntryFormCtrl', ['$scope','$routeParams','DataService','$
             });
         };
 
+		$scope.openWaypointFileModal = function(row, field)
+        {
+            $scope.file_row = row;
+            $scope.file_field = field;
+            
+            var modalInstance = $modal.open({
+                templateUrl: 'partials/modals/waypoint-file-modal.html',
+                controller: 'FileModalCtrl',
+                scope: $scope, //scope to make a child of
+            });
+        };
+
         //field = DbColumnName
         $scope.onFileSelect = function(field, files)
         {
@@ -461,6 +481,9 @@ mod_de.controller('DataEntryFormCtrl', ['$scope','$routeParams','DataService','$
 
 				//spin through the files that we uploaded
 				angular.forEach($scope.filesToUpload, function(files, field){
+
+					if(field == "null")
+						return;
 					
 					var local_files = [];
 
