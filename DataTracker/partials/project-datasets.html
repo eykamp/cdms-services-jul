@@ -15,6 +15,7 @@
 <h3>{{project.Name}}</h3>
 <p>{{project.Description}}</p>
 
+
 <tabset justified="true">
 	<tab heading="Summary">
 		<div ng-include="'partials/project-summary.html'"></div>
@@ -153,8 +154,7 @@
 		</div>
 	</tab>
 
-
-	<tab heading="Laboratories">
+	<tab heading="Laboratories" ng-show="project.ShowLaboratories">
 		<div class="container-fluid">
 		    <div class="row-fluid">
 		        <div class="span10">
@@ -213,8 +213,6 @@
 		</div>
 		</div>
 	</tab>
-	
-
 </tabset>
 
 <br/>
