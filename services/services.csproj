@@ -544,6 +544,10 @@
     <Compile Include="Migrations\201508191905447_FloatToString.Designer.cs">
       <DependentUpon>201508191905447_FloatToString.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508192131174_AddShowLabsColumn.cs" />
+    <Compile Include="Migrations\201508192131174_AddShowLabsColumn.Designer.cs">
+      <DependentUpon>201508192131174_AddShowLabsColumn.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -1019,6 +1023,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508191905447_FloatToString.resx">
       <DependentUpon>201508191905447_FloatToString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508192131174_AddShowLabsColumn.resx">
+      <DependentUpon>201508192131174_AddShowLabsColumn.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

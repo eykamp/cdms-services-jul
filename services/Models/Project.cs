@@ -33,6 +33,7 @@ namespace services.Models
         public virtual Organization Organization { get; set; }
         public virtual List<File> Files { get; set; }
         public virtual User Owner { get; set; }
+        public virtual bool ShowLaboratories { get; set; }
 
         [InverseProperty("ProjectEditor")]
         public virtual List<User> Editors { get; set; }
