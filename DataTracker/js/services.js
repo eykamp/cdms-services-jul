@@ -931,6 +931,7 @@ mod.service('ActivityParser',[ 'Logger',
                         LocationId: row.locationId,
                         ActivityDate: a_date,
                         InstrumentId: row.InstrumentId,
+                        LaboratoryId: row.LaboratoryId,
                         Header: {},
                         Details: [],
                     };
@@ -1998,7 +1999,7 @@ function validateField(field, row, key, scope, row_errors)
             break;
         case 'time':
             if(!stringIsTime(value) && !is_empty(value))
-                row_errors.push("["+field.DbColumnName+"] Value is not a time.");
+                row_errors.push("["+field.DbColumnName+"] Value is not a time (HH:MM).");
             break;
         case 'text':
             //anything here?

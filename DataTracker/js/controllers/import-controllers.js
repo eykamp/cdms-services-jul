@@ -186,6 +186,13 @@ mod_di.controller("DatasetImportCtrl", ['$scope','$routeParams','DatastoreServic
 					$scope.row.AccuracyCheckId = $scope.viewInstrument.AccuracyChecks[$scope.viewInstrument.AccuracyChecks.length-1].Id; //set to last one
 			};
 
+			$scope.selectLaboratory = function(){
+				//get latest characteristic
+				$scope.viewLaboratory = getByField($scope.project.Laboratories, $scope.ActivityFields.LaboratoryId, "Id");
+				if($scope.viewLaboratory && $scope.viewLaboratory.Characteristics.length > 0)
+					$scope.row.CharacteristickId = $scope.viewLaboratory.Characteristics[$scope.viewLaboratory.Characteristics.length-1].Id; //set to last one
+			};
+
 			$scope.toggleDuplicates = function(){
 
 				try{

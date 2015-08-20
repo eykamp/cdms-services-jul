@@ -107,6 +107,7 @@ mod_edit.controller('DataEditCtrl', ['$scope','$q','$sce','$routeParams','DataSe
         	$scope.row['activityDate'] = $scope.dataset_activities.Header.Activity.ActivityDate;
         	$scope.row['locationId'] = ""+$scope.dataset_activities.Header.Activity.LocationId; //note the conversion of this to a string!
         	$scope.row['InstrumentId'] = $scope.dataset_activities.Header.Activity.InstrumentId;
+        	$scope.row['LaboratoryId'] = $scope.dataset_activities.Header.Activity.LaboratoryId;
         	$scope.row['AccuracyCheckId'] = $scope.dataset_activities.Header.Activity.AccuracyCheckId;
         	$scope.row['PostAccuracyCheckId'] = $scope.dataset_activities.Header.Activity.PostAccuracyCheckId;
 

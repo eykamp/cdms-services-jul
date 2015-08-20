@@ -99,6 +99,14 @@ mod_ac.controller('AdminEditDatasetCtrl', ['$scope','DatastoreService','$modal',
 			$scope.InstrumentsLookup = makeObjects($scope.Instruments, 'Id','Name');
 		},true);
 
+		$scope.Laboratories = DatastoreService.getLaboratories();
+
+		$scope.$watch('Laboratories',function(){
+			if($scope.Laboratories.length > 0)
+			$scope.LaboratoriesLookup = makeObjects($scope.Laboratories, 'Id','Name');
+		},true);
+
+
 		$scope.SelectedField = null;
 
 		$scope.$watch('dataset.Id', function(){

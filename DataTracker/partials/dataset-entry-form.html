@@ -60,7 +60,7 @@
             <div ng-show="project.Instruments.length > 0 && !dataset.Config.DataEntryPage.HiddenFields.contains('Instrument')" >
 
                 <div style="display: inline-flex; margin-left: -2px;" >
-                    <div class="header-label">Instrument: </div>
+                    <div class="header-label">Instrument:</div>
                     <div class="header-value">
 
                         <select ui-select2="select2Options" data-placeholder="Choose an Instrument" ng-change="selectInstrument()" style="width: 200px; margin-top: 4px;" ng-model="row.InstrumentId">
@@ -68,13 +68,26 @@
                         </select>
                         
                         <div ng-show="row.DataGradeText">
-                        <a href ng-click="openCharacteristicModal()">
+                        <a href ng-click="openAccuracyCheckModal()">
                             <!-- <span ng-show="row.DataGradeText">Grade: {{row.DataGradeText}} on {{row.LastCharacteristic.CheckDate | date}} </span> -->
                         </a></div>
                     </div>
                     <div style="margin-top: 5px; margin-left: 7px;"><button ng-click="createInstrument()" class="btn btn-xs">Add</button></div>
                 </div>
+            </div>
 
+            <div ng-show="project.Laboratories && project.Laboratories.length > 0 && project.ShowLaboratories" >
+
+                <div style="display: inline-flex; margin-left: -2px;" >
+                    <div class="header-label">Laboratory:</div>
+                    <div class="header-value">
+
+                        <select ui-select2="select2Options" data-placeholder="Choose a Laboratory" ng-change="selectLaboratory()" style="width: 200px; margin-top: 4px;" ng-model="row.LaboratoryId">
+                                <option ng-repeat="lab in project.Laboratories | orderBy:'lab.Name'" value="{{lab.Id}}">{{lab.Name}}</option>
+                        </select>
+                    </div>
+                    <div style="margin-top: 5px; margin-left: 7px;"><button ng-click="createLaboratory()" class="btn btn-xs">Add</button></div>
+                </div>
             </div>
 
         <form novalidate class="row-form">
