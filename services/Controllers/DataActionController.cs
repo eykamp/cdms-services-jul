@@ -530,6 +530,7 @@ namespace services.Controllers
                     activity.AccuracyCheckId = activity_json.AccuracyCheckId;
                     activity.PostAccuracyCheckId = activity_json.PostAccuracyCheckId;
                     activity.Timezone = activity_json.Timezone;
+                    activity.LaboratoryId = activity_json.LaboratoryId;
 
                     //activity.CreateDate = DateTime.Now;
 

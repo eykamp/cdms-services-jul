@@ -20,6 +20,7 @@ namespace services.Models
         public DateTime CreateDate { get; set; }
         public DateTime ActivityDate { get; set; } //date of actual activity event
         public int? InstrumentId { get; set; }
+        public int? LaboratoryId { get; set; }
         public int? AccuracyCheckId { get; set; } //applied to this data
         public int? PostAccuracyCheckId { get; set; } //if applicable.
         public string Timezone { get; set; }  //timezone offset from UTC for this activity (if applicable) in ms
@@ -32,9 +33,10 @@ namespace services.Models
         public virtual ActivityType ActivityType { get; set; }
         public virtual Source Source { get; set; }
         public virtual Location Location { get; set; }
-        public virtual Instrument Instrument { get; set; }
+        public virtual Laboratory Laboratory { get; set; }
         public virtual InstrumentAccuracyCheck AccuracyCheck { get; set; }
         public virtual InstrumentAccuracyCheck PostAccuracyCheck { get; set; }
+        public virtual Instrument Instrument { get; set; }
 
         
         [NotMapped]

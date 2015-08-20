@@ -548,6 +548,18 @@
     <Compile Include="Migrations\201508192131174_AddShowLabsColumn.Designer.cs">
       <DependentUpon>201508192131174_AddShowLabsColumn.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508200001364_Remove field.cs" />
+    <Compile Include="Migrations\201508200001364_Remove field.Designer.cs">
+      <DependentUpon>201508200001364_Remove field.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508200029499_Change data type.cs" />
+    <Compile Include="Migrations\201508200029499_Change data type.Designer.cs">
+      <DependentUpon>201508200029499_Change data type.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508200050445_MoveLaboratoryToActivity.cs" />
+    <Compile Include="Migrations\201508200050445_MoveLaboratoryToActivity.Designer.cs">
+      <DependentUpon>201508200050445_MoveLaboratoryToActivity.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -1026,6 +1038,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508192131174_AddShowLabsColumn.resx">
       <DependentUpon>201508192131174_AddShowLabsColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508200001364_Remove field.resx">
+      <DependentUpon>201508200001364_Remove field.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508200029499_Change data type.resx">
+      <DependentUpon>201508200029499_Change data type.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508200050445_MoveLaboratoryToActivity.resx">
+      <DependentUpon>201508200050445_MoveLaboratoryToActivity.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
