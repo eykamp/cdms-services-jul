@@ -65,6 +65,9 @@ namespace services.Models
         public DbSet<WaterQuality_Detail> WaterQuality_Detail { get; set; }
         public DbSet<WaterQuality_Header> WaterQuality_Header { get; set; }
 
+        public DbSet<SnorkelFish_Detail> SnorkelFish_Detail { get; set; }
+        public DbSet<SnorkelFish_Header> SnorkelFish_Header { get; set; }
+
         public DbSet<FishTransport_Detail> FishTransport_Detail { get; set; }
         public DbSet<FishTransport_Header> FishTransport_Header { get; set; }
 
