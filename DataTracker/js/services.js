@@ -1956,6 +1956,11 @@ function array_count(the_array)
     return count;
 }
 
+function isInvalidOption(scope, field, value)
+{
+    return Object.keys(scope.CellOptions[field.DbColumnName+'Options']).indexOf(value.toString()) == -1;
+}
+
 function validateField(field, row, key, scope, row_errors)
 {
 
@@ -1971,7 +1976,7 @@ function validateField(field, row, key, scope, row_errors)
             //console.log(scope.CellOptions[field.DbColumnName+'Options']);
             if(scope.CellOptions[field.DbColumnName+'Options'])
             {
-                if(Object.keys(scope.CellOptions[field.DbColumnName+'Options']).indexOf(value) == -1) //not found
+                if(isInvalidOption(scope, field, value)) 
                     row_errors.push("["+field.DbColumnName+"] Invalid selection");
             }
             else
@@ -1990,7 +1995,7 @@ function validateField(field, row, key, scope, row_errors)
             for(var a = 0; a < values.length; a++ )
             {
                 var a_value = values[a];
-                if(Object.keys(scope.CellOptions[field.DbColumnName+'Options']).indexOf(a_value) == -1) //not found
+                if(isInvalidOption(scope, field, value)) 
                     row_errors.push("["+field.DbColumnName+"] Invalid selection ("+a_value+")");
             }
             break;
