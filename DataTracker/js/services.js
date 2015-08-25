@@ -1660,8 +1660,10 @@ function makeFieldColDef(field, scope) {
             case 'date':
                 coldef.editableCellTemplate = '<input type="text" ng-blur="updateCell(row,\''+field.DbColumnName+'\')" ng-pattern="'+date_pattern+'" ng-model="COL_FIELD" ng-input="COL_FIELD" />';
                 break;
-            case 'datetime':
             case 'time':
+                coldef.editableCellTemplate = '<input type="text" placeholder="ex. 16:20" ng-blur="updateCell(row,\''+field.DbColumnName+'\')" ng-model="COL_FIELD" ng-input="COL_FIELD" />';
+                break;
+            case 'datetime':
             case 'textarea':
                 coldef.editableCellTemplate = '<input type="text" ng-blur="updateCell(row,\''+field.DbColumnName+'\')" ng-model="COL_FIELD" ng-input="COL_FIELD" />';
                 break;

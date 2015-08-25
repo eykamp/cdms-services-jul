@@ -236,7 +236,6 @@ mod.directive('hasRole', function($rootScope){
 
 mod.directive('ctuirTextField',
     function(){
-
         var result = {
             templateUrl: 'partials/dataentry/field-text.html',
             restrict: 'E',
@@ -263,6 +262,18 @@ mod.directive('ctuirDateField',
 
         var result = {
             templateUrl: 'partials/dataentry/field-date.html',
+            restrict: 'E',
+        };
+
+        return result;
+
+    });
+
+mod.directive('ctuirTimeField',
+    function(){
+
+        var result = {
+            templateUrl: 'partials/dataentry/field-time.html',
             restrict: 'E',
         };
 
