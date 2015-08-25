@@ -31,6 +31,7 @@ namespace services.Models.Data
         public int? Ident { get; set; }
         public float? EastingUTM { get; set; }
         public float? NorthingUTM { get; set; }
+        public string EstimatedLocation { get; set; }
         public string DateTime { get; set; }
     }
 }

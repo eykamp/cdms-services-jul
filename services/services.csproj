@@ -604,6 +604,18 @@
     <Compile Include="Migrations\201508250125304_UpdateFieldsForNewCoumnsInSGSDataset.Designer.cs">
       <DependentUpon>201508250125304_UpdateFieldsForNewCoumnsInSGSDataset.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508252305506_AddEstimatedLocationFieldToSGS.cs" />
+    <Compile Include="Migrations\201508252305506_AddEstimatedLocationFieldToSGS.Designer.cs">
+      <DependentUpon>201508252305506_AddEstimatedLocationFieldToSGS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508252309287_SupportForEstimatedLocationField.cs" />
+    <Compile Include="Migrations\201508252309287_SupportForEstimatedLocationField.Designer.cs">
+      <DependentUpon>201508252309287_SupportForEstimatedLocationField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508252320331_ChangeDatatypeForUTMFields.cs" />
+    <Compile Include="Migrations\201508252320331_ChangeDatatypeForUTMFields.Designer.cs">
+      <DependentUpon>201508252320331_ChangeDatatypeForUTMFields.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -1127,6 +1139,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508250125304_UpdateFieldsForNewCoumnsInSGSDataset.resx">
       <DependentUpon>201508250125304_UpdateFieldsForNewCoumnsInSGSDataset.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508252305506_AddEstimatedLocationFieldToSGS.resx">
+      <DependentUpon>201508252305506_AddEstimatedLocationFieldToSGS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508252309287_SupportForEstimatedLocationField.resx">
+      <DependentUpon>201508252309287_SupportForEstimatedLocationField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508252320331_ChangeDatatypeForUTMFields.resx">
+      <DependentUpon>201508252320331_ChangeDatatypeForUTMFields.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
