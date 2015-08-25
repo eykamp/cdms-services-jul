@@ -1977,7 +1977,7 @@ function isInvalidOption(scope, field, value)
 }
 
 
-function checkNumber(row, field, value, min, max, row_errors) {
+function checkNumber(row, field, value, range, row_errors) {
 
     if(is_empty(value))
         return true;
@@ -1989,14 +1989,17 @@ function checkNumber(row, field, value, min, max, row_errors) {
         return false;
     }
 
-    else if(field.Field.Validation && field.Field.Validation.length == 2)
+    else if(range && range.length == 2)     // Expecting a 2-element array [min,max]
     {
-        if(value < min) {
+        var min = range[0];
+        var max = range[1];
+        
+        if(min && value < min) {
             row_errors.push("["+field.DbColumnName+"] Value is too low.");
             return false;
         }
 
-        if(value > max) {
+        if(max && value > max) {
             row_errors.push("["+field.DbColumnName+"] Value is too high.");
             return false;
         }
@@ -2055,12 +2058,12 @@ function validateField(field, row, key, scope, row_errors)
             //anything here?
             break;
         case 'easting':
-            return checkNumber(row, field, value, 100000, 999999, row_errors);
+            return checkNumber(row, field, value, [100000, 999999], row_errors);
         case 'northing':
-            return checkNumber(row, field, value, 1000000, 9999999, row_errors);
+            return checkNumber(row, field, value, [1000000, 9999999], row_errors);
 
         case 'number':
-            return checkNumber(row, field, value, field.Field.Validation[0], field.Field.Validation[1], row_errors);
+            return checkNumber(row, field, value, field.Field.Validation, row_errors);
             
             break;
         case 'checkbox':
