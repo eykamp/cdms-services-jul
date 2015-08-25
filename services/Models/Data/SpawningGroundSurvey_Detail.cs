@@ -25,6 +25,8 @@ namespace services.Models.Data
         public string ScaleID { get; set; }
         public string Tag { get; set; }
         public string TagID { get; set; }
+        public string GeneticID { get; set; }
+        public string KidneyID { get; set; }
         public string Comments { get; set; }
         public int? Ident { get; set; }
         public float? EastingUTM { get; set; }

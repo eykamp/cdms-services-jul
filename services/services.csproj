@@ -592,6 +592,18 @@
     <Compile Include="Migrations\201508250102520_ChangeToEastingNorthingDatatypes.Designer.cs">
       <DependentUpon>201508250102520_ChangeToEastingNorthingDatatypes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508250119328_RifflesAndPoolsOhMy.cs" />
+    <Compile Include="Migrations\201508250119328_RifflesAndPoolsOhMy.Designer.cs">
+      <DependentUpon>201508250119328_RifflesAndPoolsOhMy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508250125017_AddGeneticIDAndKidneyIDToSGSDataset.cs" />
+    <Compile Include="Migrations\201508250125017_AddGeneticIDAndKidneyIDToSGSDataset.Designer.cs">
+      <DependentUpon>201508250125017_AddGeneticIDAndKidneyIDToSGSDataset.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508250125304_UpdateFieldsForNewCoumnsInSGSDataset.cs" />
+    <Compile Include="Migrations\201508250125304_UpdateFieldsForNewCoumnsInSGSDataset.Designer.cs">
+      <DependentUpon>201508250125304_UpdateFieldsForNewCoumnsInSGSDataset.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -1106,6 +1118,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508250102520_ChangeToEastingNorthingDatatypes.resx">
       <DependentUpon>201508250102520_ChangeToEastingNorthingDatatypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508250119328_RifflesAndPoolsOhMy.resx">
+      <DependentUpon>201508250119328_RifflesAndPoolsOhMy.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508250125017_AddGeneticIDAndKidneyIDToSGSDataset.resx">
+      <DependentUpon>201508250125017_AddGeneticIDAndKidneyIDToSGSDataset.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508250125304_UpdateFieldsForNewCoumnsInSGSDataset.resx">
+      <DependentUpon>201508250125304_UpdateFieldsForNewCoumnsInSGSDataset.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
