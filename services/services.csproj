@@ -588,6 +588,10 @@
     <Compile Include="Migrations\201508220016116_ChangeVisibilityToInt.Designer.cs">
       <DependentUpon>201508220016116_ChangeVisibilityToInt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508250102520_ChangeToEastingNorthingDatatypes.cs" />
+    <Compile Include="Migrations\201508250102520_ChangeToEastingNorthingDatatypes.Designer.cs">
+      <DependentUpon>201508250102520_ChangeToEastingNorthingDatatypes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -1099,6 +1103,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508220016116_ChangeVisibilityToInt.resx">
       <DependentUpon>201508220016116_ChangeVisibilityToInt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508250102520_ChangeToEastingNorthingDatatypes.resx">
+      <DependentUpon>201508250102520_ChangeToEastingNorthingDatatypes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
