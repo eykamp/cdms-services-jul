@@ -1617,7 +1617,13 @@ mod.service('DataSheet',[ 'Logger', '$window', '$route',
 //common utility functions -- should this be broken out elsewhere?
 
 //refactore me even more
-// makes a field colulm definition
+// makes a field column definition
+
+function makeField(colName, placeholder) {
+    return '<input type="text" placeholder="' + placeholder + '" ng-blur="updateCell(row,\'' + colName + '\')" ng-model="COL_FIELD" ng-input="COL_FIELD" />';
+}
+
+
 function makeFieldColDef(field, scope) {
 
     var coldef =
@@ -1661,8 +1667,15 @@ function makeFieldColDef(field, scope) {
                 coldef.editableCellTemplate = '<input type="text" ng-blur="updateCell(row,\''+field.DbColumnName+'\')" ng-pattern="'+date_pattern+'" ng-model="COL_FIELD" ng-input="COL_FIELD" />';
                 break;
             case 'time':
-                coldef.editableCellTemplate = '<input type="text" placeholder="ex. 16:20" ng-blur="updateCell(row,\''+field.DbColumnName+'\')" ng-model="COL_FIELD" ng-input="COL_FIELD" />';
+                coldef.editableCellTemplate = makeField(field.DbColumnName, 'ex. 16:20');
                 break;
+            case 'easting':
+                coldef.editableCellTemplate = makeField(field.DbColumnName, 'ex. 541324');
+                break;
+            case 'northing':
+                coldef.editableCellTemplate = makeField(field.DbColumnName, 'ex. 7896254');
+                break;
+
             case 'datetime':
             case 'textarea':
                 coldef.editableCellTemplate = '<input type="text" ng-blur="updateCell(row,\''+field.DbColumnName+'\')" ng-model="COL_FIELD" ng-input="COL_FIELD" />';
@@ -1963,6 +1976,36 @@ function isInvalidOption(scope, field, value)
     return Object.keys(scope.CellOptions[field.DbColumnName+'Options']).indexOf(value.toString()) == -1;
 }
 
+
+function checkNumber(row, field, value, min, max, row_errors) {
+
+    if(is_empty(value))
+        return true;
+
+    // Check if input is a number even if we haven't specified a numeric range
+    if(!stringIsNumber(value))
+    {
+        row_errors.push("["+field.DbColumnName+"] Value is not a number.");
+        return false;
+    }
+
+    else if(field.Field.Validation && field.Field.Validation.length == 2)
+    {
+        if(value < min) {
+            row_errors.push("["+field.DbColumnName+"] Value is too low.");
+            return false;
+        }
+
+        if(value > max) {
+            row_errors.push("["+field.DbColumnName+"] Value is too high.");
+            return false;
+        }
+    }
+
+    return true;
+}
+
+
 function validateField(field, row, key, scope, row_errors)
 {
 
@@ -2011,21 +2054,14 @@ function validateField(field, row, key, scope, row_errors)
         case 'text':
             //anything here?
             break;
+        case 'easting':
+            return checkNumber(row, field, value, 100000, 999999, row_errors);
+        case 'northing':
+            return checkNumber(row, field, value, 1000000, 9999999, row_errors);
+
         case 'number':
-            // Check if input is a number even if we haven't specified a numeric range
-            if(!stringIsNumber(value) && !is_empty(value))
-            {
-                row_errors.push("["+field.DbColumnName+"] Value is not a number.");
-            }
-
-            else if(field.Field.Validation && field.Field.Validation.length == 2)
-            {
-                if(value < field.Field.Validation[0])
-                    row_errors.push("["+field.DbColumnName+"] Value is too low.");
-
-                if(value > field.Field.Validation[1])
-                    row_errors.push("["+field.DbColumnName+"] Value is too high.");
-            }
+            return checkNumber(row, field, value, field.Field.Validation[0], field.Field.Validation[1], row_errors);
+            
             break;
         case 'checkbox':
             //anything here?

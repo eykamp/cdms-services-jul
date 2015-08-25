@@ -281,6 +281,28 @@ mod.directive('ctuirTimeField',
 
     });
 
+mod.directive('ctuirEastingField',
+    function(){
+
+        var result = {
+            templateUrl: 'partials/dataentry/field-easting.html',
+            restrict: 'E',
+        };
+
+        return result;
+    });
+
+mod.directive('ctuirNorthingField',
+    function(){
+
+        var result = {
+            templateUrl: 'partials/dataentry/field-northing.html',
+            restrict: 'E',
+        };
+
+        return result;
+    });
+
 mod.directive('ctuirNumberField',
     function(){
 
