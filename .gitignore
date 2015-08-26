@@ -31,4 +31,5 @@ Web.config
 Web.Debug.config
 Web.Release.config
 /ServicesTest/*
-services/*
+/services/uploads/*
+
