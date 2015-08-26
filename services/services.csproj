@@ -616,6 +616,10 @@
     <Compile Include="Migrations\201508252320331_ChangeDatatypeForUTMFields.Designer.cs">
       <DependentUpon>201508252320331_ChangeDatatypeForUTMFields.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508252351028_AddCharacteristicToWaterQualityDataset.cs" />
+    <Compile Include="Migrations\201508252351028_AddCharacteristicToWaterQualityDataset.Designer.cs">
+      <DependentUpon>201508252351028_AddCharacteristicToWaterQualityDataset.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -1148,6 +1152,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508252320331_ChangeDatatypeForUTMFields.resx">
       <DependentUpon>201508252320331_ChangeDatatypeForUTMFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508252351028_AddCharacteristicToWaterQualityDataset.resx">
+      <DependentUpon>201508252351028_AddCharacteristicToWaterQualityDataset.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
