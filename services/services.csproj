@@ -620,6 +620,14 @@
     <Compile Include="Migrations\201508252351028_AddCharacteristicToWaterQualityDataset.Designer.cs">
       <DependentUpon>201508252351028_AddCharacteristicToWaterQualityDataset.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508262108599_ScrewTrapMetadata.cs" />
+    <Compile Include="Migrations\201508262108599_ScrewTrapMetadata.Designer.cs">
+      <DependentUpon>201508262108599_ScrewTrapMetadata.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508262336180_DatabaseDefinitionForScrewTrap.cs" />
+    <Compile Include="Migrations\201508262336180_DatabaseDefinitionForScrewTrap.Designer.cs">
+      <DependentUpon>201508262336180_DatabaseDefinitionForScrewTrap.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -641,6 +649,9 @@
     <Compile Include="Migrations\201311202007564_notrequiresourceinstrument.Designer.cs">
       <DependentUpon>201311202007564_notrequiresourceinstrument.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Data\ScrewTrap.cs" />
+    <Compile Include="Models\Data\ScrewTrap_Detail.cs" />
+    <Compile Include="Models\Data\ScrewTrap_Header.cs" />
     <Compile Include="Models\DatasetField.cs" />
     <Compile Include="Controllers\DepartmentController.cs" />
     <Compile Include="Controllers\FilesController.cs" />
@@ -1155,6 +1166,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508252351028_AddCharacteristicToWaterQualityDataset.resx">
       <DependentUpon>201508252351028_AddCharacteristicToWaterQualityDataset.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508262108599_ScrewTrapMetadata.resx">
+      <DependentUpon>201508262108599_ScrewTrapMetadata.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508262336180_DatabaseDefinitionForScrewTrap.resx">
+      <DependentUpon>201508262336180_DatabaseDefinitionForScrewTrap.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
