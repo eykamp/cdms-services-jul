@@ -59,7 +59,7 @@ SELECT
     Description               = @datasetBaseName + ': ' + p.name,
     DefaultActivityQAStatusId = 6,
     DatastoreId               = (SELECT IDENT_CURRENT('dbo.Datastores')),
-    Config                    = ''
+    Config                    = '{""DataEntryPage"": {""HiddenFields"": [""Instrument""]}}'
 FROM #ProjectInfo as p
 
 -------------------------
@@ -535,7 +535,7 @@ UNION ALL SELECT
    Units = NULL,
    Validation = NULL,
    DataType = 'string',
-   PossibleValues = '[""Dace"", ""Sculpin"", ""Sucker"", ""Shiner"", ""NP Minnow"", ""Crayfi"", ""White Fish"", ""Hatchery CHS"", ""Hatchery STS"", ""Chinook Fry"", ""Steelhead Fry"", ""Lamprey-Ammo"", ""Lamprey-Macro"", ""Other""]',
+   PossibleValues = '[""Dace"", ""Sculpin"", ""Sucker"", ""Shiner"", ""NP Minnow"", ""Crayfish"", ""Bullhead Catfish"", ""White Fish"", ""Hatchery CHS"", ""Hatchery STS"", ""Chinook Fry"", ""Steelhead Fry"", ""Lamprey-Ammo"", ""Lamprey-Macro"", ""Other""]',
    DbColumnName = 'OtherSpecies',
    ControlType = 'select',
    [Rule] = NULL
