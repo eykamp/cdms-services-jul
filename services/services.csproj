@@ -628,6 +628,18 @@
     <Compile Include="Migrations\201508262336180_DatabaseDefinitionForScrewTrap.Designer.cs">
       <DependentUpon>201508262336180_DatabaseDefinitionForScrewTrap.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508272214318_Electrofishing_metadata.cs" />
+    <Compile Include="Migrations\201508272214318_Electrofishing_metadata.Designer.cs">
+      <DependentUpon>201508272214318_Electrofishing_metadata.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508272330163_DatabaseDefinitionForElectrofishing.cs" />
+    <Compile Include="Migrations\201508272330163_DatabaseDefinitionForElectrofishing.Designer.cs">
+      <DependentUpon>201508272330163_DatabaseDefinitionForElectrofishing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508282119033_FishScales_metadata.cs" />
+    <Compile Include="Migrations\201508282119033_FishScales_metadata.Designer.cs">
+      <DependentUpon>201508282119033_FishScales_metadata.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -649,6 +661,12 @@
     <Compile Include="Migrations\201311202007564_notrequiresourceinstrument.Designer.cs">
       <DependentUpon>201311202007564_notrequiresourceinstrument.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\Data\FishScales.cs" />
+    <Compile Include="Models\Data\FishScales_Detail.cs" />
+    <Compile Include="Models\Data\FishScales_Header.cs" />
+    <Compile Include="Models\Data\AdultWeir.cs" />
+    <Compile Include="Models\Data\AdultWeir_Detail.cs" />
+    <Compile Include="Models\Data\AdultWeir_Header.cs" />
     <Compile Include="Models\Data\ScrewTrap.cs" />
     <Compile Include="Models\Data\ScrewTrap_Detail.cs" />
     <Compile Include="Models\Data\ScrewTrap_Header.cs" />
@@ -658,11 +676,11 @@
     <Compile Include="Controllers\MetadataPropertiesController.cs" />
     <Compile Include="Models\Datastore.cs" />
     <Compile Include="Models\Data\SnorkelFish.cs" />
-    <Compile Include="Models\Data\AdultWeir.cs" />
+    <Compile Include="Models\Data\Electrofishing.cs" />
     <Compile Include="Models\Data\SnorkelFish_Detail.cs" />
-    <Compile Include="Models\Data\AdultWeir_Detail.cs" />
+    <Compile Include="Models\Data\Electrofishing_Detail.cs" />
     <Compile Include="Models\Data\SnorkelFish_Header.cs" />
-    <Compile Include="Models\Data\AdultWeir_Header.cs" />
+    <Compile Include="Models\Data\Electrofishing_Header.cs" />
     <Compile Include="Models\Data\Appraisal.cs" />
     <Compile Include="Models\Data\Appraisal_Detail.cs" />
     <Compile Include="Models\Data\Appraisal_Header.cs" />
@@ -1172,6 +1190,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508262336180_DatabaseDefinitionForScrewTrap.resx">
       <DependentUpon>201508262336180_DatabaseDefinitionForScrewTrap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508272214318_Electrofishing_metadata.resx">
+      <DependentUpon>201508272214318_Electrofishing_metadata.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508272330163_DatabaseDefinitionForElectrofishing.resx">
+      <DependentUpon>201508272330163_DatabaseDefinitionForElectrofishing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508282119033_FishScales_metadata.resx">
+      <DependentUpon>201508282119033_FishScales_metadata.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

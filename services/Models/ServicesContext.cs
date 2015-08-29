@@ -68,8 +68,14 @@ namespace services.Models
         public DbSet<ScrewTrap_Detail> ScrewTrap_Detail { get; set; }
         public DbSet<ScrewTrap_Header> ScrewTrap_Header { get; set; }
 
+        public DbSet<FishScales_Detail> FishScales_Detail { get; set; }
+        public DbSet<FishScales_Header> FishScales_Header { get; set; }
+
         public DbSet<SnorkelFish_Detail> SnorkelFish_Detail { get; set; }
         public DbSet<SnorkelFish_Header> SnorkelFish_Header { get; set; }
+
+        public DbSet<Electrofishing_Detail> Electrofishing_Detail { get; set; }
+        public DbSet<Electrofishing_Header> Electrofishing_Header { get; set; }
 
         public DbSet<FishTransport_Detail> FishTransport_Detail { get; set; }
         public DbSet<FishTransport_Header> FishTransport_Header { get; set; }
