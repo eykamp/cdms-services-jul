@@ -1664,7 +1664,8 @@ function makeFieldColDef(field, scope) {
 //                console.log("and we used: " + scope.dataset.DatastoreId+field.DbColumnName + " as the key");
                 break;
             case 'date':
-                coldef.editableCellTemplate = '<input type="text" ng-blur="updateCell(row,\''+field.DbColumnName+'\')" ng-pattern="'+date_pattern+'" ng-model="COL_FIELD" ng-input="COL_FIELD" />';
+                coldef.editableCellTemplate = makeField(field.DbColumnName, 'ex. 07/23/2014');
+                //coldef.editableCellTemplate = '<input type="text" ng-blur="updateCell(row,\''+field.DbColumnName+'\')" ng-pattern="'+date_pattern+'" ng-model="COL_FIELD" ng-input="COL_FIELD" />';
                 break;
             case 'time':
                 coldef.editableCellTemplate = makeField(field.DbColumnName, 'ex. 16:20');
@@ -2048,7 +2049,9 @@ function validateField(field, row, key, scope, row_errors)
             }
             break;
         case 'date':
-            //TODO
+            var dateRegex = /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/ ;
+            if(!value.match(dateRegex))
+                row_errors.push("["+field.DbColumnName+"] Value is not a date (mm/dd/yyyy).");
             break;
         case 'time':
             if(!stringIsTime(value) && !is_empty(value))
