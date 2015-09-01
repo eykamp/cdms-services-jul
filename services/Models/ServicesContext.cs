@@ -45,6 +45,7 @@ namespace services.Models
         public DbSet<FieldRole> FieldRoles { get; set; }
         public DbSet<Instrument> Instruments { get; set; }
         public DbSet<Laboratory> Laboratories { get; set; }
+        public DbSet<LaboratoryCharacteristic> LaboratoryCharacteristics { get; set; }
         
         public DbSet<InstrumentType> InstrumentType { get; set; }
         public DbSet<InstrumentAccuracyCheck> AccuracyChecks { get; set; }

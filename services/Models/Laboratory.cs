@@ -35,9 +35,11 @@ namespace services.Models
         public int LaboratoryId { get; set; }
         public DateTime CreateDateTime { get; set; }
         public string Name { get; set; }
-        public string MDL { get; set; } 
+        public string MDL { get; set; }
+        public string Units { get; set; } 
         public string MethodId { get; set; }
         public string Context { get; set; }
+        public string Description { get; set; }
         public int UserId { get; set; }
 
         [JsonIgnore]

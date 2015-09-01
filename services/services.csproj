@@ -640,6 +640,42 @@
     <Compile Include="Migrations\201508282119033_FishScales_metadata.Designer.cs">
       <DependentUpon>201508282119033_FishScales_metadata.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201508312303124_DatabaseDefinitionForFishScales.cs" />
+    <Compile Include="Migrations\201508312303124_DatabaseDefinitionForFishScales.Designer.cs">
+      <DependentUpon>201508312303124_DatabaseDefinitionForFishScales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201508312334264_AddDescriptionToLabCharacteristic.cs" />
+    <Compile Include="Migrations\201508312334264_AddDescriptionToLabCharacteristic.Designer.cs">
+      <DependentUpon>201508312334264_AddDescriptionToLabCharacteristic.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509010055595_SGS Field Updates.cs" />
+    <Compile Include="Migrations\201509010055595_SGS Field Updates.Designer.cs">
+      <DependentUpon>201509010055595_SGS Field Updates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509011830212_AddUnitsToLabCharacteristics.cs" />
+    <Compile Include="Migrations\201509011830212_AddUnitsToLabCharacteristics.Designer.cs">
+      <DependentUpon>201509011830212_AddUnitsToLabCharacteristics.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509011840455_RenameSpeciesToTargetSpeciesColumnInSGS.cs" />
+    <Compile Include="Migrations\201509011840455_RenameSpeciesToTargetSpeciesColumnInSGS.Designer.cs">
+      <DependentUpon>201509011840455_RenameSpeciesToTargetSpeciesColumnInSGS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509011842263_ChangeFieldsToSupportSpeciesToTargetSpeciesChanges.cs" />
+    <Compile Include="Migrations\201509011842263_ChangeFieldsToSupportSpeciesToTargetSpeciesChanges.Designer.cs">
+      <DependentUpon>201509011842263_ChangeFieldsToSupportSpeciesToTargetSpeciesChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509011917137_UpdateFishScalesDataTypes.cs" />
+    <Compile Include="Migrations\201509011917137_UpdateFishScalesDataTypes.Designer.cs">
+      <DependentUpon>201509011917137_UpdateFishScalesDataTypes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509012008225_ChangeDataTypeForCirculi.cs" />
+    <Compile Include="Migrations\201509012008225_ChangeDataTypeForCirculi.Designer.cs">
+      <DependentUpon>201509012008225_ChangeDataTypeForCirculi.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509012009091_HideQAFieldForSGSDataEntry.cs" />
+    <Compile Include="Migrations\201509012009091_HideQAFieldForSGSDataEntry.Designer.cs">
+      <DependentUpon>201509012009091_HideQAFieldForSGSDataEntry.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -1199,6 +1235,33 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201508282119033_FishScales_metadata.resx">
       <DependentUpon>201508282119033_FishScales_metadata.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508312303124_DatabaseDefinitionForFishScales.resx">
+      <DependentUpon>201508312303124_DatabaseDefinitionForFishScales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201508312334264_AddDescriptionToLabCharacteristic.resx">
+      <DependentUpon>201508312334264_AddDescriptionToLabCharacteristic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509010055595_SGS Field Updates.resx">
+      <DependentUpon>201509010055595_SGS Field Updates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509011830212_AddUnitsToLabCharacteristics.resx">
+      <DependentUpon>201509011830212_AddUnitsToLabCharacteristics.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509011840455_RenameSpeciesToTargetSpeciesColumnInSGS.resx">
+      <DependentUpon>201509011840455_RenameSpeciesToTargetSpeciesColumnInSGS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509011842263_ChangeFieldsToSupportSpeciesToTargetSpeciesChanges.resx">
+      <DependentUpon>201509011842263_ChangeFieldsToSupportSpeciesToTargetSpeciesChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509011917137_UpdateFishScalesDataTypes.resx">
+      <DependentUpon>201509011917137_UpdateFishScalesDataTypes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509012008225_ChangeDataTypeForCirculi.resx">
+      <DependentUpon>201509012008225_ChangeDataTypeForCirculi.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509012009091_HideQAFieldForSGSDataEntry.resx">
+      <DependentUpon>201509012009091_HideQAFieldForSGSDataEntry.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

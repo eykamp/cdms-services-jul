@@ -804,10 +804,42 @@ namespace services.Controllers
             return first;
         }
 
+
+        [HttpPost]
+        public HttpResponseMessage DeleteCharacteristic(JObject jsonData)
+        {
+            var db = ServicesContext.Current;
+
+            dynamic json = jsonData;
+            var labId = json.LaboratoryId.ToObject<int>();
+            var charId = json.CharacteristicId.ToObject<int>();
+
+            Laboratory laboratory = db.Laboratories.Find(labId);
+            LaboratoryCharacteristic characteristic = laboratory.Characteristics.Find(x => x.Id == charId);
+
+
+            // See if we can find a project associated with this lab that we are also the owner of
+            User me = AuthorizationManager.getCurrentUser();
+
+            Project project = db.Projects.FirstOrDefault(x => x.Laboratories.Contains(laboratory) && x.isOwnerOrEditor(me));
+
+            if (project == null)
+                throw new Exception("Authorization error.");
+
+
+            laboratory.Characteristics.Remove(characteristic);
+            db.LaboratoryCharacteristics.Remove(characteristic);
+            db.SaveChanges();
+
+            return new HttpResponseMessage(HttpStatusCode.OK);
+        }
+
+
         public HttpResponseMessage SaveDatasetActivities(JObject jsonData)
         {
             return SaveDatasetActivitiesEFF(jsonData);
         }
+
 
         //so we'll build one that generates sql directly since the EFF way has mediocre performance.
         [HttpPost]

@@ -4,7 +4,7 @@ namespace services.Models.Data
 {
     public class SpawningGroundSurvey_Header : DataHeader
     {
-        public string Species { get; set; }
+        public string TargetSpecies { get; set; }
         public string Technicians { get; set; }
         public string StartTime { get; set; }
         public string EndTime { get; set; }

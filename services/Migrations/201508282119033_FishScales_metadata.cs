@@ -58,7 +58,7 @@ SELECT
     Description               = @datasetBaseName + ': ' + p.name,
     DefaultActivityQAStatusId = 6,
     DatastoreId               = (SELECT IDENT_CURRENT('dbo.Datastores')),
-    Config                    = '{""DataEntryPage"": {""HiddenFields"": [""Instrument"",""Location""]}}'
+    Config                    = '{""DataEntryPage"": {""HiddenFields"": [""Instrument""]}}'     -- ,""Location""
 FROM #ProjectInfo as p
 
 -------------------------
