@@ -516,7 +516,7 @@ mod_de.controller('DataEntryFormCtrl', ['$scope','$routeParams','DataService','$
 				//spin through the files that we uploaded
 				angular.forEach($scope.filesToUpload, function(files, field){
 
-					if(field == "null")
+					if(field == "null" || field == "")
 						return;
 					
 					var local_files = [];

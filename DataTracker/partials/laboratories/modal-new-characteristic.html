@@ -20,6 +20,11 @@
                     <input  class="form-control" type="text" ng-model="char_row.MDL" />
                 </div>
 
+                <div class="header-label">Units</div>
+                <div class="header-value">
+                    <input  class="form-control" type="text" ng-model="char_row.Units" />
+                </div>
+
                 <div class="header-label">Method Id</div>
                 <div class="header-value">
                     <input  class="form-control" type="text" ng-model="char_row.MethodId" />
@@ -39,6 +44,12 @@
                         <option value="USGS">USGS</option>
                     </select>
                 </div>
+
+                <div class="header-label">Description</div>
+                <div class="header-value">
+                    <input  class="form-control" type="text" ng-model="char_row.Description" />
+                </div>
+
             </form>
 
             <button project-role="editor" class="btn btn-primary right" style="margin: 10px;" ng-click="save()">Save</button>

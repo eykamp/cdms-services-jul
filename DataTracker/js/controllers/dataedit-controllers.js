@@ -397,7 +397,7 @@ mod_edit.controller('DataEditCtrl', ['$scope','$q','$sce','$routeParams','DataSe
 				//spin through the files that we uploaded
 				angular.forEach($scope.filesToUpload, function(files, field){
 
-					if(field == "null")
+					if(field == "null" || field == "")
 						return;
 
 					var local_files = [];

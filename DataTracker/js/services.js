@@ -189,6 +189,10 @@ mod.factory('SaveProjectLaboratory', ['$resource', function($resource){
         return $resource(serviceUrl+'/data/SaveProjectLaboratory');
 }]);
 
+mod.factory('DeleteCharacteristic', ['$resource', function($resource){
+        return $resource(serviceUrl+'/data/DeleteCharacteristic');
+}]);
+
 mod.factory('SaveInstrument', ['$resource', function($resource){
         return $resource(serviceUrl+'/data/SaveInstrument');
 }]);
@@ -264,8 +268,8 @@ mod.factory('GetRelationData', ['$resource', function($resource){
 
 
 
-mod.service('DatastoreService', ['$q','GetAllPossibleDatastoreLocations','GetAllDatastoreFields','GetDatastore','GetDatastoreProjects','GetAllDatastores','GetDatastoreDatasets','GetSources','GetInstruments','GetLaboratories','SaveDatasetField','SaveMasterField','DeleteDatasetField','GetAllFields','AddMasterFieldToDataset','GetLocationTypes','SaveProjectLocation','GetAllInstruments','GetAllLaboratories','SaveProjectInstrument','SaveProjectLaboratory','SaveInstrument','SaveLaboratory','SaveInstrumentAccuracyCheck','SaveCharacteristic','GetInstrumentTypes','GetLaboratoryTypes','RemoveProjectInstrument', 'RemoveProjectLaboratory', 'GetWaterBodies','UpdateFile','DeleteFile','GetTimeZones','DeleteLocationAction',
-    function($q, GetAllPossibleDatastoreLocations,GetAllDatastoreFields,GetDatastore,GetDatastoreProjects,GetAllDatastores,GetDatastoreDatasets, GetSources, GetInstruments,GetLaboratories,SaveDatasetField, SaveMasterField, DeleteDatasetField,GetAllFields, AddMasterFieldToDataset, GetLocationTypes, SaveProjectLocation,GetAllInstruments,GetAllLaboratories,SaveProjectInstrument,SaveProjectLaboratory,SaveInstrument,SaveLaboratory, SaveInstrumentAccuracyCheck, SaveCharacteristic, GetInstrumentTypes, GetLaboratoryTypes,RemoveProjectInstrument,RemoveProjectLaboratory, GetWaterBodies,UpdateFile,DeleteFile, GetTimeZones,DeleteLocationAction){
+mod.service('DatastoreService', ['$q','GetAllPossibleDatastoreLocations','GetAllDatastoreFields','GetDatastore','GetDatastoreProjects','GetAllDatastores','GetDatastoreDatasets','GetSources','GetInstruments','GetLaboratories','SaveDatasetField','SaveMasterField','DeleteDatasetField','GetAllFields','AddMasterFieldToDataset','GetLocationTypes','SaveProjectLocation','GetAllInstruments','GetAllLaboratories','SaveProjectInstrument','SaveProjectLaboratory','DeleteCharacteristic','SaveInstrument','SaveLaboratory','SaveInstrumentAccuracyCheck','SaveCharacteristic','GetInstrumentTypes','GetLaboratoryTypes','RemoveProjectInstrument', 'RemoveProjectLaboratory', 'GetWaterBodies','UpdateFile','DeleteFile','GetTimeZones','DeleteLocationAction',
+    function($q, GetAllPossibleDatastoreLocations,GetAllDatastoreFields,GetDatastore,GetDatastoreProjects,GetAllDatastores,GetDatastoreDatasets, GetSources, GetInstruments,GetLaboratories,SaveDatasetField, SaveMasterField, DeleteDatasetField,GetAllFields, AddMasterFieldToDataset, GetLocationTypes, SaveProjectLocation,GetAllInstruments,GetAllLaboratories,SaveProjectInstrument,SaveProjectLaboratory,DeleteCharacteristic,SaveInstrument,SaveLaboratory, SaveInstrumentAccuracyCheck, SaveCharacteristic, GetInstrumentTypes, GetLaboratoryTypes,RemoveProjectInstrument,RemoveProjectLaboratory, GetWaterBodies,UpdateFile,DeleteFile, GetTimeZones,DeleteLocationAction){
 
         var service = {
 
@@ -390,7 +394,11 @@ mod.service('DatastoreService', ['$q','GetAllPossibleDatastoreLocations','GetAll
             },
             saveProjectLaboratory: function(projectId, laboratory){
                 return SaveProjectLaboratory.save({ProjectId: projectId, Laboratory: laboratory});
-            },            removeProjectLaboratory: function(projectId, laboratoryId){
+            },                  
+            deleteCharacteristic: function(lab_id, characteristic_id){
+                return DeleteCharacteristic.save({LaboratoryId: lab_id, CharacteristicId: characteristic_id});
+            },            
+            removeProjectLaboratory: function(projectId, laboratoryId){
                 return RemoveProjectLaboratory.save({ProjectId: projectId, LaboratoryId: laboratoryId});
             },
             saveInstrumentAccuracyCheck: function(instrumentId, ac)
@@ -819,34 +827,29 @@ mod.service('ActivityParser',[ 'Logger',
     function(Logger){
         var service = {
 
-            parseSingleActivity: function(heading, data, fields){
+            parseSingleActivity: function(heading, data, fields) {
                 var activities = {activities: {}, errors: false};
 
                 var tmpdata = data.slice(0); // create a copy.
 
-                var key = service.makeKey(heading);
+                var key = service.makeKey(heading, null);
 
-                if(key)
-                {
+                if(key) {
 
-                    if(tmpdata.length > 0)
-                    {
+                    if(tmpdata.length > 0) {
                         angular.forEach(tmpdata, function(data_row, index){
                             //note we mash the heading fields into our row -- addActivity splits them out appropriately.
                             service.addActivity(activities, key, angular.extend(data_row, heading), fields);
                         });
                     }
-                    else
-                    {
+                    else {
                         //at least do a single.
                         console.log("trying a single with no rows!");
                         service.addActivity(activities, key, heading, fields);
                     }
-
                 }
-                else
-                {
-                    service.addError(activities,0, "Both a Location and ActivityDate are required to save a new Activity.");
+                else {
+                    service.addError(activities, 0, "Both a Location and ActivityDate are required to save a new Activity.");
                 }
 
 
@@ -883,9 +886,10 @@ mod.service('ActivityParser',[ 'Logger',
                 activities.errors.saveError = message;
             },
 
-            // Some codepaths do not pass two args, which causes this to crash
-            makeKey: function(row, activityDateToday){
+            
+            makeKey: function(row, activityDateToday) {
 
+                // Some codepaths pass null for activityDateToday
                 if(activityDateToday == null)
                     activityDateToday = new Date();
 
@@ -893,10 +897,7 @@ mod.service('ActivityParser',[ 'Logger',
                     row.activityDate = toExactISOString(activityDateToday);
 
                 if(row.locationId && row.activityDate)
-
-                {
-					return row.locationId + '_' + row.activityDate;
-                }
+                    return location + '_' + row.activityDate;
 
                 return undefined;
             },
@@ -1075,7 +1076,7 @@ mod.service('FileUploadService',['$q','$upload',function($q, $upload){
 
                     angular.forEach(filesToUpload, function(files, field){
 
-                        if(field == "null")
+                        if(field == "null" || field == "")
                             return;
 
                         console.log("handling files for: " + field)
@@ -2044,7 +2045,7 @@ function validateField(field, row, key, scope, row_errors)
             for(var a = 0; a < values.length; a++ )
             {
                 var a_value = values[a];
-                if(isInvalidOption(scope, field, value)) 
+                if(isInvalidOption(scope, field, a_value)) 
                     row_errors.push("["+field.DbColumnName+"] Invalid selection ("+a_value+")");
             }
             break;

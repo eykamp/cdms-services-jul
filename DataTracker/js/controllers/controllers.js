@@ -455,6 +455,23 @@ var projectDatasetsController = ['$scope', '$routeParams', 'DataService','Datast
             });
          };
 
+
+         scope.deleteCharacteristic = function(char_row) {
+            if(!char_row)
+              return;
+
+            scope.char_row = char_row;
+            if(window.confirm("Click OK to delete this characteristic"))
+            {
+              var promise = DatastoreService.deleteCharacteristic(char_row.LaboratoryId, char_row.Id);
+
+              promise.$promise.then(function(){
+                  scope.reloadProject();
+              });
+            }
+         }
+
+
          scope.createInstrument = function(){
             scope.viewInstrument = null;
             var modalInstance = $modal.open({
