@@ -23,8 +23,8 @@ mod_dq.controller('ModalExportController',['$scope','DataService','$modalInstanc
 	}
 ]);
 
-mod_dq.controller('DataQueryCtrl', ['$scope','$routeParams','DataService','$location', '$modal','DataSheet', '$rootScope','ChartService',
-    	function($scope, $routeParams, DataService, $location, $modal, DataSheet, $rootScope, ChartService) {
+mod_dq.controller('DataQueryCtrl', ['$scope','$routeParams','DataService','$location', '$modal','DataSheet', '$rootScope','ChartService','DatastoreService',
+    	function($scope, $routeParams, DataService, $location, $modal, DataSheet, $rootScope, ChartService, DatastoreService) {
 
 			$scope.dataset = DataService.getDataset($routeParams.Id);
 			
@@ -42,6 +42,10 @@ mod_dq.controller('DataQueryCtrl', ['$scope','$routeParams','DataService','$loca
 
     		$scope.AutoExecuteQuery = true;
 
+			$scope.sortedLocations = [];
+			$scope.datasetLocationType=0;
+			$scope.datasetLocations = [[]];		
+			$scope.primaryProjectLocation = 0;			
 
     		$scope.gridDatasheetOptions = { 
     			data: 'dataSheetDataset', 
@@ -97,10 +101,54 @@ mod_dq.controller('DataQueryCtrl', ['$scope','$routeParams','DataService','$loca
                                     ];
 
     		$scope.$watch('project.Name', function(){
-    			if($scope.project){
-    				$scope.locationOptions = $rootScope.locationOptions = makeObjects(getUnMatchingByField($scope.project.Locations,PRIMARY_PROJECT_LOCATION_TYPEID,"LocationTypeId"), 'Id','Label') ;
+    			if($scope.project){	
+					console.log("Inside DataQueryCtrl, project.Name watcher...");
+
+					// Original code
+    				//$scope.locationOptions = $rootScope.locationOptions = makeObjects(getUnMatchingByField($scope.project.Locations,PRIMARY_PROJECT_LOCATION_TYPEID,"LocationTypeId"), 'Id','Label') ;
+    				//$scope.locationOptions["all"] = "- All -";
+    				//$scope.Criteria.LocationIds = ["all"]; //set the default				
+
+					console.log("ProjectLocations is next...");
+					console.dir($scope.project.Locations);
+					//var locInd = 0;
+					for (var i = 0; i < $scope.project.Locations.length; i++ )
+					{
+						console.log("projectLocations Index = " + $scope.project.Locations[i].Label);
+						console.log($scope.project.Locations[i].Id + "  " + $scope.project.Locations[i]);
+						if ($scope.project.Locations[i].LocationTypeId === $scope.datasetLocationType)
+						{
+							console.log("Found one");
+							$scope.datasetLocations.push([$scope.project.Locations[i].Id, $scope.project.Locations[i].Label]);
+							console.log("datasetLocations length = " + $scope.datasetLocations.length);
+							//locInd++;
+						}
+					}
+					console.log("datasetLocations is next...");
+					console.dir($scope.datasetLocations);
+					
+					// When we built the array, it started adding at location 1 for some reason, skipping 0.
+					// Therefore, row 0 is blank.  The simple solution is to just delete row 0.
+					$scope.datasetLocations.shift();
+
+					$scope.datasetLocations.sort(order2dArrayByAlpha);
+					console.log("datasetLocations sorted...");
+					console.dir($scope.datasetLocations);
+			
+					// Convert our 2D array into an array of objects.
+					for (var i = 0; i < $scope.datasetLocations.length; i++)
+					{
+						$scope.sortedLocations.push({Id: $scope.datasetLocations[i][0], Label: $scope.datasetLocations[i][1]});
+					}
+					$scope.datasetLocations = [[]]; // Clean up		
+					
+					// Convert our array of objects into a list of objects, and put it in the select box.
+					$scope.locationOptions = $rootScope.locationOptions = makeObjects($scope.sortedLocations, 'Id','Label') ;
     				$scope.locationOptions["all"] = "- All -";
     				$scope.Criteria.LocationIds = ["all"]; //set the default
+					
+					console.log("locationOptions is next...");
+					console.dir($scope.locationOptions);					
 				}
     		});
 
@@ -108,6 +156,13 @@ mod_dq.controller('DataQueryCtrl', ['$scope','$routeParams','DataService','$loca
 			$scope.$watch('dataset.Id', function() { 
 				if(!$scope.dataset.Fields)
 					return;
+				
+				console.log("Inside dataset.Id watcher...");
+
+				$scope.DatastoreTablePrefix = $scope.dataset.Datastore.TablePrefix;
+				console.log("$scope.DatastoreTablePrefix = " + $scope.DatastoreTablePrefix);
+				$scope.datasetLocationType = DatastoreService.getDatasetLocationType($scope.DatastoreTablePrefix);					
+				console.log("LocationType = " + $scope.datasetLocationType);				
 
 				$scope.project = DataService.getProject($scope.dataset.ProjectId);
 	        	$scope.QAStatusOptions = $rootScope.QAStatusOptions = makeObjects($scope.dataset.QAStatuses, 'Id','Name');

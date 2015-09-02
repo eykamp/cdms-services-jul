@@ -350,11 +350,28 @@ var projectDatasetsController = ['$scope', '$routeParams', 'DataService','Datast
 
                 //split out the images and other files.
 
+				var docIndex = 0;				
                 angular.forEach(scope.project.Files, function(file, key){
                     if(file.FileType.Name=="Image")
                         scope.project.Images.push(file);
                     else
+					{
                         scope.project.Docs.push(file);
+
+						// If the user created a document and left the Title or Description blank, those fields were saved as "undefined" in the database.
+						// When we read the list of files back in, the "undefined" shows on the page, and the user would rather have a blank show instead.
+						if (scope.project.Docs[docIndex].Title.indexOf("undefined") > -1)
+						{
+							scope.project.Docs[docIndex].Title = "";
+						}
+						
+						if (scope.project.Docs[docIndex].Description.indexOf("undefined") > -1)
+						{
+							scope.project.Docs[docIndex].Description = "";
+						}
+												
+						docIndex++;
+					}
                 });
 
                 //reload if it is already selected -- this is what allows you to see the new accuracycheck/characteristic immediately after it is added

@@ -332,6 +332,31 @@ mod.service('DatastoreService', ['$q','GetAllPossibleDatastoreLocations','GetAll
             {
                 return GetLocationTypes.query();
             },
+			getDatasetLocationType: function(aDatastoreId)
+			{
+				var theLocationType = 0;
+				if (aDatastoreId === "AdultWeir")
+				{
+					console.log("This dataset is for Adult Weir...");
+					theLocationType = 4;
+				}
+				if (aDatastoreId === "WaterTemp")
+				{
+					console.log("This dataset is for Water Temperature...");
+					theLocationType = 6;
+				}
+				else if (aDatastoreId === "CreelSurvey")
+				{
+					console.log("This dataset is for Creel Survey...");
+					theLocationType = 10;
+				}
+				else if (aDatastoreId === "SpawningGroundSurvey")
+				{
+					console.log("This dataset is for Spawning Ground Survey...");
+					theLocationType = 7;
+				}				
+				return theLocationType;
+			},
             saveDatasetField: function(field, saveResults)
             {
                 saveResults.saving = true;
@@ -1139,6 +1164,8 @@ mod.service('DataSheet',[ 'Logger', '$window', '$route',
 
 		var InstrumentCellEditTemplate = '<select ng-class="\'colt\' + col.index" ng-blur="updateCell(row,\'InstrumentId\')" ng-input="COL_FIELD" ng-model="COL_FIELD" ng-options="id as name for (id, name) in instrumentOptions"/>';
 
+		var TimezoneCellEditTemplate = '<select ng-class="\'colt\' + col.index" ng-blur="updateCell(row,\'timezone\')" ng-input="COL_FIELD" ng-model="COL_FIELD" ng-options="id as name for (id, name) in timezoneOptions"/>';				
+
         var service = {
 
             initScope: function(scope){
@@ -1244,7 +1271,7 @@ mod.service('DataSheet',[ 'Logger', '$window', '$route',
             },
 
             // Only used for datasheet.  For form look at config column
-            getColDefs: function(DatastoreTablePrefix, theMode){
+            /*getColDefs: function(DatastoreTablePrefix, theMode){
 	            var coldefs = [{
                             field: 'locationId',
                             Label: 'Location',
@@ -1285,7 +1312,199 @@ mod.service('DataSheet',[ 'Logger', '$window', '$route',
                         });
 
                 return coldefs;
-            },
+            },*/
+			
+            getColDefs: function(DatastoreTablePrefix, theMode){				
+				console.log("Inside services, getColDefs...");
+				console.log("theMode = " + theMode);							
+				console.log("DatastoreTablePrefix = " + DatastoreTablePrefix);				
+				
+				if (DatastoreTablePrefix === "WaterTemp")  // Water Temp related
+				{
+					if ((typeof theMode !== 'undefined') && (theMode.indexOf("form") > -1))
+					{
+						var coldefs = [
+							{
+								field: 'InstrumentId',
+								Label: 'Instrument',
+								displayName: 'Instrument',
+								cellFilter: 'instrumentFilter', //'','instrumentFilter',
+								//editableCellTemplate: '<input ng-blur="updateCell(row,\'instrumentId\')" ng-model="COL_FIELD" ng-input="COL_FIELD" />', //'<input ng-blur="updateCell(row,\'instrumentId\')" ng-model="COL_FIELD" ng-input="COL_FIELD" />',   InstrumentCellEditTemplate,
+								//Field: { Description: "ID number of the instrument"}
+								editableCellTemplate: InstrumentCellEditTemplate, //'<input ng-blur="updateCell(row,\'instrumentId\')" ng-model="COL_FIELD" ng-input="COL_FIELD" />',   'InstrumentCellEditTemplate',
+								visible:  false,
+								Field: { Description: "Instrument the detected this value."}
+							},							
+						];
+						console.log("Water Temp-related form...");
+					}
+					else
+					{
+						var coldefs = [
+							{
+								field: 'locationId',
+								Label: 'Location',
+								displayName: 'Location',
+								cellFilter: 'locationNameFilter', //'locationNameFilter','',
+								editableCellTemplate: LocationCellEditTemplate,
+								Field: { Description: "What location is this record related to?"}
+							},
+							{
+								field: 'InstrumentId',
+								Label: 'Instrument',
+								displayName: 'Instrument',
+								cellFilter: 'instrumentFilter', //'','instrumentFilter',
+								//editableCellTemplate: '<input ng-blur="updateCell(row,\'instrumentId\')" ng-model="COL_FIELD" ng-input="COL_FIELD" />', //'<input ng-blur="updateCell(row,\'instrumentId\')" ng-model="COL_FIELD" ng-input="COL_FIELD" />',   InstrumentCellEditTemplate,
+								//Field: { Description: "ID number of the instrument"}
+								editableCellTemplate: InstrumentCellEditTemplate, //'<input ng-blur="updateCell(row,\'instrumentId\')" ng-model="COL_FIELD" ng-input="COL_FIELD" />',   'InstrumentCellEditTemplate',
+								visible:  false,
+								Field: { Description: "Instrument the detected this value."}
+							},
+							{
+								field: 'QAStatusId',
+								Label: 'QA Status',
+								displayName: 'QA Status',
+								cellFilter: 'QAStatusFilter',
+								editableCellTemplate: QACellEditTemplate,
+								Field: { Description: "Quality Assurance workflow status"}
+
+							},
+							{
+								field: 'Timezone',
+								Label: 'Reading Timezone',
+								displayName: 'Reading Timezone',
+								editableCellTemplate: TimezoneCellEditTemplate,
+								cellFilter: 'timezoneFilter',
+								Field: { Description: "The timezone the reading took place in."}
+							}
+						];
+					}
+				}
+				//else if (theDatasetId == 1206) // This changes the order of the fields, to what makes for sense for the users of this dataset.
+				else if (DatastoreTablePrefix === "CreelSurvey") // Creel Survey related				
+				{
+					if ((typeof theMode !== 'undefined') && (theMode.indexOf("form") > -1))
+					{
+						var coldefs = [
+							{
+								field: 'FishermanId',
+								Label: 'Fisherman',
+								displayName: 'Fisherman',
+								cellFilter: 'fishermanFilter',
+								editableCellTemplate: FishermanCellEditTemplate,
+								//visible:  false,
+								Field: { Description: "Fisherman that was interviewed."}
+							}
+						];
+					}
+					else
+					{
+						var coldefs = [
+							{
+								field: 'activityDate',
+								Label: 'Activity Date',
+								displayName: 'Activity Date (MM/DD/YYYY)',
+								cellFilter: 'date: \'MM/dd/yyyy\'',
+								editableCellTemplate: '<input ng-blur="updateCell(row,\'activityDate\')" type="text" ng-pattern="'+date_pattern+'" ng-model="COL_FIELD" ng-input="COL_FIELD" />',
+								Field: { Description: "Date of activity in format: '10/22/2014'"}
+							},
+							{
+								field: 'locationId',
+								Label: 'Location',
+								displayName: 'Location',
+								cellFilter: 'locationNameFilter',
+								editableCellTemplate: LocationCellEditTemplate,
+								Field: { Description: "What location is this record related to?"}
+							},
+							/*{
+								field: 'QAStatusId',
+								Label: 'QA Status',
+								displayName: 'QA Status',
+								cellFilter: 'QAStatusFilter',
+								editableCellTemplate: QACellEditTemplate,
+								Field: { Description: "Quality Assurance workflow status"}
+
+							},*/
+							{
+								field: 'FishermanId',
+								Label: 'Fisherman',
+								displayName: 'Fisherman',
+								cellFilter: 'fishermanFilter',
+								editableCellTemplate: FishermanCellEditTemplate,
+								//visible:  false,
+								Field: { Description: "Fisherman that was interviewed."}
+							}
+						];
+					}		
+				}
+				else if (DatastoreTablePrefix === "SpawningGroundSurvey") //Spawning Ground related
+				{
+					if ((typeof theMode !== 'undefined') && (theMode.indexOf("form") > -1))
+					{
+						var coldefs = [];
+					}
+					else
+					{
+						var coldefs = [
+							{
+								field: 'locationId',
+								Label: 'Location',
+								displayName: 'Location',
+								cellFilter: 'locationNameFilter',
+								editableCellTemplate: LocationCellEditTemplate,
+								Field: { Description: "What location is this record related to?"}
+							},
+							{
+								field: 'activityDate',
+								Label: 'Activity Date',
+								displayName: 'Activity Date (MM/DD/YYYY)',
+								cellFilter: 'date: \'MM/dd/yyyy\'',
+								editableCellTemplate: '<input ng-blur="updateCell(row,\'activityDate\')" type="text" ng-pattern="'+date_pattern+'" ng-model="COL_FIELD" ng-input="COL_FIELD" />',
+								Field: { Description: "Date of activity in format: '10/22/2014'"}							
+							},
+							{
+								field: 'QAStatusId',
+								Label: 'QA Status',
+								displayName: 'QA Status',
+								cellFilter: 'QAStatusFilter',
+								editableCellTemplate: QACellEditTemplate,
+								Field: { Description: "Quality Assurance workflow status"}							
+							}
+						];
+					}
+				}
+				else
+				{
+					var coldefs = [
+						{
+							field: 'locationId',
+							Label: 'Location',
+							displayName: 'Location',
+							cellFilter: 'locationNameFilter',
+							editableCellTemplate: LocationCellEditTemplate,
+							Field: { Description: "What location is this record related to?"}
+						},
+						{
+							field: 'activityDate',
+							Label: 'Activity Date',
+							displayName: 'Activity Date (MM/DD/YYYY)',
+							cellFilter: 'date: \'MM/dd/yyyy\'',
+							editableCellTemplate: '<input ng-blur="updateCell(row,\'activityDate\')" type="text" ng-pattern="'+date_pattern+'" ng-model="COL_FIELD" ng-input="COL_FIELD" />',
+							Field: { Description: "Date of activity in format: '10/22/2014'"}
+						},
+						{
+							field: 'QAStatusId',
+							Label: 'QA Status',
+							displayName: 'QA Status',
+							cellFilter: 'QAStatusFilter',
+							editableCellTemplate: QACellEditTemplate,
+							Field: { Description: "Quality Assurance workflow status"}
+						}
+					];					
+				}
+				
+                return coldefs;
+            },				
 
             //in order to call validate, you'll need to have your FieldLookup and CellOptions set
             //  on the controller (and obviously previously populated by the DataSheet service.)
@@ -1898,6 +2117,24 @@ function makeObjectsFromValues(key, valuesList)
     }
 
     return objects;
+}
+
+function order2dArrayByAlpha(a, b)
+{
+    if(!a || !b)
+        return 0;		
+	
+	//console.log(a[1] + ", " + b[1]);
+	var a = a[1].toLowerCase();
+	var b = b[1].toLowerCase();
+	//console.log(a + ", " + b);
+	
+	if (a < b)
+		return -1;
+	else if (a > b)
+		return 1; 
+	else
+		return 0;
 }
 
 function orderByAlpha(a,b)
