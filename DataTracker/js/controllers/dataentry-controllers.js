@@ -48,8 +48,8 @@ mod_de.controller('ModalQuickAddCharacteristicCtrl', ['$scope','$modalInstance',
 
 
 //datasheet version of the data entrypage
-mod_de.controller('DataEntryDatasheetCtrl', ['$scope','$routeParams','DataService','$modal','$location','$rootScope','ActivityParser','DataSheet','$route',
-	function($scope, $routeParams, DataService, $modal, $location, $rootScope, ActivityParser, DataSheet, $route){
+mod_de.controller('DataEntryDatasheetCtrl', ['$scope','$routeParams','DataService','$modal','$location','$rootScope','ActivityParser','DataSheet','$route','DatastoreService',
+	function($scope, $routeParams, DataService, $modal, $location, $rootScope, ActivityParser, DataSheet, $route, DatastoreService){
 
 		initEdit(); // stop backspace from ditching in the wrong place.
 
@@ -59,6 +59,11 @@ mod_de.controller('DataEntryDatasheetCtrl', ['$scope','$routeParams','DataServic
         
         //setup the data array that will be bound to the grid and filled with the json data objects
         $scope.dataSheetDataset = [];
+		
+		$scope.datasetLocations = [[]];	
+		$scope.datasetLocationType=0;		
+		$scope.primaryProjectLocation = 0;
+		$scope.sortedLocations = [];
         
 		//datasheet grid definition
 		$scope.gridDatasheetOptions = {
@@ -72,7 +77,7 @@ mod_de.controller('DataEntryDatasheetCtrl', ['$scope','$routeParams','DataServic
 		};
 
         //config the fields for the datasheet - include mandatory location and activityDate fields
-		$scope.datasheetColDefs = DataSheet.getColDefs();
+		//$scope.datasheetColDefs = DataSheet.getColDefs();
 		DataSheet.initScope($scope);
 
 		//fire up our dataset
@@ -83,12 +88,63 @@ mod_de.controller('DataEntryDatasheetCtrl', ['$scope','$routeParams','DataServic
         	if(!$scope.project) return;
 
         	//console.dir($scope.project);
-			$scope.locationOptions = $rootScope.locationOptions = makeObjects(getUnMatchingByField($scope.project.Locations,PRIMARY_PROJECT_LOCATION_TYPEID,"LocationTypeId"), 'Id','Label') ;
+			//$scope.locationOptions = $rootScope.locationOptions = makeObjects(getUnMatchingByField($scope.project.Locations,PRIMARY_PROJECT_LOCATION_TYPEID,"LocationTypeId"), 'Id','Label') ; // Original line
 
+			$scope.datasetLocationType = DatastoreService.getDatasetLocationType($scope.DatastoreTablePrefix);
+			console.log("LocationType = " + $scope.datasetLocationType);			
+
+			console.log("ProjectLocations is next...");
+			console.dir($scope.project.Locations);
+			//var locInd = 0;
+			for (var i = 0; i < $scope.project.Locations.length; i++ )
+			{
+				//console.log("projectLocations Index = " + $scope.project.Locations[i].Label);
+				//console.log($scope.project.Locations[i].Id + "  " + $scope.project.Locations[i]);
+				if ($scope.project.Locations[i].LocationTypeId === $scope.datasetLocationType)
+				{
+					//console.log("Found one");
+					$scope.datasetLocations.push([$scope.project.Locations[i].Id, $scope.project.Locations[i].Label]);
+					//console.log("datasetLocations length = " + $scope.datasetLocations.length);
+					//locInd++;
+				}
+				else if ($scope.project.Locations[i].LocationTypeId === 3)
+				{
+					//$scope.datasetLocations.push([$scope.project.Locations[i].Id, $scope.project.Locations[i].Label]);  // The label is NULL, so do not add it.
+					$scope.primaryProjectLocation = $scope.project.Locations[i].Id;
+					console.log("Found a primary location.  LocId = " + $scope.primaryProjectLocation);
+				}					
+			}
+			console.log("datasetLocations is next...");
+			console.dir($scope.datasetLocations);
+			
+			// When we built the array, it started adding at location 1 for some reason, skipping 0.
+			// Therefore, row 0 is blank.  The simple solution is to just delete row 0.
+			$scope.datasetLocations.shift();
+
+			$scope.datasetLocations.sort(order2dArrayByAlpha);
+			console.log("datasetLocations sorted...");
+			console.dir($scope.datasetLocations);
+
+			// Convert our 2D array into an array of objects.
+			for (var i = 0; i < $scope.datasetLocations.length; i++)
+			{
+				$scope.sortedLocations.push({Id: $scope.datasetLocations[i][0], Label: $scope.datasetLocations[i][1]});
+			}
+			$scope.datasetLocations = [[]]; // Clean up
+			
+			
+			// Convert our array of objects into a list of objects, and put it in the select box.
+			$scope.locationOptions = $rootScope.locationOptions = makeObjects($scope.sortedLocations, 'Id','Label') ;
+
+			console.log("locationOptions is next...");
+			console.dir($scope.locationOptions);
+			
+			console.log("$scope.project.Instruments is next...");
+			console.dir($scope.project.Instruments);
         	if($scope.project.Instruments.length > 0)
         	{
         		$scope.instrumentOptions = $rootScope.instrumentOptions = makeInstrumentObjects($scope.project.Instruments);
-        		getByField($scope.datasheetColDefs, 'Instrument','Label').visible=true;
+        		//getByField($scope.datasheetColDefs, 'Instrument','Label').visible=true;
 			}
 
 			//check authorization -- need to have project loaded before we can check project-level auth
@@ -102,6 +158,11 @@ mod_de.controller('DataEntryDatasheetCtrl', ['$scope','$routeParams','DataServic
          //setup a listener to populate column headers on the grid
 		$scope.$watch('dataset.Fields', function() { 
 			if(!$scope.dataset.Fields ) return;
+			
+			$scope.DatastoreTablePrefix = $scope.dataset.Datastore.TablePrefix;
+			console.log("$scope.DatastoreTablePrefix = " + $scope.DatastoreTablePrefix);
+			$scope.datasheetColDefs = DataSheet.getColDefs($scope.DatastoreTablePrefix);  // Pass the TablePrefix (name of the dataset), because it will never change.			
+			
 			//load our project based on the projectid we get back from the dataset
         	$scope.project = DataService.getProject($scope.dataset.ProjectId);
 			
@@ -207,8 +268,8 @@ mod_de.controller('DataEntryDatasheetCtrl', ['$scope','$routeParams','DataServic
 
 
 //Fieldsheet / form version of the dataentry page
-mod_de.controller('DataEntryFormCtrl', ['$scope','$routeParams','DataService','$modal','$location','$rootScope','ActivityParser','DataSheet','$route','FileUploadService',
-	function($scope, $routeParams, DataService, $modal, $location, $rootScope, ActivityParser, DataSheet, $route, UploadService){
+mod_de.controller('DataEntryFormCtrl', ['$scope','$routeParams','DataService','$modal','$location','$rootScope','ActivityParser','DataSheet','$route','FileUploadService','DatastoreService',
+	function($scope, $routeParams, DataService, $modal, $location, $rootScope, ActivityParser, DataSheet, $route, UploadService,DatastoreService){
 
 		initEdit(); // stop backspace from ditching in the wrong place.
 
@@ -220,6 +281,11 @@ mod_de.controller('DataEntryFormCtrl', ['$scope','$routeParams','DataService','$
 
         $scope.dataSheetDataset = [];
         // $scope.row = {ActivityQAStatus: {}, activityDate: new Date()}; //header field values get attached here by dbcolumnname
+
+		$scope.datasetLocations = [[]];	
+		$scope.datasetLocationType=0;		
+		$scope.primaryProjectLocation = 0;
+		$scope.sortedLocations = [];		
         
 		//datasheet grid
 		$scope.gridDatasheetOptions = {
@@ -244,8 +310,69 @@ mod_de.controller('DataEntryFormCtrl', ['$scope','$routeParams','DataService','$
         	if(!$scope.project) return;
         	//console.dir($scope.project);
 
-			$scope.locationOptions = $rootScope.locationOptions = makeObjects(getUnMatchingByField($scope.project.Locations,PRIMARY_PROJECT_LOCATION_TYPEID,"LocationTypeId"), 'Id','Label') ;
+			//$scope.locationOptions = $rootScope.locationOptions = makeObjects(getUnMatchingByField($scope.project.Locations,PRIMARY_PROJECT_LOCATION_TYPEID,"LocationTypeId"), 'Id','Label') ; // Original code		
+			
+			$scope.datasetLocationType = DatastoreService.getDatasetLocationType($scope.DatastoreTablePrefix);			
+			console.log("LocationType = " + $scope.datasetLocationType);			
+			
+			console.log("ProjectLocations is next...");
+			if ($scope.project.Locations)
+				console.dir($scope.project.Locations);
+			
+			//var locInd = 0;
+			for (var i = 0; i < $scope.project.Locations.length; i++ )
+			{
+				console.log("i = " + i);
+				console.log($scope.project.Locations[i].Id + "  " + $scope.project.Locations[i].Label);
+				console.log("$scope.datasetLocationType = " + $scope.datasetLocationType + "  $scope.project.Locations[i].LocationTypeId = " + $scope.project.Locations[i].LocationTypeId);
+				if ($scope.project.Locations[i].LocationTypeId === $scope.datasetLocationType)
+				{
+					console.log("Found one");
+					// If the label is blank, this item is the Primary Project Location, and the label is null.
+					if ((typeof $scope.project.Locations[i].Label !== 'undefined') && ($scope.project.Locations[i].Label != null))
+					{	
+						$scope.datasetLocations.push([$scope.project.Locations[i].Id, $scope.project.Locations[i].Label]);
+						//console.log("datasetLocations length = " + $scope.datasetLocations.length);
+						//locInd++;
+					}
+					else
+					{
+						$scope.primaryProjectLocation = $scope.project.Locations[i].Id;
+						console.log("**Found a primary location.  LocId = " + $scope.primaryProjectLocation);
+					}
+				}
+				else if ($scope.project.Locations[i].LocationTypeId === 3)
+				{
+					//$scope.datasetLocations.push([$scope.project.Locations[i].Id, $scope.project.Locations[i].Label]);  // The label is NULL, so do not add it.
+					$scope.primaryProjectLocation = $scope.project.Locations[i].Id;
+					console.log("Found a primary location.  LocId = " + $scope.primaryProjectLocation);
+				}					
+			}
+			console.log("datasetLocations is next...");
+			console.dir($scope.datasetLocations);
+			
+			// When we built the array, it started adding at location 1 for some reason, skipping 0.
+			// Therefore, row 0 is blank.  The simple solution is to just delete row 0.
+			$scope.datasetLocations.shift();
 
+			$scope.datasetLocations.sort(order2dArrayByAlpha);
+			console.log("datasetLocations sorted...");
+			console.dir($scope.datasetLocations);
+
+			// Convert our 2D array into an array of objects.
+			for (var i = 0; i < $scope.datasetLocations.length; i++)
+			{
+				$scope.sortedLocations.push({Id: $scope.datasetLocations[i][0], Label: $scope.datasetLocations[i][1]});
+			}
+			$scope.datasetLocations = [[]]; // Clean up
+			
+			
+			// Convert our array of objects into a list of objects, and put it in the select box.
+			$scope.locationOptions = $rootScope.locationOptions = makeObjects($scope.sortedLocations, 'Id','Label') ;
+
+			console.log("locationOptions is next...");
+			console.dir($scope.locationOptions);
+			
 			//if there is only one location, just set it to that location
 			if(array_count($scope.locationOptions)==1)
 			{
@@ -269,14 +396,15 @@ mod_de.controller('DataEntryFormCtrl', ['$scope','$routeParams','DataService','$
 				$scope.row['locationId'] = ""+$routeParams.LocationId;
 			}
 
-        });
+        });	
 
          //setup a listener to populate column headers on the grid
 		$scope.$watch('dataset.Fields', function() { 
 			if(!$scope.dataset.Fields ) return;
 
 			$scope.DatastoreTablePrefix = $scope.dataset.Datastore.TablePrefix;
-
+			console.log("$scope.DatastoreTablePrefix = " + $scope.DatastoreTablePrefix);
+			$scope.datasheetColDefs = DataSheet.getColDefs($scope.DatastoreTablePrefix, "form");  // Pass the TablePrefix (name of the dataset), because it will never change.
 
 			//load our project based on the projectid we get back from the dataset
         	$scope.project = DataService.getProject($scope.dataset.ProjectId);
@@ -299,6 +427,7 @@ mod_de.controller('DataEntryFormCtrl', ['$scope','$routeParams','DataService','$
 				}
 				else if (field.FieldRoleId == FIELD_ROLE_DETAIL)
 				{
+					//console.log("Adding to details:  " + field.DbColumnName + ", " + field.Label);
 					$scope.fields.detail.push(field);
     				$scope.datasheetColDefs.push(makeFieldColDef(field, $scope));
 
@@ -334,7 +463,8 @@ mod_de.controller('DataEntryFormCtrl', ['$scope','$routeParams','DataService','$
 
 			$scope.validateGrid($scope);
 
-
+			console.log("$scope at end of dataset.Fields watcher...");
+			console.dir($scope);
     	});
 
 		$scope.reloadProject = function(){

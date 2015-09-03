@@ -84,8 +84,9 @@
                     </td>
                 </tr>
 
-                <tr ng-show="project.Instruments.length > 0" >
-                    <td>Instrument: </td>
+                <!--<tr ng-show="project.Instruments.length > 0" >-->
+				<tr ng-hide="dataset.Config.DataEntryPage.HiddenFields.contains('Instrument')" >
+					<td>Instrument: </td>
                     <td>
 
                         <select ui-select2="select2Options" data-placeholder="Add an Instrument" ng-change="selectInstrument()" style="width: 170px; margin-top: 4px;" ng-model="ActivityFields.InstrumentId">
@@ -157,7 +158,7 @@
                     </div>
 
                     <div ng-show="project.Instruments.length > 0 && !dataset.Config.DataEntryPage.HiddenFields.contains('Instrument')" >
-                        <div style="display: inline-flex;">
+						<div style="display: inline-flex;">
                             <div class="header-label">Instrument: </div>
                             <div class="header-value">                            
                                 <select ui-select2="select2Options" data-placeholder="Add an Instrument" ng-change="selectInstrument()" style="width: 200px; margin-top: 4px; margin-bottom: 4px;" ng-model="ActivityFields.InstrumentId">

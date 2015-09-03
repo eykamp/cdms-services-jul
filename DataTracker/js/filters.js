@@ -30,6 +30,15 @@ angular.module('DatasetFilters', [])
             return input;
         };
     })
+	.filter('timezoneFilter', function($rootScope){
+        return function(input) {
+            if($rootScope.timezoneOptions[input])
+			{
+                return $rootScope.timezoneOptions[input];
+			}
+            return input;
+        };
+	})	
     .filter('QAStatusFilter', function($rootScope){
         return function(input) {
             if($rootScope.QAStatusOptions[input])

@@ -169,7 +169,7 @@ var datasetActivitiesController = ['$scope','$routeParams', 'DataService', 'Data
                         {field:'headerdata.Allotment',displayName: 'Allotment', cellTemplate: allotmentTemplate, visible: false, width: '100px'},
                         {field:'headerdata.AllotmentStatus',displayName: 'Status', visible: false, width: '120px'},
 
-                        {field:'Location.Id',displayName: 'LocId', visible: false, width: '55px'},
+                        //{field:'Location.Id',displayName: 'LocId', visible: false, width: '55px'},
                         {field:'Location.Label',displayName: 'Location', cellTemplate: locationLabelTemplate},
                         {field:'Location.WaterBody.Name',displayName: 'Waterbody', visible: false},
                         {field:'headerdata.FieldActivityType',displayName: 'Field Activity Type', visible: false, width: '120px'},

@@ -29,8 +29,8 @@ mod_edit.controller('ModalBulkRowQAChangeCtrl', ['$scope','$modalInstance',
 
 
 //Fieldsheet / form version of the dataentry page
-mod_edit.controller('DataEditCtrl', ['$scope','$q','$sce','$routeParams','DataService','$modal','$location','$rootScope','ActivityParser','DataSheet','FileUploadService',
-	function($scope, $q, $sce, $routeParams, DataService, $modal, $location, $rootScope, ActivityParser, DataSheet, UploadService){
+mod_edit.controller('DataEditCtrl', ['$scope','$q','$sce','$routeParams','DataService','$modal','$location','$rootScope','ActivityParser','DataSheet','FileUploadService','DatastoreService',
+	function($scope, $q, $sce, $routeParams, DataService, $modal, $location, $rootScope, ActivityParser, DataSheet, UploadService, DatastoreService){
 
 		initEdit(); // stop backspace from ditching in the wrong place.
 
@@ -57,6 +57,11 @@ mod_edit.controller('DataEditCtrl', ['$scope','$q','$sce','$routeParams','DataSe
         $scope.row = {ActivityQAStatus: {}}; //header field values get attached here by dbcolumnname
         $scope.selectedItems = [];
 
+		$scope.sortedLocations = [];
+		$scope.datasetLocationType=0;
+		$scope.datasetLocations = [[]];		
+		$scope.primaryProjectLocation = 0;		
+		
 		$scope.gridOptionsFilter = {};
 
         //datasheet grid
@@ -84,9 +89,49 @@ mod_edit.controller('DataEditCtrl', ['$scope','$q','$sce','$routeParams','DataSe
 			if(!$rootScope.Profile.isProjectOwner($scope.project) && !$rootScope.Profile.isProjectEditor($scope.project))
 			{
 				$location.path("/unauthorized");
-			}
+			}			
+			
+			$scope.datasetLocationType = DatastoreService.getDatasetLocationType($scope.dataset.DatastoreId);
+			console.log("LocationType = " + $scope.datasetLocationType);
 
-			$scope.locationOptions = $rootScope.locationOptions = makeObjects(getUnMatchingByField($scope.project.Locations,PRIMARY_PROJECT_LOCATION_TYPEID,"LocationTypeId"), 'Id','Label') ;
+			for (var i = 0; i < $scope.project.Locations.length; i++ )
+			{
+				//console.log("projectLocations Index = " + $scope.project.Locations[i].Label);
+				//console.log($scope.project.Locations[i].Id + "  " + $scope.project.Locations[i]);
+				if ($scope.project.Locations[i].LocationTypeId === $scope.datasetLocationType)
+				{
+					//console.log("Found one");
+					$scope.datasetLocations.push([$scope.project.Locations[i].Id, $scope.project.Locations[i].Label]);
+					//console.log("datasetLocations length = " + $scope.datasetLocations.length);
+					//locInd++;
+				}
+			}
+			console.log("datasetLocations is next...");
+			console.dir($scope.datasetLocations);
+			
+			// When we built the array, it started adding at location 1 for some reason, skipping 0.
+			// Therefore, row 0 is blank.  The simple solution is to just delete row 0.
+			$scope.datasetLocations.shift();
+
+			$scope.datasetLocations.sort(order2dArrayByAlpha);
+			console.log("datasetLocations sorted...");
+			console.dir($scope.datasetLocations);
+
+			// Convert our 2D array into an array of objects.
+			for (var i = 0; i < $scope.datasetLocations.length; i++)
+			{
+				$scope.sortedLocations.push({Id: $scope.datasetLocations[i][0], Label: $scope.datasetLocations[i][1]});
+			}
+			$scope.datasetLocations = [[]]; // Clean up
+			
+			
+			// Convert our array of objects into a list of objects, and put it in the select box.
+			$scope.locationOptions = $rootScope.locationOptions = makeObjects($scope.sortedLocations, 'Id','Label') ;
+
+			console.log("locationOptions is next...");
+			console.dir($scope.locationOptions);			
+			
+			//$scope.locationOptions = $rootScope.locationOptions = makeObjects(getUnMatchingByField($scope.project.Locations,PRIMARY_PROJECT_LOCATION_TYPEID,"LocationTypeId"), 'Id','Label') ;  // Original code
 			$scope.selectInstrument();
 
         });
