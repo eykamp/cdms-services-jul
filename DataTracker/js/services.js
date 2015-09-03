@@ -1679,6 +1679,8 @@ function makeFieldColDef(field, scope) {
                 break;
 
             case 'datetime':
+                coldef.editableCellTemplate = makeField(field.DbColumnName, 'ex. 07/23/2014 16:20');
+                break;
             case 'textarea':
                 coldef.editableCellTemplate = '<input type="text" ng-blur="updateCell(row,\''+field.DbColumnName+'\')" ng-model="COL_FIELD" ng-input="COL_FIELD" />';
                 break;
@@ -2050,13 +2052,17 @@ function validateField(field, row, key, scope, row_errors)
             }
             break;
         case 'date':
-            var dateRegex = /^(0[1-9]|1[0-2])\/(0[1-9]|1\d|2\d|3[01])\/(19|20)\d{2}$/ ;
-            if(!value.match(dateRegex))
+            if(isNaN(Date.parse(value)))
                 row_errors.push("["+field.DbColumnName+"] Value is not a date (mm/dd/yyyy).");
             break;
+        case 'datetime':
+            if(isNaN(Date.parse(value)))
+                row_errors.push("["+field.DbColumnName+"] Value is not a date-time (mm/dd/yyyy hh:mm).");
+            break;
+
         case 'time':
             if(!stringIsTime(value) && !is_empty(value))
-                row_errors.push("["+field.DbColumnName+"] Value is not a time (HH:MM).");
+                row_errors.push("["+field.DbColumnName+"] Value is not a time (hh:mm).");
             break;
         case 'text':
             //anything here?
