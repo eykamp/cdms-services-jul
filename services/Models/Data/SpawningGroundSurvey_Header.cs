@@ -10,10 +10,10 @@ namespace services.Models.Data
         public string EndTime { get; set; }
         public float? StartTemperature { get; set; }
         public float? EndTemperature { get; set; }
-        public int? StartEasting { get; set; }
-        public int? StartNorthing { get; set; }
-        public int? EndEasting { get; set; }
-        public int? EndNorthing { get; set; }
+        public double? StartEasting { get; set; }
+        public double? StartNorthing { get; set; }
+        public double? EndEasting { get; set; }
+        public double? EndNorthing { get; set; }
         public string Flow { get; set; }
         public string WaterVisibility { get; set; }
         public string Weather { get; set; }

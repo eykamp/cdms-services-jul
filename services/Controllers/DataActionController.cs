@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web.Http;
 using CsvHelper;
@@ -1461,49 +1462,57 @@ namespace services.Controllers
 
                     logger.Debug("Done saving files.");
 
-                    ImportDataResult data = new ImportDataResult();
-                    var info = new System.IO.FileInfo(newFileName);
+                    var data = new ImportDataResult();
+                    var info = new FileInfo(newFileName);
 
-                    //process the file and return all the data!
+                    // Process the file and return all the data!
 
-                    //TODO: refactor this into import plugins via polymorphism. ... but maybe this is enough. :)
-                    //CSV or Excel are the only filetypes currently supported.
-                    if (info.Extension == ".xls" || info.Extension == ".xlsx")
+                    var regex = new Regex(@"\.(m|r|ur|mc)\d+$");
+
+                    var extension = info.Extension.ToLower();
+
+                    if (extension == ".xls" || extension == ".xlsx")
                     {
                         logger.Debug("Looks like an excel file!");
-                        ExcelReader reader = new ExcelReader(newFileName);
+                        var reader = new ExcelReader(newFileName);
                         //ExcelReader doesn't support starting on a certain line for column names...  we always assume col 1
                         data.columns = reader.getColumns();
                         data.rows = reader.getData().First().Table;
                         reader.close();
-                    } else if (info.Extension == ".csv")
+                    }
+                    else if (extension == ".csv")
                     {
                         logger.Debug("Looks like a csv file!");
-                        Int32 StartOnLine = Convert.ToInt32(provider.FormData.Get("StartOnLine")); //only applicable to T/CSV
-                        CSVReader reader = new CSVReader(newFileName);
+                        var StartOnLine = Convert.ToInt32(provider.FormData.Get("StartOnLine")); //only applicable to T/CSV
+                        var reader = new CSVReader(newFileName);
                         data = reader.getImportDataResult(StartOnLine); // we do it all in one.
                     }
-                    else if (info.Extension == ".tsv")
+                    else if (extension == ".tsv")
                     {
                         logger.Debug("Looks like a tsv file!");
-                        Int32 StartOnLine = Convert.ToInt32(provider.FormData.Get("StartOnLine")); //only applicable to T/CSV
-                        TSVReader reader = new TSVReader(newFileName);
+                        var StartOnLine = Convert.ToInt32(provider.FormData.Get("StartOnLine")); //only applicable to T/CSV
+                        var reader = new TSVReader(newFileName);
                         data = reader.getImportDataResult(StartOnLine); // we do it all in one.
                     }
-
+                    else if (extension == ".lkg" || extension == ".fld" || regex.Match(extension).Success)
+                    {
+                        logger.Debug("Looks like a PITAGIS file!");
+                        var reader = new PitagisReader(newFileName);
+                        data = reader.getImportDataResult(); // we do it all in one.
+                    }
                     else
                     {
                         logger.Debug("Looks like an unknown file!");
-                        throw new Exception("File type not compatible.  We can do Excel (xls/xslx), CSV (csv) and TSV (tsv).");
+                        throw new Exception("File type not compatible.  We can do Excel (xls/xslx), CSV (csv), TSV (tsv), and PITAGIS (.lkg/.fld/.m01/.r01/.ur1/.mc1).");
                     }
 
-                    string result = JsonConvert.SerializeObject(data);
+                    var result = JsonConvert.SerializeObject(data);
 
                     //TODO: actual error/success message handling
                     //string result = "{\"message\": \"Success\"}";
 
-                    HttpResponseMessage resp = new HttpResponseMessage(System.Net.HttpStatusCode.OK);
-                    resp.Content = new System.Net.Http.StringContent(result, System.Text.Encoding.UTF8, "text/plain");  //to stop IE from being stupid.
+                    var resp = new HttpResponseMessage(HttpStatusCode.OK);
+                    resp.Content = new StringContent(result, System.Text.Encoding.UTF8, "text/plain");  //to stop IE from being stupid.
 
                     return resp;
 

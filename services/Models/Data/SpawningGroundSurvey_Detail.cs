@@ -29,8 +29,8 @@ namespace services.Models.Data
         public string KidneyID { get; set; }
         public string Comments { get; set; }
         public int? Ident { get; set; }
-        public float? EastingUTM { get; set; }
-        public float? NorthingUTM { get; set; }
+        public double? EastingUTM { get; set; }
+        public double? NorthingUTM { get; set; }
         public string EstimatedLocation { get; set; }
         public string DateTime { get; set; }
     }

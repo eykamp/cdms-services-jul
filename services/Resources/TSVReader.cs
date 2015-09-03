@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Web;
-using CsvHelper;
 using Newtonsoft.Json.Linq;
-using NLog;
 
 namespace services.Resources
 {
@@ -15,14 +10,13 @@ namespace services.Resources
     public class TSVReader
     {
         private string fileName;
-        private static Logger logger = LogManager.GetCurrentClassLogger();
+        //private static Logger logger = LogManager.GetCurrentClassLogger();
 
         public TSVReader(string a_fileName)
         {
-            this.fileName = a_fileName;
-
-
+            fileName = a_fileName;
         }
+
 
         internal ImportDataResult getImportDataResult(int start_on_line = 1)
         {
@@ -78,9 +72,5 @@ namespace services.Resources
 
             return dataresult;
         }
-
-        
-
-
     }
 }
