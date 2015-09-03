@@ -23,6 +23,10 @@ mod_di.controller("DatasetImportCtrl", ['$scope','$routeParams','DatastoreServic
 
 			$scope.existingActivitiesLoad = DataService.getActivities($routeParams.Id);
 			$scope.existingActivities = [];
+			$scope.sortedLocations = [];
+			$scope.datasetLocationType=0;
+			$scope.datasetLocations = [[]];
+			$scope.primaryProjectLocation = 0;			
 
 			$scope.ActivityFields = { QAComments: DEFAULT_IMPORT_QACOMMENT, ActivityDate: new Date() };
 
@@ -54,7 +58,25 @@ mod_di.controller("DatasetImportCtrl", ['$scope','$routeParams','DatastoreServic
 				
 			];
 
-
+			$scope.$watch('dataset.Id', function(){
+				if (!$scope.dataset.Id) return;
+				
+				console.log("Inside DatasetImportCtrl, dataset.Id watcher...");
+				
+				console.log("$scope.dataset is next...");
+				console.dir($scope.dataset);
+				
+				//if (($scope.dataset.Config !== "NULL") && ($scope.dataset.Config.DataEntryPage.ShowFields.contains('Instrument')))
+				if (((typeof $scope.dataset.Config !== 'undefined') && ($scope.dataset.Config !== null) && ($scope.dataset.Config !== "NULL")) && 
+					($scope.dataset.Config.DataEntryPage.HiddenFields.indexOf("Instrument") > -1))
+					console.log("Found instrument");
+				
+				$scope.DatastoreTablePrefix = $scope.dataset.Datastore.TablePrefix;
+				$scope.datasetLocationType = DatastoreService.getDatasetLocationType($scope.DatastoreTablePrefix);				
+				console.log("LocationType = " + $scope.datasetLocationType);				
+				$scope.datasheetColDefs = DataSheet.getColDefs($scope.DatastoreTablePrefix);  // Pass the TablePrefix (name of the dataset), because it will never change.				
+			});
+			
 			$scope.$watch('project.Name', function(){
 	        	if(!$scope.project) return;
 	        	//Logger.debug($scope.project);
@@ -65,6 +87,46 @@ mod_di.controller("DatasetImportCtrl", ['$scope','$routeParams','DatastoreServic
 					$location.path("/unauthorized");
 				}
 
+				console.log("ProjectLocations is next...");
+				console.dir($scope.project.Locations);
+				//var locInd = 0;
+				for (var i = 0; i < $scope.project.Locations.length; i++ )
+				{
+					//console.log("projectLocations Index = " + $scope.project.Locations[i].Label);
+					//console.log($scope.project.Locations[i].Id + "  " + $scope.project.Locations[i]);
+					if ($scope.project.Locations[i].LocationTypeId === $scope.datasetLocationType)
+					{
+						//console.log("Found one");
+						$scope.datasetLocations.push([$scope.project.Locations[i].Id, $scope.project.Locations[i].Label]);
+						//console.log("datasetLocations length = " + $scope.datasetLocations.length);
+						//locInd++;
+					}
+				}
+				console.log("datasetLocations is next...");
+				console.dir($scope.datasetLocations);
+				
+				// When we built the array, it started adding at location 1 for some reason, skipping 0.
+				// Therefore, row 0 is blank.  The simple solution is to just delete row 0.
+				$scope.datasetLocations.shift();
+
+				$scope.datasetLocations.sort(order2dArrayByAlpha);
+				console.log("datasetLocations sorted...");
+				console.dir($scope.datasetLocations);
+
+				// Convert our 2D array into an array of objects.
+				for (var i = 0; i < $scope.datasetLocations.length; i++)
+				{
+					$scope.sortedLocations.push({Id: $scope.datasetLocations[i][0], Label: $scope.datasetLocations[i][1]});
+				}
+				$scope.datasetLocations = [[]]; // Clean up
+				
+				
+				// Convert our array of objects into a list of objects, and put it in the select box.
+				$scope.locationOptions = $rootScope.locationOptions = makeObjects($scope.sortedLocations, 'Id','Label') ;
+
+				console.log("locationOptions is next...");
+				console.dir($scope.locationOptions);					
+				
 				//Add the OtherAgencyId to the label - requirement from Colette
 				angular.forEach($scope.project.Locations, function(loc)
 	    		{
@@ -73,7 +135,7 @@ mod_di.controller("DatasetImportCtrl", ['$scope','$routeParams','DatastoreServic
 	    		});
 
 	        	//setup locationOptions dropdown
-				$scope.locationOptions = $rootScope.locationOptions = makeObjects(getUnMatchingByField($scope.project.Locations,PRIMARY_PROJECT_LOCATION_TYPEID,"LocationTypeId"), 'Id','Label') ;
+				//$scope.locationOptions = $rootScope.locationOptions = makeObjects(getUnMatchingByField($scope.project.Locations,PRIMARY_PROJECT_LOCATION_TYPEID,"LocationTypeId"), 'Id','Label') ;  // Original code
 
 				//setup location field to participate in validation
 				$scope.FieldLookup['locationId'] = { DbColumnName: 'locationId', ControlType: "select" };
@@ -275,7 +337,7 @@ mod_di.controller("DatasetImportCtrl", ['$scope','$routeParams','DatastoreServic
 			};
 
             //config the fields for the preview datasheet - include mandatory location and activityDate fields
-			$scope.datasheetColDefs = DataSheet.getColDefs();
+			//$scope.datasheetColDefs = DataSheet.getColDefs();
 			DataSheet.initScope($scope);
 
 			$scope.cellRowQATemplate = '<select ng-class="\'colt\' + col.index" ng-blur="updateCell(row,\'RowQAStatusId\')" ng-input="COL_FIELD" ng-model="COL_FIELD" ng-options="id as name for (id, name) in RowQAStatuses"/>';
@@ -285,6 +347,10 @@ mod_di.controller("DatasetImportCtrl", ['$scope','$routeParams','DatastoreServic
     		$scope.$watch('dataset.Name', function(){
     			if($scope.dataset.Fields)
     			{
+					$scope.DatastoreTablePrefix = $scope.dataset.Datastore.TablePrefix;
+					console.log("$scope.DatastoreTablePrefix = " + $scope.DatastoreTablePrefix);
+					$scope.datasheetColDefs = DataSheet.getColDefs($scope.DatastoreTablePrefix);  // Pass the TablePrefix (name of the dataset), because it will never change.					
+					
     				//DataService.configureDataset($scope.dataset); //bump to load config since we are pulling it directly out of the activities
 
 					$scope.project = DataService.getProject($scope.dataset.ProjectId);
