@@ -27,6 +27,7 @@ namespace services.Models.Data
         public string TagID { get; set; }
         public string GeneticID { get; set; }
         public string KidneyID { get; set; }
+        public string Origin { get; set; }
         public string Comments { get; set; }
         public int? Ident { get; set; }
         public double? EastingUTM { get; set; }

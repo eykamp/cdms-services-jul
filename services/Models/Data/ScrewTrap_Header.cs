@@ -33,9 +33,9 @@ namespace services.Models.Data
         public string Turbitity { get; set; }
         public string TrapDebris { get; set; }
         public string RiverDebris { get; set; }
-        public string Task { get; set; }
         public string ActivityComments { get; set; }
         public string ReleaseSite { get; set; }
         public string ReleaseRiverKM { get; set; }
+        public string Unit { get; set; }
     }
 }

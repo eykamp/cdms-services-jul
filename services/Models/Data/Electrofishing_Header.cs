@@ -9,17 +9,15 @@ namespace services.Models.Data
         public string EventType { get; set; }
         public string FileTitle { get; set; }
         public string ClipFiles { get; set; }
-        public DateTime? TagDateTime { get; set; }
-        public DateTime? ReleaseDateTime { get; set; }
-        public string Tagger { get; set; }
+        public DateTime? StartTime { get; set; }
+        public DateTime? EndTime { get; set; }
+        public DateTime? ReleaseTime { get; set; }
+        public string ReleaseLocation { get; set; }
+        public string VisitID { get; set; }
+        public string Unit { get; set; }
         public string Crew { get; set; }
-        public string CaptureMethod { get; set; }
-        public int? MigratoryYear { get; set; }
-        public double? TaggingTemp { get; set; }
+        public double? StartTemp { get; set; }
         public double? ReleaseTemp { get; set; }
-        public string TaggingMethod { get; set; }
-        public string Organization { get; set; }
-        public string CoordinatorID { get; set; }
         public double? Conductivity { get; set; }
         public string EFModel { get; set; }
         public double? SiteLength { get; set; }

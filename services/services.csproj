@@ -700,6 +700,42 @@
     <Compile Include="Migrations\201509031705236_MakeAllEastingsDouble.Designer.cs">
       <DependentUpon>201509031705236_MakeAllEastingsDouble.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201509082350325_AddOriginToSGS.cs" />
+    <Compile Include="Migrations\201509082350325_AddOriginToSGS.Designer.cs">
+      <DependentUpon>201509082350325_AddOriginToSGS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509092125364_AddSGSViewForReporting.cs" />
+    <Compile Include="Migrations\201509092125364_AddSGSViewForReporting.Designer.cs">
+      <DependentUpon>201509092125364_AddSGSViewForReporting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509102217181_MoreDatasetChangesForColette.cs" />
+    <Compile Include="Migrations\201509102217181_MoreDatasetChangesForColette.Designer.cs">
+      <DependentUpon>201509102217181_MoreDatasetChangesForColette.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509112309345_ObjectChangesForPreviousMigration.cs" />
+    <Compile Include="Migrations\201509112309345_ObjectChangesForPreviousMigration.Designer.cs">
+      <DependentUpon>201509112309345_ObjectChangesForPreviousMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509141924535_AddUnitToScrewTrapHeader.cs" />
+    <Compile Include="Migrations\201509141924535_AddUnitToScrewTrapHeader.Designer.cs">
+      <DependentUpon>201509141924535_AddUnitToScrewTrapHeader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509142134077_MoreChangesForColette.cs" />
+    <Compile Include="Migrations\201509142134077_MoreChangesForColette.Designer.cs">
+      <DependentUpon>201509142134077_MoreChangesForColette.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509142204582_UpdateDataFieldsForLatestColetteChanges.cs" />
+    <Compile Include="Migrations\201509142204582_UpdateDataFieldsForLatestColetteChanges.Designer.cs">
+      <DependentUpon>201509142204582_UpdateDataFieldsForLatestColetteChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509142216115_AddSizeCategoryToDetails.cs" />
+    <Compile Include="Migrations\201509142216115_AddSizeCategoryToDetails.Designer.cs">
+      <DependentUpon>201509142216115_AddSizeCategoryToDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509142329043_AddDummyLocationsSoColetteCanTest.cs" />
+    <Compile Include="Migrations\201509142329043_AddDummyLocationsSoColetteCanTest.Designer.cs">
+      <DependentUpon>201509142329043_AddDummyLocationsSoColetteCanTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -1305,6 +1341,33 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201509031705236_MakeAllEastingsDouble.resx">
       <DependentUpon>201509031705236_MakeAllEastingsDouble.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509082350325_AddOriginToSGS.resx">
+      <DependentUpon>201509082350325_AddOriginToSGS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509092125364_AddSGSViewForReporting.resx">
+      <DependentUpon>201509092125364_AddSGSViewForReporting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509102217181_MoreDatasetChangesForColette.resx">
+      <DependentUpon>201509102217181_MoreDatasetChangesForColette.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509112309345_ObjectChangesForPreviousMigration.resx">
+      <DependentUpon>201509112309345_ObjectChangesForPreviousMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509141924535_AddUnitToScrewTrapHeader.resx">
+      <DependentUpon>201509141924535_AddUnitToScrewTrapHeader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509142134077_MoreChangesForColette.resx">
+      <DependentUpon>201509142134077_MoreChangesForColette.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509142204582_UpdateDataFieldsForLatestColetteChanges.resx">
+      <DependentUpon>201509142204582_UpdateDataFieldsForLatestColetteChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509142216115_AddSizeCategoryToDetails.resx">
+      <DependentUpon>201509142216115_AddSizeCategoryToDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509142329043_AddDummyLocationsSoColetteCanTest.resx">
+      <DependentUpon>201509142329043_AddDummyLocationsSoColetteCanTest.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

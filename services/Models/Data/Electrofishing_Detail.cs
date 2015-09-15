@@ -12,17 +12,15 @@ namespace services.Models.Data
         public double? Weight { get; set; }
         public string OtherSpecies { get; set; }
         public int? FishCount { get; set; }
-        public string FishSize { get; set; }
+        public string SizeCategory { get; set; }
         public string ConditionalComment { get; set; }
         public string TextualComments { get; set; }
         public string Note { get; set; }
-        public string ReleaseLocation { get; set; }
-        public string Tag { get; set; }
-        public string Clip { get; set; }
+        public string TagStatus { get; set; }
+        public string ClipStatus { get; set; }
         public string OtolithID { get; set; }
         public string GeneticID { get; set; }
         public string OtherID { get; set; }
-        public string Disposition { get; set; }
         public string FishComments { get; set; }
     }
 }

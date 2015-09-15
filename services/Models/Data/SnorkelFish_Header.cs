@@ -18,6 +18,7 @@ namespace services.Models.Data
         public double? DominantSpecies { get; set; } 
         public double? CommonSpecies { get; set; } 
         public double? RareSpecies { get; set; } 
+        public string Unit { get; set; }
     }
 }
 

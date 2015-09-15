@@ -822,7 +822,7 @@ namespace services.Controllers
             // See if we can find a project associated with this lab that we are also the owner of
             User me = AuthorizationManager.getCurrentUser();
 
-            Project project = db.Projects.FirstOrDefault(x => x.Laboratories.Contains(laboratory) && x.isOwnerOrEditor(me));
+            Project project = db.Projects.ToList().FirstOrDefault(x => x.Laboratories.Any(y => y.Id == laboratory.Id) && x.isOwnerOrEditor(me));
 
             if (project == null)
                 throw new Exception("Authorization error.");

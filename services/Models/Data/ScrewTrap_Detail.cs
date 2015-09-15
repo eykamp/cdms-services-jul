@@ -15,8 +15,8 @@ namespace services.Models.Data
         public string TextualComments { get; set; }
         public string Note { get; set; }
         public string ReleaseLocation { get; set; }
-        public string Tag { get; set; }
-        public string Clip { get; set; }
+        public string TagStatus { get; set; }
+        public string ClipStatus { get; set; }
         public string FishComments { get; set; }
     }
 }
