@@ -744,6 +744,10 @@
     <Compile Include="Migrations\201509152057548_RemoveUnusedElectrofishingField.Designer.cs">
       <DependentUpon>201509152057548_RemoveUnusedElectrofishingField.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201509152136333_ChangePossibleValuesForFishScales.cs" />
+    <Compile Include="Migrations\201509152136333_ChangePossibleValuesForFishScales.Designer.cs">
+      <DependentUpon>201509152136333_ChangePossibleValuesForFishScales.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -1382,6 +1386,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201509152057548_RemoveUnusedElectrofishingField.resx">
       <DependentUpon>201509152057548_RemoveUnusedElectrofishingField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509152136333_ChangePossibleValuesForFishScales.resx">
+      <DependentUpon>201509152136333_ChangePossibleValuesForFishScales.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
