@@ -736,6 +736,14 @@
     <Compile Include="Migrations\201509142329043_AddDummyLocationsSoColetteCanTest.Designer.cs">
       <DependentUpon>201509142329043_AddDummyLocationsSoColetteCanTest.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201509152043144_ElectrofishingViewForReporting.cs" />
+    <Compile Include="Migrations\201509152043144_ElectrofishingViewForReporting.Designer.cs">
+      <DependentUpon>201509152043144_ElectrofishingViewForReporting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509152057548_RemoveUnusedElectrofishingField.cs" />
+    <Compile Include="Migrations\201509152057548_RemoveUnusedElectrofishingField.Designer.cs">
+      <DependentUpon>201509152057548_RemoveUnusedElectrofishingField.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -1368,6 +1376,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201509142329043_AddDummyLocationsSoColetteCanTest.resx">
       <DependentUpon>201509142329043_AddDummyLocationsSoColetteCanTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509152043144_ElectrofishingViewForReporting.resx">
+      <DependentUpon>201509152043144_ElectrofishingViewForReporting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509152057548_RemoveUnusedElectrofishingField.resx">
+      <DependentUpon>201509152057548_RemoveUnusedElectrofishingField.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

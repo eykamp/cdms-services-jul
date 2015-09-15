@@ -4,7 +4,6 @@ namespace services.Models.Data
 {
     public class Electrofishing_Detail : DataDetail
     {
-        public string PassNumber { get; set; }
         public int? Sequence { get; set; }
         public string PitTagCode { get; set; }
         public string SpeciesRunRearing { get; set; }
