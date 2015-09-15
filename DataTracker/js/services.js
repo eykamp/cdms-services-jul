@@ -354,7 +354,32 @@ mod.service('DatastoreService', ['$q','GetAllPossibleDatastoreLocations','GetAll
 					console.log("This dataset is for Creel Survey...");
 					theLocationType = 10;
 				}
-				else if (aDatastoreId === "SpawningGroundSurvey")
+                else if (aDatastoreId === "Electrofishing")
+                {
+                    console.log("This dataset is for Electrofishing...");
+                    theLocationType = 101;
+                }
+                else if (aDatastoreId === "SnorkelFish")
+                {
+                    console.log("This dataset is for Snorkel Fish...");
+                    theLocationType = 102;
+                }				
+                else if (aDatastoreId === "ScrewTrap")
+                {
+                    console.log("This dataset is for Screw Trap...");
+                    theLocationType = 103;
+                }               
+                else if (aDatastoreId === "FishScales")
+                {
+                    console.log("This dataset is for Fish Scales...");
+                    theLocationType = 104;
+                }                
+                else if (aDatastoreId === "WaterQualitywithLabs")
+                {
+                    console.log("This dataset is for Water Quality with Labs...");
+                    theLocationType = 105;
+                }                  
+                else if (aDatastoreId === "SpawningGroundSurvey")
 				{
 					console.log("This dataset is for Spawning Ground Survey...");
 					theLocationType = 7;
@@ -1475,6 +1500,25 @@ mod.service('DataSheet',[ 'Logger', '$window', '$route',
 						];
 					}
 				}
+                else if (DatastoreTablePrefix === "FishScales") //Fish Scales related
+                {
+                    if ((typeof theMode !== 'undefined') && (theMode.indexOf("form") > -1))
+                    {
+                        var coldefs = [];
+                    }
+                    else
+                    {
+                        var coldefs = [{
+                            field: 'QAStatusId',
+                            Label: 'QA Status',
+                            displayName: 'QA Status',
+                            cellFilter: 'QAStatusFilter',
+                            editableCellTemplate: QACellEditTemplate,
+                            Field: { Description: "Quality Assurance workflow status"}                                                                                                                
+                        }];
+                    }
+                }
+
 				else
 				{
 					var coldefs = [
