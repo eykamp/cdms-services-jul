@@ -9,6 +9,7 @@ namespace services.Models.Data
         public string SpeciesRunRearing { get; set; }
         public double? ForkLength { get; set; }
         public double? Weight { get; set; }
+        public double? TotalLength { get; set; }
         public string OtherSpecies { get; set; }
         public int? FishCount { get; set; }
         public string SizeCategory { get; set; }

@@ -19,6 +19,7 @@ namespace services.Models.Data
         public double? CommonSpecies { get; set; } 
         public double? RareSpecies { get; set; } 
         public string Unit { get; set; }
+        public string IsAEM { get; set; }
     }
 }
 

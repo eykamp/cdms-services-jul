@@ -71,7 +71,7 @@ namespace services.Models
         //note: this is specific to datasetfields, so we can't use it for the global query.
         internal string getExportSelectString()
         {
-            var header_fields = string.Join(",", this.Fields.Where(o => o.FieldRoleId == FieldRole.HEADER).OrderBy(o => o.Label).Select(o => o.DbColumnName));
+            var header_fields = string.Join(",", this.Fields.Where(o => o.FieldRoleId == FieldRole.HEADER && o.DbColumnName != "").OrderBy(o => o.Label).Select(o => o.DbColumnName));
             header_fields += (header_fields == "") ? "" : ","; //add on the ending comma if applicable
             var detail_fields = string.Join(",",this.Fields.Where(o => o.FieldRoleId == FieldRole.DETAIL).OrderBy(o => o.Label).Select(o => o.DbColumnName)) + ",";
 

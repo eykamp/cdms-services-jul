@@ -748,6 +748,50 @@
     <Compile Include="Migrations\201509152136333_ChangePossibleValuesForFishScales.Designer.cs">
       <DependentUpon>201509152136333_ChangePossibleValuesForFishScales.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201509160006560_AddMoreViewsForSGS.cs" />
+    <Compile Include="Migrations\201509160006560_AddMoreViewsForSGS.Designer.cs">
+      <DependentUpon>201509160006560_AddMoreViewsForSGS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509160027079_RedoSGSViewForReporting.cs" />
+    <Compile Include="Migrations\201509160027079_RedoSGSViewForReporting.Designer.cs">
+      <DependentUpon>201509160027079_RedoSGSViewForReporting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509160039101_RedoElectrofishingViewForReporting.cs" />
+    <Compile Include="Migrations\201509160039101_RedoElectrofishingViewForReporting.Designer.cs">
+      <DependentUpon>201509160039101_RedoElectrofishingViewForReporting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509162050084_ChangePossibleValuesForOtherSpeciesFields.cs" />
+    <Compile Include="Migrations\201509162050084_ChangePossibleValuesForOtherSpeciesFields.Designer.cs">
+      <DependentUpon>201509162050084_ChangePossibleValuesForOtherSpeciesFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509162230430_AddMissingFieldForElectroFishing.cs" />
+    <Compile Include="Migrations\201509162230430_AddMissingFieldForElectroFishing.Designer.cs">
+      <DependentUpon>201509162230430_AddMissingFieldForElectroFishing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509162240200_AddSupportingElectroFishingFieldToDatabase.cs" />
+    <Compile Include="Migrations\201509162240200_AddSupportingElectroFishingFieldToDatabase.Designer.cs">
+      <DependentUpon>201509162240200_AddSupportingElectroFishingFieldToDatabase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509162241216_RedoViewYetAgain.cs" />
+    <Compile Include="Migrations\201509162241216_RedoViewYetAgain.Designer.cs">
+      <DependentUpon>201509162241216_RedoViewYetAgain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509162321308_FishScalesReportingViews.cs" />
+    <Compile Include="Migrations\201509162321308_FishScalesReportingViews.Designer.cs">
+      <DependentUpon>201509162321308_FishScalesReportingViews.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509170054379_SnorkelFishReportingViews.cs" />
+    <Compile Include="Migrations\201509170054379_SnorkelFishReportingViews.Designer.cs">
+      <DependentUpon>201509170054379_SnorkelFishReportingViews.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509171844414_AddMoreFieldsToSnorkelFish.cs" />
+    <Compile Include="Migrations\201509171844414_AddMoreFieldsToSnorkelFish.Designer.cs">
+      <DependentUpon>201509171844414_AddMoreFieldsToSnorkelFish.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509180155208_FixProblemsWithManualDefs.cs" />
+    <Compile Include="Migrations\201509180155208_FixProblemsWithManualDefs.Designer.cs">
+      <DependentUpon>201509180155208_FixProblemsWithManualDefs.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -1389,6 +1433,39 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201509152136333_ChangePossibleValuesForFishScales.resx">
       <DependentUpon>201509152136333_ChangePossibleValuesForFishScales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509160006560_AddMoreViewsForSGS.resx">
+      <DependentUpon>201509160006560_AddMoreViewsForSGS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509160027079_RedoSGSViewForReporting.resx">
+      <DependentUpon>201509160027079_RedoSGSViewForReporting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509160039101_RedoElectrofishingViewForReporting.resx">
+      <DependentUpon>201509160039101_RedoElectrofishingViewForReporting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509162050084_ChangePossibleValuesForOtherSpeciesFields.resx">
+      <DependentUpon>201509162050084_ChangePossibleValuesForOtherSpeciesFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509162230430_AddMissingFieldForElectroFishing.resx">
+      <DependentUpon>201509162230430_AddMissingFieldForElectroFishing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509162240200_AddSupportingElectroFishingFieldToDatabase.resx">
+      <DependentUpon>201509162240200_AddSupportingElectroFishingFieldToDatabase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509162241216_RedoViewYetAgain.resx">
+      <DependentUpon>201509162241216_RedoViewYetAgain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509162321308_FishScalesReportingViews.resx">
+      <DependentUpon>201509162321308_FishScalesReportingViews.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509170054379_SnorkelFishReportingViews.resx">
+      <DependentUpon>201509170054379_SnorkelFishReportingViews.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509171844414_AddMoreFieldsToSnorkelFish.resx">
+      <DependentUpon>201509171844414_AddMoreFieldsToSnorkelFish.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509180155208_FixProblemsWithManualDefs.resx">
+      <DependentUpon>201509180155208_FixProblemsWithManualDefs.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
