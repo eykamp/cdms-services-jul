@@ -21,6 +21,6 @@ namespace services.Models.Data
         public string OtolithID { get; set; }
         public string GeneticID { get; set; }
         public string OtherID { get; set; }
-        public string FishComments { get; set; }
+        public string AdditionalPositionalComment { get; set; }
     }
 }
