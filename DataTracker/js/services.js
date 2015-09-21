@@ -2408,7 +2408,7 @@ function stringIsTime(s) {
     if(s == null)
         return false;
 
-    if(typeof theMode != 'string')
+    if(typeof s != 'string')
         return false;
 
     return s.match(/^\s*([01]?\d|2[0-3]):([0-5]\d)\s*$/);
