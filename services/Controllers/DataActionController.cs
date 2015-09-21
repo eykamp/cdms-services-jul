@@ -1880,7 +1880,10 @@ namespace services.Controllers
                     {
                         case "number":
                         case "currency":
-                            logger.Debug("A number or currency");
+                        case "time":
+                        case "easting":
+                        case "northing":
+                            logger.Debug("A number or currency or time or northing or easting");
                             conditions.Add(field.DbColumnName + item.Value); //>100
                             break;
 
