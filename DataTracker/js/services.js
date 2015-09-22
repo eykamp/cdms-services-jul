@@ -374,7 +374,7 @@ mod.service('DatastoreService', ['$q','GetAllPossibleDatastoreLocations','GetAll
                     console.log("This dataset is for Fish Scales...");
                     theLocationType = 104;
                 }                
-                else if (aDatastoreId === "WaterQualitywithLabs")
+                else if (aDatastoreId === "WaterQuality")
                 {
                     console.log("This dataset is for Water Quality with Labs...");
                     theLocationType = 105;

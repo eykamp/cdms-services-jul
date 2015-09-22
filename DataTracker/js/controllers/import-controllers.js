@@ -67,9 +67,12 @@ mod_di.controller("DatasetImportCtrl", ['$scope','$routeParams','DatastoreServic
 				console.dir($scope.dataset);
 				
 				//if (($scope.dataset.Config !== "NULL") && ($scope.dataset.Config.DataEntryPage.ShowFields.contains('Instrument')))
-				if (((typeof $scope.dataset.Config !== 'undefined') && ($scope.dataset.Config !== null) && ($scope.dataset.Config !== "NULL")) && 
+				if (((typeof $scope.dataset.Config !== 'undefined') && 
+					($scope.dataset.Config !== null) && 
+					($scope.dataset.Config !== "NULL")) && 
+					($scope.dataset.Config.DataEntryPage.HiddenFields) &&
 					($scope.dataset.Config.DataEntryPage.HiddenFields.indexOf("Instrument") > -1))
-					console.log("Found instrument");
+						console.log("Found instrument");
 				
 				$scope.DatastoreTablePrefix = $scope.dataset.Datastore.TablePrefix;
 				$scope.datasetLocationType = DatastoreService.getDatasetLocationType($scope.DatastoreTablePrefix);				
