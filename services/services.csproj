@@ -808,6 +808,18 @@
     <Compile Include="Migrations\201509212021020_MoreFixesToDomains.Designer.cs">
       <DependentUpon>201509212021020_MoreFixesToDomains.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201509212250273_CreateScrewTrapViewForReporting.cs" />
+    <Compile Include="Migrations\201509212250273_CreateScrewTrapViewForReporting.Designer.cs">
+      <DependentUpon>201509212250273_CreateScrewTrapViewForReporting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509220034179_RemoveFieldsFromScrewTrap.cs" />
+    <Compile Include="Migrations\201509220034179_RemoveFieldsFromScrewTrap.Designer.cs">
+      <DependentUpon>201509220034179_RemoveFieldsFromScrewTrap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509220035309_AddReportingViewForLabData.cs" />
+    <Compile Include="Migrations\201509220035309_AddReportingViewForLabData.Designer.cs">
+      <DependentUpon>201509220035309_AddReportingViewForLabData.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -1494,6 +1506,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201509212021020_MoreFixesToDomains.resx">
       <DependentUpon>201509212021020_MoreFixesToDomains.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509212250273_CreateScrewTrapViewForReporting.resx">
+      <DependentUpon>201509212250273_CreateScrewTrapViewForReporting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509220034179_RemoveFieldsFromScrewTrap.resx">
+      <DependentUpon>201509220034179_RemoveFieldsFromScrewTrap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509220035309_AddReportingViewForLabData.resx">
+      <DependentUpon>201509220035309_AddReportingViewForLabData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

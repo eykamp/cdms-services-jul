@@ -18,5 +18,6 @@ namespace services.Models.Data
         public string TagStatus { get; set; }
         public string ClipStatus { get; set; }
         public string FishComments { get; set; }
+        public string AdditionalPositionalComments { get; set; }
     }
 }
