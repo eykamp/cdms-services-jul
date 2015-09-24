@@ -820,6 +820,34 @@
     <Compile Include="Migrations\201509220035309_AddReportingViewForLabData.Designer.cs">
       <DependentUpon>201509220035309_AddReportingViewForLabData.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201509222310021_AddFinClipsToScrewTrapHeader.cs" />
+    <Compile Include="Migrations\201509222310021_AddFinClipsToScrewTrapHeader.Designer.cs">
+      <DependentUpon>201509222310021_AddFinClipsToScrewTrapHeader.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509230053265_RegenerateScrewTrapViewForReporting.cs" />
+    <Compile Include="Migrations\201509230053265_RegenerateScrewTrapViewForReporting.Designer.cs">
+      <DependentUpon>201509230053265_RegenerateScrewTrapViewForReporting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509231853415_SnorkelRefinement.cs" />
+    <Compile Include="Migrations\201509231853415_SnorkelRefinement.Designer.cs">
+      <DependentUpon>201509231853415_SnorkelRefinement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509231929564_FixDataTypesForSnorkelHeaderFields.cs" />
+    <Compile Include="Migrations\201509231929564_FixDataTypesForSnorkelHeaderFields.Designer.cs">
+      <DependentUpon>201509231929564_FixDataTypesForSnorkelHeaderFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509232149452_UpdateSnrkelFishReportingView.cs" />
+    <Compile Include="Migrations\201509232149452_UpdateSnrkelFishReportingView.Designer.cs">
+      <DependentUpon>201509232149452_UpdateSnrkelFishReportingView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509232221448_CreateFishScaleViewsForReporting.cs" />
+    <Compile Include="Migrations\201509232221448_CreateFishScaleViewsForReporting.Designer.cs">
+      <DependentUpon>201509232221448_CreateFishScaleViewsForReporting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509232350454_YetAnotherPassAtScrewTrapReportingView.cs" />
+    <Compile Include="Migrations\201509232350454_YetAnotherPassAtScrewTrapReportingView.Designer.cs">
+      <DependentUpon>201509232350454_YetAnotherPassAtScrewTrapReportingView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -1515,6 +1543,27 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201509220035309_AddReportingViewForLabData.resx">
       <DependentUpon>201509220035309_AddReportingViewForLabData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509222310021_AddFinClipsToScrewTrapHeader.resx">
+      <DependentUpon>201509222310021_AddFinClipsToScrewTrapHeader.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509230053265_RegenerateScrewTrapViewForReporting.resx">
+      <DependentUpon>201509230053265_RegenerateScrewTrapViewForReporting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509231853415_SnorkelRefinement.resx">
+      <DependentUpon>201509231853415_SnorkelRefinement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509231929564_FixDataTypesForSnorkelHeaderFields.resx">
+      <DependentUpon>201509231929564_FixDataTypesForSnorkelHeaderFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509232149452_UpdateSnrkelFishReportingView.resx">
+      <DependentUpon>201509232149452_UpdateSnrkelFishReportingView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509232221448_CreateFishScaleViewsForReporting.resx">
+      <DependentUpon>201509232221448_CreateFishScaleViewsForReporting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509232350454_YetAnotherPassAtScrewTrapReportingView.resx">
+      <DependentUpon>201509232350454_YetAnotherPassAtScrewTrapReportingView.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

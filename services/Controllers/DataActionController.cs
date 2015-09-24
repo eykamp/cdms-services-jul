@@ -1206,6 +1206,7 @@ namespace services.Controllers
                     activity.ActivityTypeId = 1;
                     activity.CreateDate = DateTime.Now;
                     activity.InstrumentId = activity_json.InstrumentId;
+                    activity.LaboratoryId = activity_json.LaboratoryId;
                     activity.AccuracyCheckId = activity_json.AccuracyCheckId;
                     activity.PostAccuracyCheckId = activity_json.PostAccuracyCheckId;
                     activity.Timezone = activity_json.Timezone;

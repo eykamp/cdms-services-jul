@@ -22,6 +22,7 @@ namespace services.Models.Data
         public DateTime? TrapStarted { get; set; }
         public DateTime? FishCollected { get; set; }
         public DateTime? FishReleased { get; set; }
+        public string DailyFinClips { get; set; }
         public string Flow { get; set; }
         public string Turbitity { get; set; }
         public string TrapDebris { get; set; }

@@ -15,11 +15,12 @@ namespace services.Models.Data
         public int? VisitId { get; set; }
         public string Comments { get; set; }
         public string CollectionType { get; set; }
-        public double? DominantSpecies { get; set; } 
-        public double? CommonSpecies { get; set; } 
-        public double? RareSpecies { get; set; } 
+        public string DominantSpecies { get; set; } 
+        public string CommonSpecies { get; set; } 
+        public string RareSpecies { get; set; } 
         public string Unit { get; set; }
         public string IsAEM { get; set; }
+
     }
 }
 

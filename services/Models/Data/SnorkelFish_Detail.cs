@@ -5,11 +5,10 @@ namespace services.Models.Data
     {
         public string NoSnorklers { get; set; } 
         public int? FishID { get; set; }
-        public string ChannelUnit { get; set; }
         public int? ChannelUnitNumber { get; set; }
+        public string ChannelUnitType { get; set; }
         public int? Lane { get; set; }
         public string Type { get; set; } 
-        public string HabitatType { get; set; }
         public double? ChannelAverageDepth { get; set; } 
         public double? ChannelLength { get; set; } 
         public double? ChannelWidth { get; set; } 
@@ -17,7 +16,6 @@ namespace services.Models.Data
         public int? FishCount { get; set; }
         public string Species { get; set; }
         public string SizeClass { get; set; }
-        public string Length { get; set; } 
         public string UnidentifiedSalmonID { get; set; } 
         public string OtherSpeciesPres { get; set; } 
         public string NaturalWoodUsed { get; set; }
@@ -31,7 +29,6 @@ namespace services.Models.Data
         public double? AmbientTemp { get; set; } 
         public double? MinimumTemp { get; set; } 
         public string FieldNotes { get; set; }
-        public string ChannelUnitType { get; set; }
         public string AEMHabitatType { get; set; }
         public int? AEMLength { get; set; }
         public string UnidentifiedSalmonid { get; set; }

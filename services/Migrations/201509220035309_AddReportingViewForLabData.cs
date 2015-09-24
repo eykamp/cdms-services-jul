@@ -27,7 +27,7 @@ from WaterQuality_Detail d
 join WaterQuality_Header h on d.ActivityId = h.ActivityId
 join activities a on a.id = h.ActivityId
 join laboratories l on l.id = a.laboratoryId
-join LaboratoryCharacteristics lc on lc.name = d.characteristicname
+join LaboratoryCharacteristics lc on lower(lc.name) = lower(d.characteristicname)
 join locations loc on loc.id = a.locationid
 --join waterbodies w on w.id = l.waterbodyid
 join ActivityQAs_VW AS aq ON aq.ActivityId = a.Id

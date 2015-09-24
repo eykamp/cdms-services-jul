@@ -5,61 +5,30 @@ namespace services.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class RemoveFieldsFromScrewTrap : DbMigration
+    public partial class AddFinClipsToScrewTrapHeader : DbMigration
     {
         private static readonly List<Tuple<string, List<string>>> vals = new List<Tuple<string, List<string>>> { 
 
            // select * from FieldCategories
-           //     FieldCategory                         Name                              H/D     dbName                         dbType       CtrlType         Descr                                 Units   Rule                                                                                                                                                                                                                                                                                                                                                                                                                                      Order    PossibleValues               
+           //     FieldCategory                         Name             H/D     dbName            dbType      CtrlType         Descr          Units   Rule   Order     PossValues                                                                                                                                                                                                                                                                                                                                                                                                                                 Order    PossibleValues               
            new Tuple<string, List<string>>                                                      
 
-        /* 0 */   ("Snorkel Fish", new List<string> { "'Additional Positional Comments'", DET, "'AdditionalPositionalComments'", "'string'", "'text'", "'Additional comments about the position'", "NULL", "NULL", "465", "NULL" } ),
+        /* 0 */   ("Screw Trap", new List<string> { "'Daily Fin Clips'", HEAD, "'DailyFinClips'", "'string'", "'select'", "'Daily fin clips'", "NULL", "NULL", "185", @"'[""UC"", ""LC"", ""BC"", ""A"", ""AU"", ""AL"", ""AB"", ""D""]'" } ),
         };
+
 
         public override void Up()
         {
-            AddColumn("dbo.ScrewTrap_Detail", "AdditionalPositionalComments", c => c.String());
-            DropColumn("dbo.ScrewTrap_Header", "TagDateTime");
-            DropColumn("dbo.ScrewTrap_Header", "ReleaseDateTime");
-            DropColumn("dbo.ScrewTrap_Header", "CaptureMethod");
-            DropColumn("dbo.ScrewTrap_Header", "MigratoryYear");
-            DropColumn("dbo.ScrewTrap_Header", "TaggingMethod");
-            DropColumn("dbo.ScrewTrap_Header", "Organization");
-            DropColumn("dbo.ScrewTrap_Header", "CoordinatorID");
-            DropColumn("dbo.ScrewTrap_Header", "ReleaseSite");
-            DropColumn("dbo.ScrewTrap_Header", "ReleaseRiverKM");
-
-            Sql(@"
--- NO UNDO
-delete from datasetfields where fieldid in (select id from fields where name in( 'capture method', 'tagging method', 'Organization', 'Coordinator ID',
-                                                                                 'Migratory Year','Tag DateTime','Release DateTime','Release Site','Release River Km')
-   and FieldCategoryId = (select id from fieldcategories where name = 'screw trap'))
-
-delete from fields where name in( 'capture method', 'tagging method', 'Organization', 'Coordinator ID','Migratory Year','Tag DateTime','Release DateTime','Release Site','Release River Km')
-   and FieldCategoryId = (select id from fieldcategories where name = 'screw trap')
-
-");
+            AddColumn("dbo.ScrewTrap_Header", "DailyFinClips", c => c.String());
             Sql(GetAddFieldSql(0));
         }
+        
 
         public override void Down()
         {
-            AddColumn("dbo.ScrewTrap_Header", "ReleaseRiverKM", c => c.String());
-            AddColumn("dbo.ScrewTrap_Header", "ReleaseSite", c => c.String());
-            AddColumn("dbo.ScrewTrap_Header", "CoordinatorID", c => c.String());
-            AddColumn("dbo.ScrewTrap_Header", "Organization", c => c.String());
-            AddColumn("dbo.ScrewTrap_Header", "TaggingMethod", c => c.String());
-            AddColumn("dbo.ScrewTrap_Header", "MigratoryYear", c => c.Int());
-            AddColumn("dbo.ScrewTrap_Header", "CaptureMethod", c => c.String());
-            AddColumn("dbo.ScrewTrap_Header", "ReleaseDateTime", c => c.DateTime());
-            AddColumn("dbo.ScrewTrap_Header", "TagDateTime", c => c.DateTime());
-            DropColumn("dbo.ScrewTrap_Detail", "AdditionalPositionalComments");
-
+            DropColumn("dbo.ScrewTrap_Header", "DailyFinClips");
             Sql(GetRemoveFieldSql(0));
         }
-
-
-
 
 
         private string GetAddFieldSql(int index)
