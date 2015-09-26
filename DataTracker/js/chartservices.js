@@ -30,7 +30,7 @@ cmod.service('ChartService', ['AdultWeir_ChartService','WaterTemp_ChartService',
 		    			scope.chartConfig = SnorkelFish_ChartService.getChartConfig();
 		    			scope.chartData   = SnorkelFish_ChartService.getChartData(data_in);
 		    		}		    		
-		    		else if(dataset == "Electrofishing" || dataset == "ScrewTrap")
+		    		else if(dataset == "Electrofishing" || dataset == "ScrewTrap" || dataset == "FishScales")
 		    		{
 		    			scope.chartConfig = ElectroFishing_ChartService.getChartConfig();
 		    			scope.chartData   = ElectroFishing_ChartService.getChartData(data_in);
@@ -367,7 +367,7 @@ cmod.service('ElectroFishing_ChartService',[
 
 			    angular.forEach(data, function(row, key){
 			        var num = row.FishCount || 1;
-			        var species = row.SpeciesRunRearing || row.OtherSpecies || 'Not specified';
+			        var species = row.SpeciesRunRearing || row.OtherSpecies || row.Species || 'Not specified';
 			        console.log(species);
 
 			        if(species)
