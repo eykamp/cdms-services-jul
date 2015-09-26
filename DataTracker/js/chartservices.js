@@ -30,13 +30,13 @@ cmod.service('ChartService', ['AdultWeir_ChartService','WaterTemp_ChartService',
 		    			scope.chartConfig = SnorkelFish_ChartService.getChartConfig();
 		    			scope.chartData   = SnorkelFish_ChartService.getChartData(data_in);
 		    		}		    		
-		    		else if(dataset == "Electrofishing" || dataset == "ScrewTrap" || dataset == "FishScales")
+		    		else if(dataset == "Electrofishing" || dataset == "ScrewTrap" || dataset == "FishScales" || dataset == "SpawningGroundSurvey")
 		    		{
 		    			scope.chartConfig = ElectroFishing_ChartService.getChartConfig();
 		    			scope.chartData   = ElectroFishing_ChartService.getChartData(data_in);
 		    		}	
 		    		else 
-		    			console.log("No charting configured for " + dataset)	    				    ;
+		    			console.log("No charting configured for " + dataset);
 		    	},
 		};
 
