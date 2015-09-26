@@ -11,8 +11,8 @@ var cmod = angular.module('ChartServices', []);
 		Each dataset type that you want to provide a generated graph needs to live here.
 		You can do your graphing however you like for the particular kind of chart.d
 */
-cmod.service('ChartService', ['AdultWeir_ChartService','WaterTemp_ChartService','SnorkelFish_ChartService', 'ElectroFishing_ChartService',
-	function(AdultWeir_ChartService, WaterTemp_ChartService, SnorkelFish_ChartService, ElectroFishing_ChartService){
+cmod.service('ChartService', ['AdultWeir_ChartService','WaterTemp_ChartService','SnorkelFish_ChartService', 'ElectroFishing_ChartService', 'WaterQuality_ChartService',
+	function(AdultWeir_ChartService, WaterTemp_ChartService, SnorkelFish_ChartService, ElectroFishing_ChartService, WaterQuality_ChartService){
 		var service = {
 			buildChart: function(scope, data_in, dataset, config){
 
@@ -35,6 +35,11 @@ cmod.service('ChartService', ['AdultWeir_ChartService','WaterTemp_ChartService',
 		    			scope.chartConfig = ElectroFishing_ChartService.getChartConfig();
 		    			scope.chartData   = ElectroFishing_ChartService.getChartData(data_in);
 		    		}	
+		    		else if(dataset == "WaterQuality")
+		    		{
+		    			scope.chartConfig = WaterQuality_ChartService.getChartConfig();
+		    			scope.chartData   = WaterQuality_ChartService.getChartData(data_in);
+		    		}		
 		    		else 
 		    			console.log("No charting configured for " + dataset);
 		    	},
@@ -393,6 +398,78 @@ cmod.service('ElectroFishing_ChartService',[
 
 				console.log("data is next...");
 			    console.dir(data);
+
+			    return data;
+
+			},
+
+			buildChart: function(){
+
+			},
+
+        };
+
+        return service;
+    }
+]);
+
+
+cmod.service('WaterQuality_ChartService',[ 
+    function(){
+        var service = {
+
+        	dataset: "ElectroFishing",
+
+			getChartConfig: function(){
+				var config = {
+    			  title : 'Sample Count',
+				  tooltips: true,
+				  labels : false,
+				  
+				  legend: {
+				    display: true,
+				    position: 'right'
+				  }
+				};
+
+				return config;
+			},
+
+
+			getDefaultChartData: function()
+			{
+				var defaultChartData = {"series": [], "data":[{ "x": "Loading...", "y": [0],"tooltip": ""}]}; //default
+				return defaultChartData;
+			},
+
+
+			getChartData: function(data)
+			{
+			    var dataCalc = {};
+
+			    angular.forEach(data, function(row, key){
+			        var characteristic = row.CharacteristicName || 'Unknown';
+
+			        if(characteristic)
+			        {
+			            if(!dataCalc[characteristic])
+			                dataCalc[characteristic] = { total: 0 };
+
+			            dataCalc[characteristic].total++;
+			        }
+			    });
+
+			    var data = {
+			              "series": ["Total"],
+			              "data": [] 
+			          };
+
+			    angular.forEach(dataCalc, function(vals, characteristic){
+			        data['data'].push({
+			          "x": characteristic,
+			          "y": [vals.total],
+			        });
+			    });
 
 			    return data;
 
