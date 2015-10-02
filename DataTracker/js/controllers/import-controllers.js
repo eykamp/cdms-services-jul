@@ -86,6 +86,7 @@ mod_di.controller("DatasetImportCtrl", ['$scope','$routeParams','DatastoreServic
 
 	        	//check authorization -- need to have project loaded before we can check project-level auth
 				if(!$rootScope.Profile.isProjectOwner($scope.project) && !$rootScope.Profile.isProjectEditor($scope.project))
+				if(!$rootScope.Profile.isProjectOwner($scope.project) && !$rootScope.Profile.isProjectEditor($scope.project))
 				{
 					$location.path("/unauthorized");
 				}

@@ -506,6 +506,29 @@ var projectDatasetsController = ['$scope', '$routeParams', 'DataService','Datast
             });
          };
 
+
+         scope.syncToStreamnet = function(){
+            $.ajax({
+                url: serviceUrl + '/action/SyncToStreamnet',
+                type : 'GET',
+                // data : formData,
+                // processData: false,  // tell jQuery not to process the data
+                // contentType: false,  // tell jQuery not to set contentType
+                success : function(data) {
+                    // var output = eval("(" + data + ")");
+                    alert(data.join('\n'));
+                },
+                error: function(jqXHR, error, errorThrown) {
+                    if(jqXHR.status && jqXHR.status == 400) {
+                        alert(jqXHR.responseText + "\n\n" + "Error running sync action!");
+                    } else {
+                        alert("Error running sync action!");
+                    }
+                }
+            });
+
+         };
+
          scope.openProjectEditor = function(){
             scope.row = scope.project; //
             var modalInstance = $modal.open({

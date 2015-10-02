@@ -379,6 +379,21 @@ mod.service('DatastoreService', ['$q','GetAllPossibleDatastoreLocations','GetAll
                     console.log("This dataset is for Water Quality with Labs...");
                     theLocationType = 105;
                 }                  
+                else if (aDatastoreId === "StreamNet_RperS")
+                {
+                    console.log("This dataset is for StreamNet_RperS...");
+                    theLocationType = 106;
+                }  
+                else if (aDatastoreId === "StreamNet_NOSA")
+                {
+                    console.log("This dataset is for StreamNet_NOSA...");
+                    theLocationType = 107;
+                } 
+                else if (aDatastoreId === "StreamNet_SAR")
+                {
+                    console.log("This dataset is for StreamNet_SAR...");
+                    theLocationType = 108;
+                } 
                 else if (aDatastoreId === "SpawningGroundSurvey")
 				{
 					console.log("This dataset is for Spawning Ground Survey...");
@@ -1500,6 +1515,114 @@ mod.service('DataSheet',[ 'Logger', '$window', '$route',
 						];
 					}
 				}
+                else if (DatastoreTablePrefix === "StreamNet_RperS") 
+                {
+                    if ((typeof theMode !== 'undefined') && (theMode.indexOf("form") > -1))
+                    {
+                        var coldefs = [];
+                    }
+                    else
+                    {
+                        var coldefs = [
+                            {
+                                field: 'locationId',
+                                Label: 'Location',
+                                displayName: 'Location',
+                                cellFilter: 'locationNameFilter',
+                                editableCellTemplate: LocationCellEditTemplate,
+                                Field: { Description: "What location is this record related to?"}
+                            },
+                            {
+                                field: 'activityDate',
+                                Label: 'Activity Date',
+                                displayName: 'Activity Date (MM/DD/YYYY)',
+                                cellFilter: 'date: \'MM/dd/yyyy\'',
+                                editableCellTemplate: '<input ng-blur="updateCell(row,\'activityDate\')" type="text" ng-pattern="'+date_pattern+'" ng-model="COL_FIELD" ng-input="COL_FIELD" />',
+                                Field: { Description: "Date of activity in format: '10/22/2014'"}                           
+                            },
+                            {
+                                field: 'QAStatusId',
+                                Label: 'QA Status',
+                                displayName: 'QA Status',
+                                cellFilter: 'QAStatusFilter',
+                                editableCellTemplate: QACellEditTemplate,
+                                Field: { Description: "Quality Assurance workflow status"}                          
+                            }
+                        ];
+                    }
+                }    
+                else if (DatastoreTablePrefix === "StreamNet_NOSA") 
+                {
+                    if ((typeof theMode !== 'undefined') && (theMode.indexOf("form") > -1))
+                    {
+                        var coldefs = [];
+                    }
+                    else
+                    {
+                        var coldefs = [
+                            {
+                                field: 'locationId',
+                                Label: 'Location',
+                                displayName: 'Location',
+                                cellFilter: 'locationNameFilter',
+                                editableCellTemplate: LocationCellEditTemplate,
+                                Field: { Description: "What location is this record related to?"}
+                            },
+                            {
+                                field: 'activityDate',
+                                Label: 'Activity Date',
+                                displayName: 'Activity Date (MM/DD/YYYY)',
+                                cellFilter: 'date: \'MM/dd/yyyy\'',
+                                editableCellTemplate: '<input ng-blur="updateCell(row,\'activityDate\')" type="text" ng-pattern="'+date_pattern+'" ng-model="COL_FIELD" ng-input="COL_FIELD" />',
+                                Field: { Description: "Date of activity in format: '10/22/2014'"}                           
+                            },
+                            {
+                                field: 'QAStatusId',
+                                Label: 'QA Status',
+                                displayName: 'QA Status',
+                                cellFilter: 'QAStatusFilter',
+                                editableCellTemplate: QACellEditTemplate,
+                                Field: { Description: "Quality Assurance workflow status"}                          
+                            }
+                        ];
+                    }
+                } 
+                else if (DatastoreTablePrefix === "StreamNet_SAR") 
+                {
+                    if ((typeof theMode !== 'undefined') && (theMode.indexOf("form") > -1))
+                    {
+                        var coldefs = [];
+                    }
+                    else
+                    {
+                        var coldefs = [
+                            {
+                                field: 'locationId',
+                                Label: 'Location',
+                                displayName: 'Location',
+                                cellFilter: 'locationNameFilter',
+                                editableCellTemplate: LocationCellEditTemplate,
+                                Field: { Description: "What location is this record related to?"}
+                            },
+                            {
+                                field: 'activityDate',
+                                Label: 'Activity Date',
+                                displayName: 'Activity Date (MM/DD/YYYY)',
+                                cellFilter: 'date: \'MM/dd/yyyy\'',
+                                editableCellTemplate: '<input ng-blur="updateCell(row,\'activityDate\')" type="text" ng-pattern="'+date_pattern+'" ng-model="COL_FIELD" ng-input="COL_FIELD" />',
+                                Field: { Description: "Date of activity in format: '10/22/2014'"}                           
+                            },
+                            {
+                                field: 'QAStatusId',
+                                Label: 'QA Status',
+                                displayName: 'QA Status',
+                                cellFilter: 'QAStatusFilter',
+                                editableCellTemplate: QACellEditTemplate,
+                                Field: { Description: "Quality Assurance workflow status"}                          
+                            }
+                        ];
+                    }
+                }                                             
                 else if (DatastoreTablePrefix === "FishScales") //Fish Scales related
                 {
                     if ((typeof theMode !== 'undefined') && (theMode.indexOf("form") > -1))
