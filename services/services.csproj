@@ -928,6 +928,18 @@
     <Compile Include="Migrations\201509302232072_AddMoreFieldsForStreamNetDefaults.Designer.cs">
       <DependentUpon>201509302232072_AddMoreFieldsForStreamNetDefaults.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510021800013_ReportingViewsForNOSAAndSar.cs" />
+    <Compile Include="Migrations\201510021800013_ReportingViewsForNOSAAndSar.Designer.cs">
+      <DependentUpon>201510021800013_ReportingViewsForNOSAAndSar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510021944474_GeorgeCode.cs" />
+    <Compile Include="Migrations\201510021944474_GeorgeCode.Designer.cs">
+      <DependentUpon>201510021944474_GeorgeCode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510022008147_RedoElectrofishingReportingViews.cs" />
+    <Compile Include="Migrations\201510022008147_RedoElectrofishingReportingViews.Designer.cs">
+      <DependentUpon>201510022008147_RedoElectrofishingReportingViews.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -1713,6 +1725,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201509302232072_AddMoreFieldsForStreamNetDefaults.resx">
       <DependentUpon>201509302232072_AddMoreFieldsForStreamNetDefaults.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510021800013_ReportingViewsForNOSAAndSar.resx">
+      <DependentUpon>201510021800013_ReportingViewsForNOSAAndSar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510021944474_GeorgeCode.resx">
+      <DependentUpon>201510021944474_GeorgeCode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510022008147_RedoElectrofishingReportingViews.resx">
+      <DependentUpon>201510022008147_RedoElectrofishingReportingViews.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

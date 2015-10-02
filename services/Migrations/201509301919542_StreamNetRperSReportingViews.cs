@@ -62,7 +62,7 @@ WHERE        (EffDt =
             Sql(@"
 drop view StreamNet_RperS_vw
 go
-drop view StreamNet_RperS_VW
+drop view StreamNet_RperS_Detail_VW
 go
 drop view StreamNet_RperS_Header_VW
 go

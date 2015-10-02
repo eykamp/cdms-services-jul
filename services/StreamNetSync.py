@@ -47,9 +47,9 @@ api_key = "AAA89E60-47FC-43E9-ABCE-67FBD5D8162E"    # Your api key, provided by 
 agency = "CTUIR"                                    # Your agency, canonical name provided by StreamNet
 
 # The tables we're interested in replicating upstream -- should be one defined in table_ids below
-tables_to_sync = dict(NOSA  = 'streamnet_nosa_detail',
-                      SAR   = 'streamnet_sar_detail',
-                      RperS = 'streamnet_rpers_detail')  # Dataset : local database table name
+tables_to_sync = dict(NOSA  = 'streamnet_nosa_detail_vw',
+                      SAR   = 'streamnet_sar_detail_vw',
+                      RperS = 'streamnet_rpers_detail_vw')  # Dataset : local database table name
 
 
 database_name = "CDMS_PROD"
@@ -260,8 +260,9 @@ def get_local_ids_modified_since(db_table, date):
     cur = dbconn.cursor()
     sql = "SELECT " + id_column + " FROM " + db_table
     if date is not None:
-        sql += " WHERE " + last_modified_date_column + " >= cast('" + str(date) + "' as date)"
+        sql += " WHERE cast(" + last_modified_date_column + " as datetime2) >= cast('" + str(date) + "' as datetime2)"
     cur.execute(sql)
+
 
     return [str(x[0]) for x in cur.fetchall()]      # De-tuplize results
 
