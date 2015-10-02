@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Spatial;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.WebPages;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using NLog;
@@ -70,6 +73,7 @@ namespace services.Controllers
             return activities;
         }
 
+
         [AllowAnonymous]
         [HttpGet]
         public dynamic DatasetData(int Id)
@@ -83,6 +87,38 @@ namespace services.Controllers
 
             //instantiate by name
             return Activator.CreateInstance(type, activity.Id);
+        }
+
+
+        [AllowAnonymous]
+        [HttpGet]
+        public List<string> SyncToStreamNet()
+        {
+            var pathToStreamNetSyncScript = System.Configuration.ConfigurationManager.AppSettings["PathToStreamNetSyncScript"];
+
+            if (pathToStreamNetSyncScript.IsEmpty())
+                return new List<string>() { "Need to specify path to StreamNet sync script in your web.config!"};    
+
+
+            var proc = new Process {
+                StartInfo = new ProcessStartInfo {
+                    FileName = "python.exe",
+                    Arguments = pathToStreamNetSyncScript,
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    CreateNoWindow = true
+                }
+            };
+
+            proc.Start();
+
+            var outputLines = new List<string>();
+
+
+            while (!proc.StandardOutput.EndOfStream)
+                outputLines.Add(proc.StandardOutput.ReadLine());
+
+            return outputLines;
         }
 
 

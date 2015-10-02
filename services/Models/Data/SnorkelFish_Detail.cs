@@ -31,6 +31,5 @@ namespace services.Models.Data
         public string FieldNotes { get; set; }
         public string AEMHabitatType { get; set; }
         public int? AEMLength { get; set; }
-        public string UnidentifiedSalmonid { get; set; }
     }
 }

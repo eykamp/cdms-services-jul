@@ -78,6 +78,15 @@ namespace services.Models
         public DbSet<Electrofishing_Detail> Electrofishing_Detail { get; set; }
         public DbSet<Electrofishing_Header> Electrofishing_Header { get; set; }
 
+        public DbSet<StreamNet_RperS_Detail> StreamNet_RperS_Detail { get; set; }
+        public DbSet<StreamNet_RperS_Header> StreamNet_RperS_Header { get; set; }
+
+        public DbSet<StreamNet_NOSA_Detail> StreamNet_NOSA_Detail { get; set; }
+        public DbSet<StreamNet_NOSA_Header> StreamNet_NOSA_Header { get; set; }
+
+        public DbSet<StreamNet_SAR_Detail> StreamNet_SAR_Detail { get; set; }
+        public DbSet<StreamNet_SAR_Header> StreamNet_SAR_Header { get; set; }
+
         public DbSet<FishTransport_Detail> FishTransport_Detail { get; set; }
         public DbSet<FishTransport_Header> FishTransport_Header { get; set; }
 

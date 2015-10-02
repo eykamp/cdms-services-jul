@@ -30,15 +30,55 @@ namespace services.Models.Data
         public string ReleaseSite { get; set; }
         public string Weather { get; set; }
         public string ReleaseRiverKM { get; set; }
-        public string PassNumber { get; set; }
-        public string TimeBegin { get; set; }
-        public string TimeEnd { get; set; }
-        public double? TotalSecondsEF { get; set; }
-        public double? WaterTempBegin { get; set; }
-        public double? WaterTempStop { get; set; }
-        public double? Hertz { get; set; }
-        public double? Freq { get; set; }
-        public double? Volts { get; set; }
-        public int? TotalFishCaptured { get; set; }  
+        public DateTime Pass1TimeBegin { get; set; }
+        public DateTime Pass1TimeEnd { get; set; }
+        public double? Pass1TotalSecondsEF { get; set; }
+        public double? Pass1WaterTempBegin { get; set; }
+        public double? Pass1WaterTempStop { get; set; }
+        public double? Pass1Hertz { get; set; }
+        public double? Pass1Freq { get; set; }
+        public double? Pass1Volts { get; set; }
+        public DateTime Pass2TimeBegin { get; set; }
+        public DateTime Pass2TimeEnd { get; set; }
+        public double? Pass2TotalSecondsEF { get; set; }
+        public double? Pass2WaterTempBegin { get; set; }
+        public double? Pass2WaterTempStop { get; set; }
+        public double? Pass2Hertz { get; set; }
+        public double? Pass2Freq { get; set; }
+        public double? Pass2Volts { get; set; }
+        public DateTime Pass3TimeBegin { get; set; }
+        public DateTime Pass3TimeEnd { get; set; }
+        public double? Pass3TotalSecondsEF { get; set; }
+        public double? Pass3WaterTempBegin { get; set; }
+        public double? Pass3WaterTempStop { get; set; }
+        public double? Pass3Hertz { get; set; }
+        public double? Pass3Freq { get; set; }
+        public double? Pass3Volts { get; set; }
+        public DateTime Pass4TimeBegin { get; set; }
+        public DateTime Pass4TimeEnd { get; set; }
+        public double? Pass4TotalSecondsEF { get; set; }
+        public double? Pass4WaterTempBegin { get; set; }
+        public double? Pass4WaterTempStop { get; set; }
+        public double? Pass4Hertz { get; set; }
+        public double? Pass4Freq { get; set; }
+        public double? Pass4Volts { get; set; }
+        public DateTime Pass5TimeBegin { get; set; }
+        public DateTime Pass5TimeEnd { get; set; }
+        public double? Pass5TotalSecondsEF { get; set; }
+        public double? Pass5WaterTempBegin { get; set; }
+        public double? Pass5WaterTempStop { get; set; }
+        public double? Pass5Hertz { get; set; }
+        public double? Pass5Freq { get; set; }
+        public double? Pass5Volts { get; set; }
+        public DateTime Pass6TimeBegin { get; set; }
+        public DateTime Pass6TimeEnd { get; set; }
+        public double? Pass6TotalSecondsEF { get; set; }
+        public double? Pass6WaterTempBegin { get; set; }
+        public double? Pass6WaterTempStop { get; set; }
+        public double? Pass6Hertz { get; set; }
+        public double? Pass6Freq { get; set; }
+        public double? Pass6Volts { get; set; }
+
+        public int? TotalFishCaptured { get; set; }
     }
 }

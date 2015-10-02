@@ -848,6 +848,86 @@
     <Compile Include="Migrations\201509232350454_YetAnotherPassAtScrewTrapReportingView.Designer.cs">
       <DependentUpon>201509232350454_YetAnotherPassAtScrewTrapReportingView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201509281829259_FixIssuesOnlyOnQA.cs" />
+    <Compile Include="Migrations\201509281829259_FixIssuesOnlyOnQA.Designer.cs">
+      <DependentUpon>201509281829259_FixIssuesOnlyOnQA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509281852388_AddTonsOfStuffToTheElectroFishingHeaders.cs" />
+    <Compile Include="Migrations\201509281852388_AddTonsOfStuffToTheElectroFishingHeaders.Designer.cs">
+      <DependentUpon>201509281852388_AddTonsOfStuffToTheElectroFishingHeaders.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509282308234_UpdateFieldsFOrElectrofishing.cs" />
+    <Compile Include="Migrations\201509282308234_UpdateFieldsFOrElectrofishing.Designer.cs">
+      <DependentUpon>201509282308234_UpdateFieldsFOrElectrofishing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509290043240_CreateTableDefinitionForStreamNet.cs" />
+    <Compile Include="Migrations\201509290043240_CreateTableDefinitionForStreamNet.Designer.cs">
+      <DependentUpon>201509290043240_CreateTableDefinitionForStreamNet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509292204448_TryNewStreamNetStructure.cs" />
+    <Compile Include="Migrations\201509292204448_TryNewStreamNetStructure.Designer.cs">
+      <DependentUpon>201509292204448_TryNewStreamNetStructure.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509292235091_RenameTable.cs" />
+    <Compile Include="Migrations\201509292235091_RenameTable.Designer.cs">
+      <DependentUpon>201509292235091_RenameTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509292359400_AnotherDummyLocation.cs" />
+    <Compile Include="Migrations\201509292359400_AnotherDummyLocation.Designer.cs">
+      <DependentUpon>201509292359400_AnotherDummyLocation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509300101021_MoreFieldsForStreamNetRperS.cs" />
+    <Compile Include="Migrations\201509300101021_MoreFieldsForStreamNetRperS.Designer.cs">
+      <DependentUpon>201509300101021_MoreFieldsForStreamNetRperS.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509301728040_MoreStreamNetFixes.cs" />
+    <Compile Include="Migrations\201509301728040_MoreStreamNetFixes.Designer.cs">
+      <DependentUpon>201509301728040_MoreStreamNetFixes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509301851404_MoreStreamNetFixes1.cs" />
+    <Compile Include="Migrations\201509301851404_MoreStreamNetFixes1.Designer.cs">
+      <DependentUpon>201509301851404_MoreStreamNetFixes1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509301906305_YetMoreFixesForStreamNet.cs" />
+    <Compile Include="Migrations\201509301906305_YetMoreFixesForStreamNet.Designer.cs">
+      <DependentUpon>201509301906305_YetMoreFixesForStreamNet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509301919542_StreamNetRperSReportingViews.cs" />
+    <Compile Include="Migrations\201509301919542_StreamNetRperSReportingViews.Designer.cs">
+      <DependentUpon>201509301919542_StreamNetRperSReportingViews.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509301944070_RemoveLastModifiedOnColumnFromStreanetRspers.cs" />
+    <Compile Include="Migrations\201509301944070_RemoveLastModifiedOnColumnFromStreanetRspers.Designer.cs">
+      <DependentUpon>201509301944070_RemoveLastModifiedOnColumnFromStreanetRspers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509302042056_CreateFieldDefinitionsFOrStreamNetSARAndNOSADatasets.cs" />
+    <Compile Include="Migrations\201509302042056_CreateFieldDefinitionsFOrStreamNetSARAndNOSADatasets.Designer.cs">
+      <DependentUpon>201509302042056_CreateFieldDefinitionsFOrStreamNetSARAndNOSADatasets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509302105518_StreamNetDefsForSAR.cs" />
+    <Compile Include="Migrations\201509302105518_StreamNetDefsForSAR.Designer.cs">
+      <DependentUpon>201509302105518_StreamNetDefsForSAR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509302114148_MoreFakeLocations.cs" />
+    <Compile Include="Migrations\201509302114148_MoreFakeLocations.Designer.cs">
+      <DependentUpon>201509302114148_MoreFakeLocations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509302147213_RemoveFieldsSoWeCanReaddThemDifferently.cs" />
+    <Compile Include="Migrations\201509302147213_RemoveFieldsSoWeCanReaddThemDifferently.Designer.cs">
+      <DependentUpon>201509302147213_RemoveFieldsSoWeCanReaddThemDifferently.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509302148060_ReAddFieldsJustRemoved.cs" />
+    <Compile Include="Migrations\201509302148060_ReAddFieldsJustRemoved.Designer.cs">
+      <DependentUpon>201509302148060_ReAddFieldsJustRemoved.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509302229320_AddExtraStreamNetFieldsSoAllValuesCanBePresent.cs" />
+    <Compile Include="Migrations\201509302229320_AddExtraStreamNetFieldsSoAllValuesCanBePresent.Designer.cs">
+      <DependentUpon>201509302229320_AddExtraStreamNetFieldsSoAllValuesCanBePresent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201509302232072_AddMoreFieldsForStreamNetDefaults.cs" />
+    <Compile Include="Migrations\201509302232072_AddMoreFieldsForStreamNetDefaults.Designer.cs">
+      <DependentUpon>201509302232072_AddMoreFieldsForStreamNetDefaults.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -906,6 +986,15 @@
     <Compile Include="Models\Data\FishTransport_Detail.cs" />
     <Compile Include="Models\Data\FishTransport_Header.cs" />
     <Compile Include="Models\Data\DataDetailRelation.cs" />
+    <Compile Include="Models\Data\StreamNet_NOSA.cs" />
+    <Compile Include="Models\Data\StreamNet_SAR.cs" />
+    <Compile Include="Models\Data\StreamNet_RperS.cs" />
+    <Compile Include="Models\Data\StreamNet_NOSA_Detail.cs" />
+    <Compile Include="Models\Data\StreamNet_SAR_Detail.cs" />
+    <Compile Include="Models\Data\StreamNet_RperS_Detail.cs" />
+    <Compile Include="Models\Data\StreamNet_NOSA_Header .cs" />
+    <Compile Include="Models\Data\StreamNet_SAR_Header.cs" />
+    <Compile Include="Models\Data\StreamNet_RperS_Header.cs" />
     <Compile Include="Models\Data\WaterQuality.cs" />
     <Compile Include="Models\Data\SpawningGroundSurvey.cs" />
     <Compile Include="Models\Data\WaterQuality_Detail.cs" />
@@ -1564,6 +1653,66 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201509232350454_YetAnotherPassAtScrewTrapReportingView.resx">
       <DependentUpon>201509232350454_YetAnotherPassAtScrewTrapReportingView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509281829259_FixIssuesOnlyOnQA.resx">
+      <DependentUpon>201509281829259_FixIssuesOnlyOnQA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509281852388_AddTonsOfStuffToTheElectroFishingHeaders.resx">
+      <DependentUpon>201509281852388_AddTonsOfStuffToTheElectroFishingHeaders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509282308234_UpdateFieldsFOrElectrofishing.resx">
+      <DependentUpon>201509282308234_UpdateFieldsFOrElectrofishing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509290043240_CreateTableDefinitionForStreamNet.resx">
+      <DependentUpon>201509290043240_CreateTableDefinitionForStreamNet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509292204448_TryNewStreamNetStructure.resx">
+      <DependentUpon>201509292204448_TryNewStreamNetStructure.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509292235091_RenameTable.resx">
+      <DependentUpon>201509292235091_RenameTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509292359400_AnotherDummyLocation.resx">
+      <DependentUpon>201509292359400_AnotherDummyLocation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509300101021_MoreFieldsForStreamNetRperS.resx">
+      <DependentUpon>201509300101021_MoreFieldsForStreamNetRperS.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509301728040_MoreStreamNetFixes.resx">
+      <DependentUpon>201509301728040_MoreStreamNetFixes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509301851404_MoreStreamNetFixes1.resx">
+      <DependentUpon>201509301851404_MoreStreamNetFixes1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509301906305_YetMoreFixesForStreamNet.resx">
+      <DependentUpon>201509301906305_YetMoreFixesForStreamNet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509301919542_StreamNetRperSReportingViews.resx">
+      <DependentUpon>201509301919542_StreamNetRperSReportingViews.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509301944070_RemoveLastModifiedOnColumnFromStreanetRspers.resx">
+      <DependentUpon>201509301944070_RemoveLastModifiedOnColumnFromStreanetRspers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509302042056_CreateFieldDefinitionsFOrStreamNetSARAndNOSADatasets.resx">
+      <DependentUpon>201509302042056_CreateFieldDefinitionsFOrStreamNetSARAndNOSADatasets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509302105518_StreamNetDefsForSAR.resx">
+      <DependentUpon>201509302105518_StreamNetDefsForSAR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509302114148_MoreFakeLocations.resx">
+      <DependentUpon>201509302114148_MoreFakeLocations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509302147213_RemoveFieldsSoWeCanReaddThemDifferently.resx">
+      <DependentUpon>201509302147213_RemoveFieldsSoWeCanReaddThemDifferently.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509302148060_ReAddFieldsJustRemoved.resx">
+      <DependentUpon>201509302148060_ReAddFieldsJustRemoved.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509302229320_AddExtraStreamNetFieldsSoAllValuesCanBePresent.resx">
+      <DependentUpon>201509302229320_AddExtraStreamNetFieldsSoAllValuesCanBePresent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201509302232072_AddMoreFieldsForStreamNetDefaults.resx">
+      <DependentUpon>201509302232072_AddMoreFieldsForStreamNetDefaults.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
