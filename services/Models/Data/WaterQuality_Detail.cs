@@ -13,5 +13,11 @@ namespace services.Models.Data
         public DateTime? SampleDate { get; set; }
         public string SampleID { get; set; }
 
+        public string SampleFraction { get; set; }
+        public string MethodSpeciation { get; set; }
+        public string DetectionLimit { get; set; }
+        public string ContextID { get; set; }
+        public string MethodID { get; set; }
+        public string LabName { get; set; }
     }
 }

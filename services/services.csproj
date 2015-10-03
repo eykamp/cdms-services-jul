@@ -948,6 +948,18 @@
     <Compile Include="Migrations\201510022326297_UpdatesFromColetteSep30.Designer.cs">
       <DependentUpon>201510022326297_UpdatesFromColetteSep30.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510030014036_WaterQualityUpdatesFromOct1.cs" />
+    <Compile Include="Migrations\201510030014036_WaterQualityUpdatesFromOct1.Designer.cs">
+      <DependentUpon>201510030014036_WaterQualityUpdatesFromOct1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510030051043_AddDbFieldsForWaterQualityChanges.cs" />
+    <Compile Include="Migrations\201510030051043_AddDbFieldsForWaterQualityChanges.Designer.cs">
+      <DependentUpon>201510030051043_AddDbFieldsForWaterQualityChanges.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510030058474_HideLabsForWaterQuality.cs" />
+    <Compile Include="Migrations\201510030058474_HideLabsForWaterQuality.Designer.cs">
+      <DependentUpon>201510030058474_HideLabsForWaterQuality.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -1748,6 +1760,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510022326297_UpdatesFromColetteSep30.resx">
       <DependentUpon>201510022326297_UpdatesFromColetteSep30.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510030014036_WaterQualityUpdatesFromOct1.resx">
+      <DependentUpon>201510030014036_WaterQualityUpdatesFromOct1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510030051043_AddDbFieldsForWaterQualityChanges.resx">
+      <DependentUpon>201510030051043_AddDbFieldsForWaterQualityChanges.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510030058474_HideLabsForWaterQuality.resx">
+      <DependentUpon>201510030058474_HideLabsForWaterQuality.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
