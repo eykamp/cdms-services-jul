@@ -940,6 +940,14 @@
     <Compile Include="Migrations\201510022008147_RedoElectrofishingReportingViews.Designer.cs">
       <DependentUpon>201510022008147_RedoElectrofishingReportingViews.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510022217466_MoreFixesForStreamNet.cs" />
+    <Compile Include="Migrations\201510022217466_MoreFixesForStreamNet.Designer.cs">
+      <DependentUpon>201510022217466_MoreFixesForStreamNet.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510022326297_UpdatesFromColetteSep30.cs" />
+    <Compile Include="Migrations\201510022326297_UpdatesFromColetteSep30.Designer.cs">
+      <DependentUpon>201510022326297_UpdatesFromColetteSep30.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -1734,6 +1742,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510022008147_RedoElectrofishingReportingViews.resx">
       <DependentUpon>201510022008147_RedoElectrofishingReportingViews.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510022217466_MoreFixesForStreamNet.resx">
+      <DependentUpon>201510022217466_MoreFixesForStreamNet.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510022326297_UpdatesFromColetteSep30.resx">
+      <DependentUpon>201510022326297_UpdatesFromColetteSep30.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

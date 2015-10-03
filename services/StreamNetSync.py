@@ -20,6 +20,7 @@ import pickle
 import http.client
 import json
 import pypyodbc   # pip install pypyodbc
+import sys
 
 
 # For connecting to StreamNet:
@@ -444,9 +445,13 @@ def main():
             print("Update: ",      ','.join(records_to_update))
             print("Delete: ",      ','.join(records_to_delete))
 
-    print("Syncing to StreamNet Complete")
+    
 
 
-
-main()      # Just Do It!!
-
+try:
+    main()      # Just Do It!!
+except Exception as e:
+    print("Error syncing to StreamNet:")
+    print(str(e))
+else:
+    print("Syncing to StreamNet successful!")
