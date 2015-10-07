@@ -77,7 +77,18 @@ namespace services.Models
 
             //add on any "system" fields we want to also return
             var activity_fields = "ActivityDate,";
-            var system_fields = "CreateDate,QAStatusId,QAStatusName, ActivityQAComments, LocationId,ActivityQAStatusId,DatasetId,ActivityId,RowId, RowStatusId";
+
+            var system_fields = "";
+            if (this.Datastore.TablePrefix == "WaterTemp")
+            {
+                logger.Debug("This dataset is WaterTemp related...");
+                system_fields = "CreateDate,QAStatusId,QAStatusName, ActivityQAComments, LocationId,ActivityQAStatusId,DatasetId,ActivityId,RowId, RowStatusId";
+            }
+            else
+            {
+                logger.Debug("This dataset IS NOT WaterTemp related...");
+                system_fields = "CreateDate,QAStatusName, ActivityQAComments, LocationId,ActivityQAStatusId,DatasetId,ActivityId,RowId, RowStatusId";
+            }
 
             return activity_fields + header_fields + detail_fields + system_fields;
         }

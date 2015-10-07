@@ -13,7 +13,7 @@ namespace services.Models
 
         private const int SUPERUSER_KEN = 1;
         private const int SUPERUSER_COLETTE = 2;
-        private const int SUPERUSER_GEORGE = 1082;
+        private const int SUPERUSER_GEORGE = 1081;
         private const int SUPERUSER_STACY = 9;
 
         public int Id { get; set; }
