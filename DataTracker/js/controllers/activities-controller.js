@@ -414,10 +414,20 @@ var datasetActivitiesController = ['$scope','$routeParams', 'DataService', 'Data
             };
 
             $scope.reloadProjectLocations = function(){
-
-                $scope.locationsArray = getUnMatchingByField($scope.project.Locations,PRIMARY_PROJECT_LOCATION_TYPEID,"LocationTypeId");
-
-                $scope.locationObjectIds = getLocationObjectIdsByInverseType(PRIMARY_PROJECT_LOCATION_TYPEID,$scope.project.Locations);
+				console.log("Inside $scope.reloadProjectLocations...");
+				console.log("$scope.project.Locations is next...");
+				console.dir($scope.project.Locations);
+				
+				$scope.datasetLocationType = DatastoreService.getDatasetLocationType($scope.DatastoreTablePrefix);			
+				console.log("LocationType = " + $scope.datasetLocationType);
+				
+                //$scope.locationsArray = getUnMatchingByField($scope.project.Locations,PRIMARY_PROJECT_LOCATION_TYPEID,"LocationTypeId");
+                $scope.locationsArray = getMatchingByField($scope.project.Locations,$scope.datasetLocationType,"LocationTypeId");
+			
+                //$scope.locationObjectIds = getLocationObjectIdsByInverseType(PRIMARY_PROJECT_LOCATION_TYPEID,$scope.project.Locations);
+                $scope.locationObjectIds = getLocationObjectIdsByInverseType($scope.datasetLocationType,$scope.project.Locations);
+				console.log("$scope.locationObjectIds is next...");
+				console.dir($scope.locationObjectIds);
 
                 if($scope.map && $scope.map.locationLayer && $scope.map.locationLayer.hasOwnProperty('showLocationsById'))
                     $scope.map.locationLayer.showLocationsById($scope.locationObjectIds); //bump and reload the locations.

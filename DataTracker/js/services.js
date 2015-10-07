@@ -1361,7 +1361,9 @@ mod.service('DataSheet',[ 'Logger', '$window', '$route',
 				console.log("theMode = " + theMode);							
 				console.log("DatastoreTablePrefix = " + DatastoreTablePrefix);				
 				
-				if (DatastoreTablePrefix === "WaterTemp")  // Water Temp related
+				if ((DatastoreTablePrefix === "WaterTemp") || // Water Temp related
+					(DatastoreTablePrefix === "WaterQuality") // Water Quality related)
+					)
 				{
 					if ((typeof theMode !== 'undefined') && (theMode.indexOf("form") > -1))
 					{
@@ -1479,7 +1481,13 @@ mod.service('DataSheet',[ 'Logger', '$window', '$route',
 						];
 					}		
 				}
-				else if (DatastoreTablePrefix === "SpawningGroundSurvey") //Spawning Ground related
+				else if ((DatastoreTablePrefix === "SpawningGroundSurvey") || //Spawning Ground related
+					(DatastoreTablePrefix === "SnorkelFish") || //Snorkel Fish related
+					(DatastoreTablePrefix === "FishTransport") || //Fish Transport related					
+					(DatastoreTablePrefix === "Electrofishing") || //Electrofishing related
+					(DatastoreTablePrefix === "ScrewTrap") //Screw Trap related
+					//(DatastoreTablePrefix === "FishScales") //Fish Scales related					
+					)
 				{
 					if ((typeof theMode !== 'undefined') && (theMode.indexOf("form") > -1))
 					{
@@ -1515,7 +1523,10 @@ mod.service('DataSheet',[ 'Logger', '$window', '$route',
 						];
 					}
 				}
-                else if (DatastoreTablePrefix === "StreamNet_RperS") 
+                else if ((DatastoreTablePrefix === "StreamNet_RperS") ||
+						(DatastoreTablePrefix === "StreamNet_NOSA") ||
+						(DatastoreTablePrefix === "StreamNet_SAR") 
+					)
                 {
                     if ((typeof theMode !== 'undefined') && (theMode.indexOf("form") > -1))
                     {
@@ -1551,7 +1562,7 @@ mod.service('DataSheet',[ 'Logger', '$window', '$route',
                         ];
                     }
                 }    
-                else if (DatastoreTablePrefix === "StreamNet_NOSA") 
+                /*else if (DatastoreTablePrefix === "StreamNet_NOSA")
                 {
                     if ((typeof theMode !== 'undefined') && (theMode.indexOf("form") > -1))
                     {
@@ -1622,7 +1633,7 @@ mod.service('DataSheet',[ 'Logger', '$window', '$route',
                             }
                         ];
                     }
-                }                                             
+                }*/                                          
                 else if (DatastoreTablePrefix === "FishScales") //Fish Scales related
                 {
                     if ((typeof theMode !== 'undefined') && (theMode.indexOf("form") > -1))
@@ -1631,14 +1642,33 @@ mod.service('DataSheet',[ 'Logger', '$window', '$route',
                     }
                     else
                     {
-                        var coldefs = [{
-                            field: 'QAStatusId',
-                            Label: 'QA Status',
-                            displayName: 'QA Status',
-                            cellFilter: 'QAStatusFilter',
-                            editableCellTemplate: QACellEditTemplate,
-                            Field: { Description: "Quality Assurance workflow status"}                                                                                                                
-                        }];
+                        var coldefs = [
+							{
+								field: 'locationId',
+								visible:  false,
+								Label: 'Location',
+								displayName: 'Location',
+								cellFilter: 'locationNameFilter',
+								editableCellTemplate: LocationCellEditTemplate,
+								Field: { Description: "What location is this record related to?"}
+							},						
+							{
+								field: 'activityDate',
+								Label: 'Activity Date',
+								displayName: 'Activity Date (MM/DD/YYYY)',
+								cellFilter: 'date: \'MM/dd/yyyy\'',
+								editableCellTemplate: '<input ng-blur="updateCell(row,\'activityDate\')" type="text" ng-pattern="'+date_pattern+'" ng-model="COL_FIELD" ng-input="COL_FIELD" />',
+								Field: { Description: "Date of activity in format: '10/22/2014'"}							
+							},						
+							{
+								field: 'QAStatusId',
+								Label: 'QA Status',
+								displayName: 'QA Status',
+								cellFilter: 'QAStatusFilter',
+								editableCellTemplate: QACellEditTemplate,
+								Field: { Description: "Quality Assurance workflow status"}                                                                                                                
+							}
+						];
                     }
                 }
 

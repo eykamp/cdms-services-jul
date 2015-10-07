@@ -169,17 +169,21 @@ mod_edit.controller('DataEditCtrl', ['$scope','$q','$sce','$routeParams','DataSe
 
 					$scope.RowQAStatuses =  $rootScope.RowQAStatuses = makeObjects($scope.dataset.RowQAStatuses, 'Id', 'Name');  //Row qa status ids
 
-					if($scope.dataset.RowQAStatuses.length > 1)
+					//if($scope.dataset.RowQAStatuses.length > 1)
+		    		if (($scope.dataset.Datastore.TablePrefix === "WaterTemp") && ($scope.dataset.RowQAStatuses.length > 1))						
 					{
-						$scope.datasheetColDefs.push(
-								{
-				    				field: "QAStatusId", //QARowStatus
-				    				displayName: "QA",
-				    				minWidth: 50, maxWidth: 180,
-				    				enableCellEditOnFocus: true,
-				        			editableCellTemplate: $scope.cellSelectEditableTemplate,
-				 					cellFilter: 'RowQAStatusFilter'
-				    			});
+						if($scope.dataset.RowQAStatuses.length > 1)
+						{
+							$scope.datasheetColDefs.push(
+									{
+										field: "QAStatusId", //QARowStatus
+										displayName: "QA",
+										minWidth: 50, maxWidth: 180,
+										enableCellEditOnFocus: true,
+										editableCellTemplate: $scope.cellSelectEditableTemplate,
+										cellFilter: 'RowQAStatusFilter'
+									});
+						}
 					}
 
 

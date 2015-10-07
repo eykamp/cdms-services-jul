@@ -75,15 +75,18 @@ mod_dv.controller('DatasetViewCtrl', ['$scope','$routeParams','DataService','$mo
 	    			ChartService.buildChart($scope, $scope.grid.Details, $scope.dataset.Datastore.TablePrefix);
 
 	    			//if we have more than 1 row qa status then show them.
-		    		if($scope.dataset.RowQAStatuses.length > 1)
+		    		if (($scope.dataset.Datastore.TablePrefix === "WaterTemp") && ($scope.dataset.RowQAStatuses.length > 1))
 		    		{
-		    			$scope.datasheetColDefs.unshift(
-				    	{
-		    				field: "QAStatusId", //QARowStatus
-		    				displayName: "QA",
-		 					cellFilter: 'RowQAStatusFilter'
-		    			});
-		    		}
+						if($scope.dataset.RowQAStatuses.length > 1)
+						{
+							$scope.datasheetColDefs.unshift(
+							{
+								field: "QAStatusId", //QARowStatus
+								displayName: "QA",
+								cellFilter: 'RowQAStatusFilter'
+							});
+						}
+					}
 
 	    		}
 

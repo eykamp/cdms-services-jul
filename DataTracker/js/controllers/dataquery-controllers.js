@@ -114,8 +114,9 @@ mod_dq.controller('DataQueryCtrl', ['$scope','$routeParams','DataService','$loca
 					//var locInd = 0;
 					for (var i = 0; i < $scope.project.Locations.length; i++ )
 					{
-						console.log("projectLocations Index = " + $scope.project.Locations[i].Label);
-						console.log($scope.project.Locations[i].Id + "  " + $scope.project.Locations[i]);
+						//console.log("projectLocations Label = " + $scope.project.Locations[i].Label);
+						//console.log($scope.project.Locations[i].Id + "  " + $scope.project.Locations[i].Id);
+						//console.log("$scope.project.Locations[i].LocationTypeId = " + $scope.project.Locations[i].LocationTypeId + ", $scope.datasetLocationType = " + $scope.datasetLocationType);
 						if ($scope.project.Locations[i].LocationTypeId === $scope.datasetLocationType)
 						{
 							console.log("Found one");
@@ -205,7 +206,8 @@ mod_dq.controller('DataQueryCtrl', ['$scope','$routeParams','DataService','$loca
 				$scope.RowQAStatuses =  $rootScope.RowQAStatuses = undefined;
 
 				//add in the QA field if it is relevant for this dataset.
-				if($scope.dataset.RowQAStatuses.length > 1)
+				//if($scope.dataset.RowQAStatuses.length > 1)
+		    	if (($scope.dataset.Datastore.TablePrefix === "WaterTemp") && ($scope.dataset.RowQAStatuses.length > 1))
 				{
 					$scope.RowQAStatuses =  $rootScope.RowQAStatuses = makeObjects($scope.dataset.RowQAStatuses, 'Id', 'Name');  //Row qa status ids
 
@@ -248,21 +250,42 @@ mod_dq.controller('DataQueryCtrl', ['$scope','$routeParams','DataService','$loca
 
     		$scope.buildQuery = function(){
 				console.log("Inside buildQuery...");
-				var query = 
-    			{
-					criteria: {
-						DatasetId: 	  $scope.dataset.Id,
-						QAStatusId:   $scope.Criteria.ParamQAStatusId,
-						RowQAStatusId: $scope.Criteria.ParamRowQAStatusId,
-						Locations:    angular.toJson($scope.Criteria.LocationIds).toString(),
-						FromDate:     $scope.Criteria.BetweenFromActivityDate,
-						ToDate:       $scope.Criteria.BetweenToActivityDate,
-						DateSearchType: $scope.Criteria.paramActivityDateType, 
-						Fields: 	  $scope.criteriaList,
+				var query = {};
+				if ($scope.dataset.Datastore.TablePrefix === "WaterTemp")
+				{
+					query = 
+					{
+						criteria: {
+							DatasetId: 	  $scope.dataset.Id,
+							QAStatusId:   $scope.Criteria.ParamQAStatusId,
+							RowQAStatusId: $scope.Criteria.ParamRowQAStatusId,
+							Locations:    angular.toJson($scope.Criteria.LocationIds).toString(),
+							FromDate:     $scope.Criteria.BetweenFromActivityDate,
+							ToDate:       $scope.Criteria.BetweenToActivityDate,
+							DateSearchType: $scope.Criteria.paramActivityDateType, 
+							Fields: 	  $scope.criteriaList,
 
-					},
-					loading: true,
-    			};
+						},
+						loading: true,
+					};
+				}
+				else
+				{
+					query = 
+					{
+						criteria: {
+							DatasetId: 	  $scope.dataset.Id,
+							QAStatusId:   $scope.Criteria.ParamQAStatusId,
+							Locations:    angular.toJson($scope.Criteria.LocationIds).toString(),
+							FromDate:     $scope.Criteria.BetweenFromActivityDate,
+							ToDate:       $scope.Criteria.BetweenToActivityDate,
+							DateSearchType: $scope.Criteria.paramActivityDateType, 
+							Fields: 	  $scope.criteriaList,
+
+						},
+						loading: true,
+					};
+				}
 				console.log("query is next...");
 				console.dir(query);
 
@@ -274,6 +297,7 @@ mod_dq.controller('DataQueryCtrl', ['$scope','$routeParams','DataService','$loca
 
     		$scope.executeQuery = function(){
  				console.log("Inside executeQuery...");
+				console.log("$scope.dataset.Id = " + $scope.dataset.Id);
    			
     			$scope.query = $scope.buildQuery();
 
