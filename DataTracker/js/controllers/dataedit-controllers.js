@@ -172,18 +172,15 @@ mod_edit.controller('DataEditCtrl', ['$scope','$q','$sce','$routeParams','DataSe
 					//if($scope.dataset.RowQAStatuses.length > 1)
 		    		if (($scope.dataset.Datastore.TablePrefix === "WaterTemp") && ($scope.dataset.RowQAStatuses.length > 1))						
 					{
-						if($scope.dataset.RowQAStatuses.length > 1)
-						{
-							$scope.datasheetColDefs.push(
-									{
-										field: "QAStatusId", //QARowStatus
-										displayName: "QA",
-										minWidth: 50, maxWidth: 180,
-										enableCellEditOnFocus: true,
-										editableCellTemplate: $scope.cellSelectEditableTemplate,
-										cellFilter: 'RowQAStatusFilter'
-									});
-						}
+						$scope.datasheetColDefs.push(
+								{
+									field: "QAStatusId", //QARowStatus
+									displayName: "QA",
+									minWidth: 50, maxWidth: 180,
+									enableCellEditOnFocus: true,
+									editableCellTemplate: $scope.cellSelectEditableTemplate,
+									cellFilter: 'RowQAStatusFilter'
+								});
 					}
 
 

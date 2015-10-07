@@ -77,17 +77,13 @@ mod_dv.controller('DatasetViewCtrl', ['$scope','$routeParams','DataService','$mo
 	    			//if we have more than 1 row qa status then show them.
 		    		if (($scope.dataset.Datastore.TablePrefix === "WaterTemp") && ($scope.dataset.RowQAStatuses.length > 1))
 		    		{
-						if($scope.dataset.RowQAStatuses.length > 1)
+						$scope.datasheetColDefs.unshift(
 						{
-							$scope.datasheetColDefs.unshift(
-							{
-								field: "QAStatusId", //QARowStatus
-								displayName: "QA",
-								cellFilter: 'RowQAStatusFilter'
-							});
-						}
+							field: "QAStatusId", //QARowStatus
+							displayName: "QA",
+							cellFilter: 'RowQAStatusFilter'
+						});
 					}
-
 	    		}
 
     		});
