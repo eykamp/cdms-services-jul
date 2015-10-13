@@ -33,3 +33,8 @@ Web.Release.config
 /ServicesTest/*
 /services/uploads/*
 
+=======
+# exclude the ProjectTracker directory
+/ProjectTracker/*
+/DataTracker/js/config.js
+DataTracker/js/config.js
