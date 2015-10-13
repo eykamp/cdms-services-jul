@@ -960,6 +960,10 @@
     <Compile Include="Migrations\201510030058474_HideLabsForWaterQuality.Designer.cs">
       <DependentUpon>201510030058474_HideLabsForWaterQuality.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510030127566_NewWQViews.cs" />
+    <Compile Include="Migrations\201510030127566_NewWQViews.Designer.cs">
+      <DependentUpon>201510030127566_NewWQViews.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -1769,6 +1773,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510030058474_HideLabsForWaterQuality.resx">
       <DependentUpon>201510030058474_HideLabsForWaterQuality.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510030127566_NewWQViews.resx">
+      <DependentUpon>201510030127566_NewWQViews.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
