@@ -2,6 +2,13 @@ cdms-services
 ========
 
 Centralized Data Management System (Project Tracker) WebAPI services
+=======
+cdms-dev
+========
+
+Centralized Data Management System (Project Tracker) JS App
+
+There is a little bit of help to get started here: https://github.com/CTUIR/cdms-docs/wiki
 
 This system is (C) 2014 by the Confederated Tribes of the Umatilla Indian Reservation.  Any use is subject to our license agreement included in this repository.
 
