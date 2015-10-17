@@ -980,6 +980,10 @@
     <Compile Include="Migrations\201510140015401_AddDataFieldsToSupportWQWork.Designer.cs">
       <DependentUpon>201510140015401_AddDataFieldsToSupportWQWork.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510170010158_AddFieldSheetLinkToElectroFishing.cs" />
+    <Compile Include="Migrations\201510170010158_AddFieldSheetLinkToElectroFishing.Designer.cs">
+      <DependentUpon>201510170010158_AddFieldSheetLinkToElectroFishing.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -1804,6 +1808,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510140015401_AddDataFieldsToSupportWQWork.resx">
       <DependentUpon>201510140015401_AddDataFieldsToSupportWQWork.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510170010158_AddFieldSheetLinkToElectroFishing.resx">
+      <DependentUpon>201510170010158_AddFieldSheetLinkToElectroFishing.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

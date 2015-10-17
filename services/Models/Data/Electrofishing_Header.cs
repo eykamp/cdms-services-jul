@@ -80,5 +80,6 @@ namespace services.Models.Data
         public double? Pass6Volts { get; set; }
 
         public int? TotalFishCaptured { get; set; }
+        public string FieldsheetLink { get; set; }
     }
 }
