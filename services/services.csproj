@@ -964,6 +964,22 @@
     <Compile Include="Migrations\201510030127566_NewWQViews.Designer.cs">
       <DependentUpon>201510030127566_NewWQViews.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510122124119_SGSFixes.cs" />
+    <Compile Include="Migrations\201510122124119_SGSFixes.Designer.cs">
+      <DependentUpon>201510122124119_SGSFixes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510132345000_FixMicro.cs" />
+    <Compile Include="Migrations\201510132345000_FixMicro.Designer.cs">
+      <DependentUpon>201510132345000_FixMicro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510140009190_WaterQualityEnhancements.cs" />
+    <Compile Include="Migrations\201510140009190_WaterQualityEnhancements.Designer.cs">
+      <DependentUpon>201510140009190_WaterQualityEnhancements.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510140015401_AddDataFieldsToSupportWQWork.cs" />
+    <Compile Include="Migrations\201510140015401_AddDataFieldsToSupportWQWork.Designer.cs">
+      <DependentUpon>201510140015401_AddDataFieldsToSupportWQWork.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -1776,6 +1792,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510030127566_NewWQViews.resx">
       <DependentUpon>201510030127566_NewWQViews.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510122124119_SGSFixes.resx">
+      <DependentUpon>201510122124119_SGSFixes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510132345000_FixMicro.resx">
+      <DependentUpon>201510132345000_FixMicro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510140009190_WaterQualityEnhancements.resx">
+      <DependentUpon>201510140009190_WaterQualityEnhancements.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510140015401_AddDataFieldsToSupportWQWork.resx">
+      <DependentUpon>201510140015401_AddDataFieldsToSupportWQWork.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
