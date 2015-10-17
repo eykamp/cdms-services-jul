@@ -988,6 +988,10 @@
     <Compile Include="Migrations\201510170032153_AddMoreSpeciesToOtherSpecies.Designer.cs">
       <DependentUpon>201510170032153_AddMoreSpeciesToOtherSpecies.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510170105014_UpdateNullabilityOfDateFieldsInElectrofishing.cs" />
+    <Compile Include="Migrations\201510170105014_UpdateNullabilityOfDateFieldsInElectrofishing.Designer.cs">
+      <DependentUpon>201510170105014_UpdateNullabilityOfDateFieldsInElectrofishing.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -1818,6 +1822,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510170032153_AddMoreSpeciesToOtherSpecies.resx">
       <DependentUpon>201510170032153_AddMoreSpeciesToOtherSpecies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510170105014_UpdateNullabilityOfDateFieldsInElectrofishing.resx">
+      <DependentUpon>201510170105014_UpdateNullabilityOfDateFieldsInElectrofishing.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
