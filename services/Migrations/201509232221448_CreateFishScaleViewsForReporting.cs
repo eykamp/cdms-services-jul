@@ -44,6 +44,8 @@ left join spawninggroundsurvey_vw sgs on sgs.scaleId = d.FieldScaleID
 
 
 ");
+
+
         }
 
         public override void Down()
