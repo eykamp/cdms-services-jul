@@ -996,6 +996,10 @@
     <Compile Include="Migrations\201510200021274_RedoFishScalesView.Designer.cs">
       <DependentUpon>201510200021274_RedoFishScalesView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510200057352_RedoLotsOfViewToFixRepeatingRecordsIssues.cs" />
+    <Compile Include="Migrations\201510200057352_RedoLotsOfViewToFixRepeatingRecordsIssues.Designer.cs">
+      <DependentUpon>201510200057352_RedoLotsOfViewToFixRepeatingRecordsIssues.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -1832,6 +1836,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510200021274_RedoFishScalesView.resx">
       <DependentUpon>201510200021274_RedoFishScalesView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510200057352_RedoLotsOfViewToFixRepeatingRecordsIssues.resx">
+      <DependentUpon>201510200057352_RedoLotsOfViewToFixRepeatingRecordsIssues.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
