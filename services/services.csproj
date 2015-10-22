@@ -1000,6 +1000,14 @@
     <Compile Include="Migrations\201510200057352_RedoLotsOfViewToFixRepeatingRecordsIssues.Designer.cs">
       <DependentUpon>201510200057352_RedoLotsOfViewToFixRepeatingRecordsIssues.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510201756551_ReRedoLostsOfViews.cs" />
+    <Compile Include="Migrations\201510201756551_ReRedoLostsOfViews.Designer.cs">
+      <DependentUpon>201510201756551_ReRedoLostsOfViews.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510212229231_SnorkelFishViewAgain.cs" />
+    <Compile Include="Migrations\201510212229231_SnorkelFishViewAgain.Designer.cs">
+      <DependentUpon>201510212229231_SnorkelFishViewAgain.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -1839,6 +1847,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510200057352_RedoLotsOfViewToFixRepeatingRecordsIssues.resx">
       <DependentUpon>201510200057352_RedoLotsOfViewToFixRepeatingRecordsIssues.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510201756551_ReRedoLostsOfViews.resx">
+      <DependentUpon>201510201756551_ReRedoLostsOfViews.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510212229231_SnorkelFishViewAgain.resx">
+      <DependentUpon>201510212229231_SnorkelFishViewAgain.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
