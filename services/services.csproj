@@ -1012,6 +1012,10 @@
     <Compile Include="Migrations\201510220130123_ScrewTrapHeaderViewReduxe.Designer.cs">
       <DependentUpon>201510220130123_ScrewTrapHeaderViewReduxe.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510262248498_WaterQualityViewsReduxe.cs" />
+    <Compile Include="Migrations\201510262248498_WaterQualityViewsReduxe.Designer.cs">
+      <DependentUpon>201510262248498_WaterQualityViewsReduxe.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -1860,6 +1864,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510220130123_ScrewTrapHeaderViewReduxe.resx">
       <DependentUpon>201510220130123_ScrewTrapHeaderViewReduxe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510262248498_WaterQualityViewsReduxe.resx">
+      <DependentUpon>201510262248498_WaterQualityViewsReduxe.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
