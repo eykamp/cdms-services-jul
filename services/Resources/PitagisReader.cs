@@ -177,9 +177,9 @@ namespace services.Resources
             if (from == "RELEASE WATER TEMP") return "Release Temp (C)";
             if (from == "RELEASE DATE")       return "Release DateTime";
             if (from == RECORD_ID)            return "Sequence";
-            if (from == COMMENT_1)            return "Conditional Comment";
-            if (from == COMMENT_2)            return "Textual Comments";            
-            if (from == COMMENT_3)            return "Note";            
+            if (from == COMMENT_1)            return "Additional Positional Comments";
+            if (from == COMMENT_2)            return "Conditional Comment";
+            if (from == COMMENT_3)            return "Textual Comments";            
             if (from == PIT_TAG_NUMBER)       return "Pit Tag Code";
             if (from == FORK_LENGTH)          return "Fork Length (mm)";
             if (from == WEIGHT)               return "Weight (g)";
