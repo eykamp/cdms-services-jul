@@ -47,11 +47,11 @@ left join ActivityQAs_VW AS aq ON aq.ActivityId = a.Id
 
 go
 
+drop view Screwtrap_vw
+go
 drop view Screwtrap_Header_VW
 go
 drop view Screwtrap_Detail_VW
-go
-drop view Screwtrap_vw
 go
 
 
