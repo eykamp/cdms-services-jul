@@ -22,5 +22,6 @@ namespace services.Models.Data
         public string GeneticID { get; set; }
         public string OtherID { get; set; }
         public string AdditionalPositionalComment { get; set; }
+        public string ChannelUnitType { get; set; }
     }
 }
