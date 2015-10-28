@@ -1347,7 +1347,7 @@ namespace services.Controllers
                 }
 
                 //If there is a ReadingDateTime field in use, set the activity description to be the range of reading dates for this activity.
-                if (newActivityId != 0 && dataset.Datastore.TablePrefix == "WaterTemp") // others with readingdatetime?
+                if (newActivityId != 0 && (dataset.Datastore.TablePrefix == "WaterTemp")) // others with readingdatetime?
                 {
                     using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ServicesContext"].ConnectionString))
                     {
@@ -1360,7 +1360,21 @@ namespace services.Controllers
                             cmd.ExecuteNonQuery();
                         }
                     }
-                }//if
+                }
+                else if(newActivityId != 0 && (dataset.Datastore.TablePrefix == "WaterQuality")) // others with readingdatetime?
+                {
+                    using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["ServicesContext"].ConnectionString))
+                    {
+                        con.Open();
+                        var query = "update Activities set Description = (select concat(convert(varchar,min(SampleDate),111), ' - ', convert(varchar,max(SampleDate),111)) from " + dataset.Datastore.TablePrefix + "_Detail_VW where ActivityId = " + newActivityId + ") where Id = " + newActivityId;
+
+                        using (SqlCommand cmd = new SqlCommand(query, con))
+                        {
+                            logger.Debug(query);
+                            cmd.ExecuteNonQuery();
+                        }
+                    }
+                }
 
             } //foreach activity
             
