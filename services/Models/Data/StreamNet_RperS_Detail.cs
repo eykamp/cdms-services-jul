@@ -91,6 +91,6 @@ namespace services.Models.Data
         public string UpdDate { get; set; }
         public string YOY { get; set; }
 
-        public String ShadowId { get; set; }
+        public string ShadowId { get; set; }
     }
 }
