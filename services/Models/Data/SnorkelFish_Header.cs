@@ -10,7 +10,7 @@ namespace services.Models.Data
         public string StartTime { get; set; } 
         public string EndTime { get; set; } 
         public double? WaterTemperature { get; set; }
-        public int? Visibility { get; set; }
+        public string Visibility { get; set; }
         public string WeatherConditions{ get; set; } 
         public int? VisitId { get; set; }
         public string Comments { get; set; }
