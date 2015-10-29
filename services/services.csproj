@@ -1036,6 +1036,10 @@
     <Compile Include="Migrations\201510290156558_ConvertIntsToStrings.Designer.cs">
       <DependentUpon>201510290156558_ConvertIntsToStrings.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510292105189_FleshOutViewBasedOnEmailFromColette.cs" />
+    <Compile Include="Migrations\201510292105189_FleshOutViewBasedOnEmailFromColette.Designer.cs">
+      <DependentUpon>201510292105189_FleshOutViewBasedOnEmailFromColette.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -1902,6 +1906,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510290156558_ConvertIntsToStrings.resx">
       <DependentUpon>201510290156558_ConvertIntsToStrings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510292105189_FleshOutViewBasedOnEmailFromColette.resx">
+      <DependentUpon>201510292105189_FleshOutViewBasedOnEmailFromColette.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
