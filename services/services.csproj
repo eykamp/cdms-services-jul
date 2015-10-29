@@ -1020,6 +1020,22 @@
     <Compile Include="Migrations\201510271823131_AddChannelUnitTypeToElectrofishingDetail.Designer.cs">
       <DependentUpon>201510271823131_AddChannelUnitTypeToElectrofishingDetail.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510272344441_ReplayScrewTrapViewCreation.cs" />
+    <Compile Include="Migrations\201510272344441_ReplayScrewTrapViewCreation.Designer.cs">
+      <DependentUpon>201510272344441_ReplayScrewTrapViewCreation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510280133559_MakeColumnNamesMoreConsistent.cs" />
+    <Compile Include="Migrations\201510280133559_MakeColumnNamesMoreConsistent.Designer.cs">
+      <DependentUpon>201510280133559_MakeColumnNamesMoreConsistent.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510282240036_UpdateViewToIncludeMoreSGSData.cs" />
+    <Compile Include="Migrations\201510282240036_UpdateViewToIncludeMoreSGSData.Designer.cs">
+      <DependentUpon>201510282240036_UpdateViewToIncludeMoreSGSData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201510290156558_ConvertIntsToStrings.cs" />
+    <Compile Include="Migrations\201510290156558_ConvertIntsToStrings.Designer.cs">
+      <DependentUpon>201510290156558_ConvertIntsToStrings.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -1874,6 +1890,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510271823131_AddChannelUnitTypeToElectrofishingDetail.resx">
       <DependentUpon>201510271823131_AddChannelUnitTypeToElectrofishingDetail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510272344441_ReplayScrewTrapViewCreation.resx">
+      <DependentUpon>201510272344441_ReplayScrewTrapViewCreation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510280133559_MakeColumnNamesMoreConsistent.resx">
+      <DependentUpon>201510280133559_MakeColumnNamesMoreConsistent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510282240036_UpdateViewToIncludeMoreSGSData.resx">
+      <DependentUpon>201510282240036_UpdateViewToIncludeMoreSGSData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510290156558_ConvertIntsToStrings.resx">
+      <DependentUpon>201510290156558_ConvertIntsToStrings.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
