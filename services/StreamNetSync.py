@@ -264,7 +264,6 @@ def get_local_ids_modified_since(db_table, date):
         sql += " WHERE cast(" + last_modified_date_column + " as datetime2) >= cast('" + str(date) + "' as datetime2)"
     cur.execute(sql)
 
-
     return [str(x[0]) for x in cur.fetchall()]      # De-tuplize results
 
 

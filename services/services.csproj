@@ -1040,6 +1040,10 @@
     <Compile Include="Migrations\201510292105189_FleshOutViewBasedOnEmailFromColette.Designer.cs">
       <DependentUpon>201510292105189_FleshOutViewBasedOnEmailFromColette.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201510301826567_MeetTheNewViewSameAsTheOldView.cs" />
+    <Compile Include="Migrations\201510301826567_MeetTheNewViewSameAsTheOldView.Designer.cs">
+      <DependentUpon>201510301826567_MeetTheNewViewSameAsTheOldView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\Activity.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.cs" />
     <Compile Include="Migrations\201311191804154_dataset-support.Designer.cs">
@@ -1909,6 +1913,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201510292105189_FleshOutViewBasedOnEmailFromColette.resx">
       <DependentUpon>201510292105189_FleshOutViewBasedOnEmailFromColette.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201510301826567_MeetTheNewViewSameAsTheOldView.resx">
+      <DependentUpon>201510301826567_MeetTheNewViewSameAsTheOldView.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

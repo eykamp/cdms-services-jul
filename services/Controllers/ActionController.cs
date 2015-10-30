@@ -106,6 +106,7 @@ namespace services.Controllers
                     Arguments = pathToStreamNetSyncScript,
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
+                    RedirectStandardError = true,
                     CreateNoWindow = true
                 }
             };
@@ -117,6 +118,10 @@ namespace services.Controllers
 
             while (!proc.StandardOutput.EndOfStream)
                 outputLines.Add(proc.StandardOutput.ReadLine());
+
+
+            while (!proc.StandardError.EndOfStream)
+                outputLines.Add(proc.StandardError.ReadLine());
 
             return outputLines;
         }
